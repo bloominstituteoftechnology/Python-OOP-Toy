@@ -14,11 +14,10 @@ class Ball:
         self.radius = radius
 
     def update(self):
-        # bounce at edges
-        # account for decimal in position # TODO:  Faster to use < and >
-        if int(self.position.x) not in range(0 + self.radius, self.bounds[0] - self.radius): # screen width
+        # bounce at edges.  TODO: Fix sticky edges
+        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
             self.velocity.x *= -1
-        if int(self.position.y) not in range(0 + self.radius, self.bounds[1] - self.radius): # screen height
+        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
             self.velocity.y *= -1
         self.position += self.velocity
 
@@ -56,7 +55,6 @@ class KineticBall(Ball):
     def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
         self.object_list = object_list
         self.mass = mass
-        print(position)
         super().__init__(bounds, position, velocity, color, radius)
 
     def collide(self, object, relative_vector):
@@ -80,7 +78,7 @@ class KineticBall(Ball):
         self.velocity = Vector2(math.sin(angle1), math.cos(angle1)) * object_speed
         object.velocity = Vector2(math.sin(angle2), math.cos(angle2)) * self_speed
 
-        # Fix sticky problem
+        # Help sticky problem
         # TODO:  This is not efficient or accurate, we should calculate the correct distance and move there exactly
         angle = 0.5 * math.pi + tangent
         while relative_vector.length() <= self.radius + object.radius:
@@ -95,11 +93,11 @@ class KineticBall(Ball):
         # Consider time complexity when adding more of this type
         index = self.object_list.index(self)
         for object in self.object_list[index+1:]:  # TODO: Check effeciency
-            if issubclass(type(object), KineticBall) and object != self: # Don't collide with non kinetic (a class is also a subclass of itself)
-                # import pdb; pdb.set_trace()
+            # Don't collide with non kinetic (a class is also a subclass of itself)
+            if issubclass(type(object), KineticBall) and object != self:
                 relative_vector = self.position - object.position
                 if relative_vector.length() <= self.radius + object.radius:
-                    # We are in collision range, so collide
+                    # Objects are in collision range, so collide
                     self.collide(object, relative_vector)
 
         super().update()

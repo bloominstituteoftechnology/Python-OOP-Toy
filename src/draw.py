@@ -7,17 +7,8 @@ from ball import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
-  
-def main():
-    pygame.init()
- 
-    screen = pygame.display.set_mode(SCREEN_SIZE)
- 
-    # Used to manage how fast the screen updates
-    clock = pygame.time.Clock()
- 
-    object_list = [] # list of objects of all types in the toy
 
+def debug_create_objects(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
@@ -33,34 +24,38 @@ def main():
                                     Vector2(-4, 0), [0, 255, 0], 8)
     object_list.append(bouncing_rainbow_ball)
     
-    
-    # kinetic1 = KineticBall(1, object_list, SCREEN_SIZE, Vector2(50, 100),
-    #                                     Vector2(2, 0), [10, 255, 0], 20)
-    # kinetic2 = KineticBall(1, object_list, SCREEN_SIZE, Vector2(500, 103),
-    #                                     Vector2(-1, 0), [10, 255, 0], 20)
+    for i in range(0, 2):
+        kinetic = KineticBall(1, object_list, SCREEN_SIZE, 
+                                        Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                        Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                        [255, 10, 0], 20)
+        object_list.append(kinetic)
 
-    # kinetic1 = KineticBall(1, object_list, SCREEN_SIZE, Vector2(300, 100),
-    #                                     Vector2(0, 2), [10, 255, 0], 20)
-    # kinetic2 = KineticBall(1, object_list, SCREEN_SIZE, Vector2(300, 408),
-    #                                     Vector2(0, -1), [10, 255, 0], 20)
-
-    # object_list.append(kinetic1)
-    # object_list.append(kinetic2)
-
-    for i in range(1, 10):
+    for i in range(0, 10):
         kinetic = KineticBouncing(1, object_list, SCREEN_SIZE, 
                                         Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                         Vector2(4*random.random() - 2, 4*random.random() - 2),
                                         [10, 255, 0], 20)
         object_list.append(kinetic)
 
-    for i in range(1, 10):
+    for i in range(0, 10):
         kinetic = AllTheThings(1, object_list, SCREEN_SIZE, 
                                         Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                         Vector2(4*random.random() - 2, 4*random.random() - 2),
                                         [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
                                         random.randint(3, 20))
         object_list.append(kinetic)
+  
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode(SCREEN_SIZE)
+ 
+    # Used to manage how fast the screen updates
+    clock = pygame.time.Clock()
+ 
+    object_list = [] # list of objects of all types in the toy
+
+    debug_create_objects(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
@@ -69,8 +64,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  #TODO:  Get working
                 if event.key == pygame.K_SPACE:
-                    # ball = Ball(SCREEN_SIZE, 50, 50, 3, 3, [255, 0, 0], 10)
-                    # object_list.append(ball)
+                    # TODO: Add behavior when button pressed
                     pass
 
         for ball in object_list:
