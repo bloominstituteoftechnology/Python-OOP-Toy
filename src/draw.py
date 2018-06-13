@@ -18,20 +18,20 @@ def main():
  
     object_list = [] # list of objects of all types in the toy
 
-    # ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    # object_list.append(ball)
+    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+    object_list.append(ball)
 
-    # bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(100, 100), Vector2(3, 0),
-    #                                 [0, 0, 255], 8)
-    # object_list.append(bouncing_ball)
+    bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(100, 100), Vector2(3, 0),
+                                    [0, 0, 255], 8)
+    object_list.append(bouncing_ball)
 
-    # rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(400, 300), Vector2(3, -2),
-    #                                 [0, 255, 0], 8)
-    # object_list.append(rainbow_ball)
+    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(400, 300), Vector2(3, -2),
+                                    [0, 255, 0], 8)
+    object_list.append(rainbow_ball)
 
-    # bouncing_rainbow_ball = BouncingRainbow(SCREEN_SIZE, Vector2(300, 150),
-    #                                 Vector2(-4, 0), [0, 255, 0], 8)
-    # object_list.append(bouncing_rainbow_ball)
+    bouncing_rainbow_ball = BouncingRainbow(SCREEN_SIZE, Vector2(300, 150),
+                                    Vector2(-4, 0), [0, 255, 0], 8)
+    object_list.append(bouncing_rainbow_ball)
     
     
     # kinetic1 = KineticBall(1, object_list, SCREEN_SIZE, Vector2(50, 100),
@@ -48,10 +48,18 @@ def main():
     # object_list.append(kinetic2)
 
     for i in range(1, 10):
-        kinetic = KineticBall(1, object_list, SCREEN_SIZE, 
+        kinetic = KineticBouncing(1, object_list, SCREEN_SIZE, 
                                         Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
                                         Vector2(4*random.random() - 2, 4*random.random() - 2),
                                         [10, 255, 0], 20)
+        object_list.append(kinetic)
+
+    for i in range(1, 10):
+        kinetic = AllTheThings(1, object_list, SCREEN_SIZE, 
+                                        Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                        Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                        [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
+                                        random.randint(3, 20))
         object_list.append(kinetic)
  
     while True: # TODO:  Create more elegant condition for loop
