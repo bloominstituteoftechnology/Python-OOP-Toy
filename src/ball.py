@@ -33,8 +33,8 @@ class BouncingBall(Ball):
     GRAVITY = .1
 
     def update(self):
-        # add gravity then call normal update
-        self.position.y += self.GRAVITY
+        # add gravity then call normal updates
+        self.velocity.y += self.GRAVITY
         super().update()
 
 class RainbowBall(Ball):
@@ -60,7 +60,7 @@ class KineticBall(Ball):
         super().__init__(bounds, position, velocity, color, radius)
 
     def collide(self, object, relative_vector):
-        print('bang!')
+        # print('bang!')
         
         # We can imagine the point of reflection as a wall tangent to the collision 
         tangent = math.atan2(relative_vector.y, relative_vector.x)
@@ -81,26 +81,21 @@ class KineticBall(Ball):
         object.velocity = Vector2(math.sin(angle2), math.cos(angle2)) * self_speed
 
         # Fix sticky problem
+        # TODO:  This is not efficient or accurate, we should calculate the correct distance and move there exactly
         angle = 0.5 * math.pi + tangent
-        self.position.x += math.sin(angle)
-        self.position.y -= math.cos(angle)
-        object.position.x -= math.sin(angle)
-        object.position.y += math.cos(angle)
-
-        # # TODO:  This is not efficient
-        # while relative_vector.length() <= self.radius + object.radius:
-        #     self.position += self.velocity
-        #     object.position += object.velocity
-        #     relative_vector = self.position - object.position
-
+        while relative_vector.length() <= self.radius + object.radius:
+            self.position.x += math.sin(angle)
+            self.position.y -= math.cos(angle)
+            object.position.x -= math.sin(angle)
+            object.position.y += math.cos(angle)
+            relative_vector = self.position - object.position
 
     def update(self):
-        print(self.velocity)
         # Warning!:  This is a primitive method of collision detection
         # Consider time complexity when adding more of this type
         index = self.object_list.index(self)
         for object in self.object_list[index+1:]:  # TODO: Check effeciency
-            if type(object) is KineticBall and object != self: # Don't collide with non kinetic
+            if issubclass(type(object), KineticBall) and object != self: # Don't collide with non kinetic (a class is also a subclass of itself)
                 # import pdb; pdb.set_trace()
                 relative_vector = self.position - object.position
                 if relative_vector.length() <= self.radius + object.radius:
@@ -109,3 +104,8 @@ class KineticBall(Ball):
 
         super().update()
 
+class KineticBouncing(BouncingBall, KineticBall):
+    pass
+
+class AllTheThings(BouncingBall, KineticBall, RainbowBall):
+    pass
