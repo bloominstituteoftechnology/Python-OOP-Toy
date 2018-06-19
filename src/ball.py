@@ -54,26 +54,40 @@ class RainbowBall(Ball):
         super().update()
     # TODO: Find out why the balls disappear one by one
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    print('This function works!')
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    
+    GRAVITY = .1
 
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
+
+    #TODO: They keep sticking and disappearing need to fixed
+
+    def update(self):
+        self.velocity.y += self.GRAVITY * self.radius
+        super().update()
+
+
+class KineticBouncing(BouncingBall):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    And is affected by gravity
+    """
+    
+    #TODO:
+    pass
     
 
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+class AllTheThings(???):
+    """
+    A ball that does everything!
+    """
+    #TODO: 
+    pass
