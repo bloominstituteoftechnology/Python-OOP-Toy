@@ -30,6 +30,14 @@ class Ball:
 #     ball effected by gravity
 #     """
 #     # TODO: 
+    GRAVITY = .1
+
+    def update(self):
+        # This function will override the update in ball()
+       self.velocity.y += self.GRAVITY
+       # Now that you've done your class specific stuff, call your parents 
+       # update function 
+       super().update()
 
 # class RainbowBall(???):
 #     """
