@@ -58,11 +58,20 @@ class BouncingBall(Ball): # Passing Ball in makes BouncingBall a child of Ball
         super().update()
     
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
+    # TODO: 
+    def update(self):
+        # Just continuously alters the R, G, and B colors each time update
+        # is called.
+        r = (self.color[0] + 10) % 256
+        g = (self.color[1] - 5) % 256
+        b = (self.color[2] + 5) % 256
+        self.color = [ r, g, b ]
+        # This will get the balls moving!
+        super().update()
 
 # class BouncingRainbow(???):
 #     """
