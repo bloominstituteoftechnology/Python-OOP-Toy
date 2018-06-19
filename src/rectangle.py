@@ -3,50 +3,52 @@ import math
 from pygame.math import Vector2
 
 
-class Ball:
+class Rectangle:
     """
     base class for bouncing objects
     """
 
-    def __init__(self, bounds, position, velocity, color, radius):
+    def __init__(self, bounds, position, velocity, color, length, width):
         self.position = position
         self.velocity = velocity
         self.bounds = bounds
         self.color = color
-        self.radius = radius
+        self.length = length
+        self.width = width
 
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
         # screen width
-        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius:
+        if self.position.x < 0 + self.length or self.position.x > self.bounds[0] - self.length:
             self.velocity.x *= -1
         # screen height
-        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius:
+        if self.position.y < 0 + self.width or self.position.y > self.bounds[1] - self.width:
             self.velocity.y *= -1
         self.position += self.velocity
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
-        pygame.draw.circle(screen, self.color, [int(
-            self.position.x), int(self.position.y)], self.radius)
+        # pygame.draw.circle(screen, self.color, [int(
+        #     self.position.x), int(self.position.y)], self.radius)
+        pygame.draw.rect(screen, self.color, [150, 10, 50, 20])
 
 
-class BouncingBall(Ball):
+class BouncingRectangle(Rectangle):
     """
-    ball effected by gravity
+    Rectangle effected by gravity
     """
     GRAVITY = .1
 
     def update(self):
-        # This function will override the update in Ball()
+        # This function will override the update in Rectangle()
         self.velocity.y += self.GRAVITY
         # Now that you've done your class specific stuff, call your paren'ts update function
         super().update()
 
 
-class RainbowBall(Ball):
+class RainbowRectangle(Rectangle):
     """
-    Ball that changes colors
+    Rectangle that changes colors
     """
 
     def update(self):
@@ -58,26 +60,26 @@ class RainbowBall(Ball):
         super().update()
 
 
-class BouncingRainbow(BouncingBall, RainbowBall):
+class BouncingRainbow(BouncingRectangle, RainbowRectangle):
     """
-    Ball that changes color and is affected by gravity
+    Rectangle that changes color and is affected by gravity
     """
     pass
 
-# class KineticBall(???):
+# class KineticRectangle(???):
 #     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
+#     A Rectangle that collides with other collidable Rectangles using simple elastic circle collision
 #     """
 #     # TODO:
 
 # class KineticBouncing(???):
 #     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
+#     A Rectangle that collides with other collidable Rectangles using simple elastic circle collision
 #     And is affected by gravity
 #     """
 
 
 # class AllTheThings(???):
 #     """
-#     A ball that does everything!
+#     A Rectangle that does everything!
 #     """
