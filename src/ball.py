@@ -30,7 +30,7 @@ class BouncingBall(Ball):
     ball effected by gravity
     """
     # TODO: 
-    GRAVITY = .5
+    GRAVITY = .25
 
     def update(self):
         self.velocity.y += self.GRAVITY
