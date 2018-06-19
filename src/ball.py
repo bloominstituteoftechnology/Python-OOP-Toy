@@ -12,6 +12,7 @@ class Ball:
         self.bounds = bounds
         self.color = color
         self.radius = radius
+        
 
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
@@ -30,6 +31,13 @@ class Ball:
 #     ball effected by gravity
 #     """
 #     # TODO: 
+    GRAVITY= .1
+    # This function will override the update in Ball() 
+    def update(self):
+        self.velocity.y +=self.GRAVITY
+        #now that you have done class specific stuff call your
+        #parent's update function
+        super().update()
 
 # class RainbowBall(???):
 #     """
