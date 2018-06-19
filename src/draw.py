@@ -9,6 +9,7 @@ import random
 from pygame.math import Vector2
 
 from ball import *
+from rectangles import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
@@ -27,6 +28,9 @@ def debug_create_objects(object_list):
             150, 200), random.randint(160, 240)), Vector2(5, 2), [0, 255, 0], 10)
         rbBall = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(
             10, 200), random.randint(10, 24)), Vector2(1, 2), [134, 55, 100], 10)
+
+        rec = Rectangle(SCREEN_SIZE, Vector2(random.randint(10, 400),
+                                             random.randint(70, 100)), Vector2(1 + 2, 2 + 2), [255, 0, 0], 10, 40)
 
         object_list.append(ball)
         object_list.append(bBall)
