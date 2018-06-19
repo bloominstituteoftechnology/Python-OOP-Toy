@@ -17,7 +17,7 @@ class Ball:
         # bounce at edges.  FIXED: Fix sticky edges
         if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
             self.velocity.x *= -1
-        if self.position.y < 0 + (self.radius + 1) or self.position.y > self.bounds[1] - self.radius: # screen height
+        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
             if self.position.y < 0 + self.radius:
                 self.position.y += 1
             self.velocity.y *= -1
