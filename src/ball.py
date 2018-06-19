@@ -52,9 +52,9 @@ class RainbowBall(Ball):
     """
 
     def update(self):
-        r = (self.color[0] + 1) % 256
-        g = (self.color[1] - 1) % 256
-        b = (self.color[2] + 2) % 256
+        r = (self.color[0] + 5) % 256
+        g = (self.color[1] - 10) % 256
+        b = (self.color[2] + 5) % 256
         self.color = [r, g, b]
         super().update()
 
