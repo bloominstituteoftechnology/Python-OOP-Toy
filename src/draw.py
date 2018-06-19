@@ -7,15 +7,14 @@ from ball import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
-
+randX1 = random.randint(1,639)
+randY1 = random.randint(1,479)
 
 def debug_create_objects(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(10, 50), Vector2(3, 3), [255, 0, 0], 10)
-    ball1 = Ball(SCREEN_SIZE, Vector2(20, 50), Vector2(3, 3), [255, 0, 0], 10)
-    ball2 = Ball(SCREEN_SIZE, Vector2(30, 50), Vector2(3, 3), [255, 0, 0], 10)
+    ball = Ball(SCREEN_SIZE, Vector2(25,50), Vector2(3, 3), [255, 0, 0], 10)
+    ball1= Ball(SCREEN_SIZE, Vector2(randX1,randY1), Vector2(3, 3), [0, 255, 0], 10)
     object_list.append(ball)
     object_list.append(ball1)
-    object_list.append(ball2)
 
     # TODO: Create other ball types for testing
 
