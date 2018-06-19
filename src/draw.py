@@ -9,8 +9,10 @@ SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    object_list.append(ball)
+    for i in range(5): # adds more balls to the sim
+        # ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10) # this code for testing Ball
+        ball = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100, 400), random.randint(100, 400)), Vector2(random.random(), random.random()), [255, 0, 0], 10) # this code for testing BouncingBall
+        object_list.append(ball)
 
     # TODO: Create other ball types for testing
   
