@@ -3,19 +3,14 @@ import math
 from pygame.math import Vector2
 
 class Rectangle:
-    """
-    base class for bouncing objects
-    """
-    def __init__(self, x, y, color, width, height):
+    def __init__(self, SCREEN_SIZE, color, x, y, width, height):
+        self.color = color
+        self.SCREEN_SIZE = SCREEN_SIZE
         self.x = x
         self.y = y
-        self.color = color
         self.width = width
-        self.height = height
-       
+        self.height = height  
 
-        
-
-    def draw(self, screen, pygame):
+    def draw(self, Surface, pygame):
         # cast x and y to int for drawing
-        pygame.draw.rect(screen, self.color, (self.x, self.y, self.height, self.width))
+        pygame.draw.rect(Surface, self.color, (self.x, self.y, self.height, self.width))

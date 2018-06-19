@@ -1,4 +1,4 @@
-import pygame #TODO:  Fix intellisense
+import pygame, sys #TODO:  Fix intellisense
 import random
 
 from pygame.math import Vector2
@@ -11,14 +11,14 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 
 def debug_create_objects(object_list):
-    rectangle = Rectangle(SCREEN_SIZE,  [255, 0, 0], (3, 3), 100, 50)
+    rectangle = Rectangle(SCREEN_SIZE, [255, 0, 0], x=200, y=150, height=100, width=50)
     object_list.append(rectangle)
 
 
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode(SCREEN_SIZE)
+    Surface = pygame.display.set_mode(SCREEN_SIZE)
  
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
@@ -39,9 +39,9 @@ def main():
                     pass
  
         # Draw Loop
-        screen.fill(BACKGROUND_COLOR)
+        Surface.fill(BACKGROUND_COLOR)
         for rectangle in object_list:
-            rectangle.draw(screen, pygame)
+            rectangle.draw(Surface, pygame)
  
         clock.tick(60)
         pygame.display.flip()
