@@ -17,12 +17,13 @@ def debug_create_objects(object_list, paddle_list, enemies_list):
                                         [255, 0, 0], 10)
         object_list.append(ball)
 
-    paddle = Rectangle([300, 450, 50, 10], [255, 0, 0])
+    paddle = Paddle(SCREEN_SIZE, [300, 450, 50, 10], [0, 0, 0])
     paddle_list.append(paddle)
 
     for i in range(5):
+        color = [random.randint(100, 250), random.randint(100, 250), random.randint(100, 250)]
         for j in range(3):
-            enemy = Rectangle([ (180 + (55 * i)) , (50 + (20 * j)) , 50, 10 ], [255, 0, 0])
+            enemy = Enemy(SCREEN_SIZE, [ (180 + (55 * i)) , (50 + (20 * j)) , 50, 10 ], color)
             enemies_list.append(enemy)
   
 def main():
@@ -38,16 +39,15 @@ def main():
 
     debug_create_objects(object_list, paddle_list, enemies_list)
 
-    while True:
+    while len(enemies_list) > 0:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-        # Logic Loop
+        # Logic Loop TODO: Move paddle
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:  #TODO:  Get working
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    # TODO: Add behavior when button pressed
-                    pass
+                    print(1)
 
         for ball in object_list:
             ball.update()
