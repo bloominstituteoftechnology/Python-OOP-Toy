@@ -6,10 +6,12 @@ from pygame.math import Vector2
 from ball import *
 
 SCREEN_SIZE = [640, 480]
-BACKGROUND_COLOR = [255, 255, 255]
+BACKGROUND_COLOR = [0, 0, 0]
 
 def debug_create_objects(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+    # QUESTION: Looking at the class `Ball` parameters, I see 6, but only see 5 values passed here?
+    # # Where/What is "self"???
+    ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 0), [255, 0, 0], 10) # This is the constructor!
     object_list.append(ball)
 
     # TODO: Create other ball types for testing
