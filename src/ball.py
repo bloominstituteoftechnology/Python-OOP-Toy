@@ -73,11 +73,11 @@ class RainbowBall(Ball):
         # This will get the balls moving!
         super().update()
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall, RainbowBall): # That's it!  Everything you need is already in the previously constructed instances!
+    """
+    Ball that changes color and is affected by gravity
+    """
+    # TODO:
 
 # class KineticBall(???):
 #     """
