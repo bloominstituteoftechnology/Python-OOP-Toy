@@ -27,7 +27,8 @@ class Rectangle:
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
-        pygame.draw.rect(screen, self.color, [300, 20, 100, 40])
+        pygame.draw.rect(screen, self.color, [int(
+            self.position.x), int(self.position.y), 100, 40])
 
 
 class BouncingRectangle(Rectangle):

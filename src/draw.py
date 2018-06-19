@@ -6,13 +6,13 @@ from pygame.math import Vector2
 from ball import *
 from rectangle import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [320, 240]
 BACKGROUND_COLOR = [255, 255, 255]
 
 
 def debug_create_objects(object_list):
-    ball = BouncingRectangle(SCREEN_SIZE, Vector2(
-        50, 50), Vector2(3, 3), [0, 255, 0], 10)
+    ball = BouncingRainbow(SCREEN_SIZE, Vector2(
+        50, 50), Vector2(2, 2), [0, 255, 0], 10)
     object_list.append(ball)
 
     # TODO: Create other ball types for testing
