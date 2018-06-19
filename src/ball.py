@@ -12,6 +12,7 @@ class Ball:
         self.bounds = bounds
         self.color = color
         self.radius = radius
+    
 
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
@@ -29,7 +30,7 @@ class BouncingBall(Ball):
     """
     ball effected by gravity
     """
-    # TODO: 
+     
     GRAVITY = .1
 
     def update(self):
@@ -38,11 +39,20 @@ class BouncingBall(Ball):
         # Call the parent's update function
         super().update()
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
+    GRAVITY = 5
+    def update(self):
+        self.velocity.y += self.GRAVITY
+        r = (self.color[0] + 10) % 256
+        g = (self.color[1] -5 ) % 256
+        b = (self.color[2] + 5) % 256
+        self.color = [r, g, b]
+        # Causes all of the balls to bounce
+        super().update()
+    # TODO: Find out why the balls disappear one by one
 
 # class BouncingRainbow(???):
 #     """

@@ -10,7 +10,7 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
     for i in range(15):
-        ball = BouncingBall(SCREEN_SIZE, Vector2(random.randint(100, 400),
+        ball = RainbowBall(SCREEN_SIZE, Vector2(random.randint(100, 400),
                                                  random.randint(100, 400)),
                                                 Vector2(random.random(), random.random()),
                                                 [255, 0, 0], 10)
