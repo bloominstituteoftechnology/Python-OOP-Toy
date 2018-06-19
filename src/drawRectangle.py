@@ -3,21 +3,15 @@ import random
 
 from pygame.math import Vector2
 
-from ball import *
+from rectangle import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
-    for i in range(5):
-        
-        ball = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100, 400),
-                                                      random.randint(100, 400)),   
-                                                      Vector2(random.random(), random.random()), [255, 0, 0], 10)
-        object_list.append(ball)
+    rectangle = Rectangle(SCREEN_SIZE, [255, 0, 0], (3, 3), 100, 50)
+    object_list.append(rectangle)
 
-    # TODO: Create other ball types for testing
-  
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -53,6 +47,6 @@ def main():
  
     # Close everything down
     pygame.quit()
- 
-if __name__ == "__main__":
+
+if __name__=="__main__":
     main()
