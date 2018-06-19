@@ -24,24 +24,38 @@ class Ball:
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
+        pygame.draw.rect(screen, self.color, (200,150,100,50))
+class BouncingBall(Ball):
+    """
+    ball effected by gravity
+    """
+    GRAVITY = .1
 
-# class BouncingBall(???):
-#     """
-#     ball effected by gravity
-#     """
-#     # TODO: 
+    def update(self): #Todo: Fix rounding error that makes it bounce higher
+        #This function will override the update in the toy
+        # print('called update in BouncingBall')
+        self.velocity.y += self.GRAVITY
+        #Now that you've done your class specific studd, call your parent's update function
+        super().update()
+        #this could be withouth the underscores too
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
+    def update(self):
+        r = (self.color[0] + 10) % 256
+        g = (self.color[1] - 5) % 256
+        b = (self.color[2] + 5) %256
+        self.color = [r,g,b]
+        super().update()
+
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    pass
 
 # class KineticBall(???):
 #     """
