@@ -8,15 +8,15 @@ from rectangle2 import *
 
 
 SCREEN_SIZE = [640, 480]
-BACKGROUND_COLOR = [255, 255, 255]
+BACKGROUND_COLOR = [218, 165, 32]
 
 
 def debug_create_objects(object_list):
     for i in range(5):
-        ball = Rectangle2(SCREEN_SIZE, Vector2(random.randint(100, 400),
-                                               random.randint(100, 400)),
+        ball = Rectangle2(SCREEN_SIZE, Vector2(random.randint(100, 200),
+                                               random.randint(100, 200)),
                           Vector2(random.random(), random.random()),
-                          [255, 0, 0], 10)
+                          [100, 149, 237], 5)
         object_list.append(ball)
 
     # TODO: Create other ball types for testing

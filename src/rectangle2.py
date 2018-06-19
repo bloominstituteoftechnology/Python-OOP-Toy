@@ -13,15 +13,14 @@ class Rectangle2:
         self.velocity = velocity
         self.bounds = bounds
         self.color = color
-        self.radius = radius
 
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
         # screen width
-        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius:
+        if self.position.x < 0 + (self.position.x / 2) or self.position.x > self.bounds[0] - (self.position.x / 2):
             self.velocity.x *= -1
         # screen height
-        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius:
+        if self.position.y < 0 + (self.position.y / 2) or self.position.y > self.bounds[1] - (self.position.y / 2):
             self.velocity.y *= -1
         self.position += self.velocity
 
