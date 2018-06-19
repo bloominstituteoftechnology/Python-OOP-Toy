@@ -22,6 +22,7 @@ class Rectangle:
     # Draws a rectangular shape on the Surface. The given Rect is the area of the rectangle.
     # The width argument is the thickness to draw the outer edge.
     # If width is zero then the rectangle will be filled.
+    
     # Rect(left, top, width, height) --> Rect
     # Rect((left, top), (width, height)) --> Rect
     # Rect(object) -> Rect

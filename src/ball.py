@@ -15,10 +15,10 @@ class Ball:
         self.radius = radius
 
     def update(self):
-        # bounce at edges.  TODO: Fix sticky edges
-        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
+        # bounce at edges.  DONE: Fix sticky edges; set checks to '<=' and '>='
+        if self.position.x <= 0 + self.radius or self.position.x >= self.bounds[0] - self.radius: # screen width
             self.velocity.x *= -1
-        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
+        if self.position.y <= 0 + self.radius or self.position.y >= self.bounds[1] - self.radius: # screen height
             self.velocity.y *= -1
         self.position += self.velocity
 
@@ -30,7 +30,7 @@ class BouncingBall(Ball):
     """
     ball effected by gravity
     """
-    GRAVITY = 0.1
+    GRAVITY = 0.0
 
     def update(self):
         # This fn overrides update() in Ball
@@ -63,6 +63,11 @@ class BouncingRainbow(BouncingBall, RainbowBall):
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """
 #     # TODO:
+
+#     def update(self):
+
+
+#         super().update()
 
 # class KineticBouncing(???):
 #     """

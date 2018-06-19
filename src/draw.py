@@ -15,8 +15,10 @@ def debug_create_objects(object_list):
         ball = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100, 400), random.randint(100, 400)),
                                          Vector2(random.randint(0, 5), random.randint(0, 5)), [255, 0, 0], 10)
         object_list.append(ball)
-    rect = Rectangle(SCREEN_SIZE, [255, 0, 0], [175, 10, 150, 100], 2)
-    object_list.append(rect)
+    rect1 = Rectangle(SCREEN_SIZE, [255, 0, 0], [175, 10, 150, 100], 2)
+    rect2 = Rectangle(SCREEN_SIZE, [0, 0, 255], [300, 200, 75, 125], 2)
+    object_list.append(rect1)
+    object_list.append(rect2)
     
 
     # TODO: Create other ball types for testing
