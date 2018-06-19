@@ -2,7 +2,7 @@ import math
 
 from pygame.math import Vector2
 
-class Ball:
+class Rect:
     """
     base class for bouncing objects
     """
@@ -23,11 +23,12 @@ class Ball:
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
-        pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
+        # pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
+        pygame.draw.rect(screen, self.color, (int(self.position.x), int(self.position.y),70,50), 0)
 
-class BouncingBall(Ball):
+class BouncingRect(Rect):
     """
-    ball effected by gravity
+    rect effected by gravity
     """
     GRAVITY = .1
 
@@ -35,9 +36,9 @@ class BouncingBall(Ball):
         self.velocity.y += self.GRAVITY
         super().update()
 
-class RainbowBall(Ball):
+class RainbowRect(Rect):
     """
-    Ball that changes colors
+    rect that changes colors
     """
     def update(self):
         r = (self.color[0] + 10) % 256
@@ -46,26 +47,26 @@ class RainbowBall(Ball):
         self.color = [r, g, b]
         super().update()
 
-class BouncingRainbow(BouncingBall, RainbowBall):
+class BouncingRainbow(BouncingRect, RainbowRect):
     """
-    Ball that changes color and is affected by gravity
+    Rect that changes color and is affected by gravity
     """
     pass
 
-# class KineticBall(???):
+# class KineticRect(???):
 #     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
+#     A rect that collides with other collidable rects using simple elastic circle collision
 #     """
 #     # TODO:
 
 # class KineticBouncing(???):
 #     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
+#     A rect that collides with other collidable rects using simple elastic circle collision
 #     And is affected by gravity
 #     """
     
 
 # class AllTheThings(???):
 #     """
-#     A ball that does everything!
+#     A rect that does everything!
 #     """
