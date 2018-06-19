@@ -11,13 +11,11 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 
 def debug_create_objects(object_list):
-    for i in range(5):
-        rectangle = BouncingRectangle(SCREEN_SIZE, Vector2(
-            random.randint(100, 400), random.randint(100, 400)),
-            Vector2(random.random(), random.random()), [0, 255, 0], 10, 10)
-        object_list.append(rectangle)
+    ball = BouncingRectangle(SCREEN_SIZE, Vector2(
+        50, 50), Vector2(3, 3), [0, 255, 0], 10)
+    object_list.append(ball)
 
-    # TODO: Create other rectangle types for testing
+    # TODO: Create other ball types for testing
 
 
 def main():
@@ -42,13 +40,13 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for rectangle in object_list:
-            rectangle.update()
+        for ball in object_list:
+            ball.update()
 
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
-        for rectangle in object_list:
-            rectangle.draw(screen, pygame)
+        for ball in object_list:
+            ball.draw(screen, pygame)
 
         clock.tick(60)
         pygame.display.flip()
