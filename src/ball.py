@@ -31,8 +31,11 @@ class BouncingBall(Ball):
      """
      # TODO: 
      GRAVITY = .1
+     friction = .99
      def update(self):
          self.velocity.y += self.GRAVITY
+         self.velocity.y *= self.friction
+         self.velocity.x *= self.friction
          super().update()
 
 class RainbowBall(Ball):
