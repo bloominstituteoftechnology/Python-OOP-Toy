@@ -11,8 +11,12 @@ BACKGROUND_COLOR = [0, 0, 0]
 def debug_create_objects(object_list):
     # QUESTION: Looking at the class `Ball` parameters, I see 6, but only see 5 values passed here?
     # # Where/What is "self"???
-    ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 0), [255, 0, 0], 10) # This is the constructor!
-    object_list.append(ball)
+    for i in range(5):
+        ball = BouncingBall(SCREEN_SIZE, Vector2(random.randint(100,400),
+                                                 random.randint(100,400)), 
+                                                 Vector2(random.random(), random.random()),
+                                                 [255, 0, 0], 10) # This is the constructor!
+        object_list.append(ball)
 
     # TODO: Create other ball types for testing
   
