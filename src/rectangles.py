@@ -24,5 +24,5 @@ class Rectangle:
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
-        pygame.draw.rec(screen, self.color, (int(self.position.x), int(
+        pygame.draw.rect(screen, self.color, (int(self.position.x), int(
             self.position.y), int(self.width), int(self.length)))
