@@ -67,20 +67,23 @@ class BouncingRainbow(BouncingBall, RainbowBall):
         super().update()
     # TODO:
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
 
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    # TODO:
+    self.kinetic = True
+    for items in object_list:
+        if item.kinetic:
 
+            # class KineticBouncing(???):
+            #     """
+            #     A ball that collides with other collidable balls using simple elastic circle collision
+            #     And is affected by gravity
+            #     """
 
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+            # class AllTheThings(???):
+            #     """
+            #     A ball that does everything!
+            #     """
