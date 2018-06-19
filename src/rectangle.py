@@ -8,10 +8,9 @@ class Rectangle:
     base class for rectangles
     """
 
-    def __init__(self, bounds, position, velocity, color):
+    def __init__(self, bounds, Rect, color):
         self.bounds = bounds
-        self.position = position
-        self.velocity = velocity
+        self.Rect = Rect
         self.color = color
         # self.height = height
         # self.width = width

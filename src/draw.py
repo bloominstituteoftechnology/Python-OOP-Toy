@@ -21,9 +21,9 @@ def debug_create_objects(object_list):
         object_list.append(ball)
 
     # TODO: Create other ball types for testing
-    box = Rectangle(SCREEN_SIZE, Vector2(random.randint(100, 400), random.randint(
-        100, 400)), Vector2(random.random(), random.random()), [255, 0, 0])
-    object_list.append(box)
+    for i in range(5):
+        box = Rectangle(SCREEN_SIZE, random.random(), [255, 0, 0])
+        object_list.append(box)
 
 
 def main():
