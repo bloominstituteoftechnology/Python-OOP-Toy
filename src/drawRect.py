@@ -11,10 +11,10 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
     for i in range(5):
-        rect = BouncingRect(SCREEN_SIZE, Vector2(random.randint(100, 400),
-                                                 random.randint(100, 400)),
-                            Vector2(random.random(), random.random()),
-                            [255, 0, 0], 1)
+        rect = RainbowRect(SCREEN_SIZE, Vector2(random.randint(400, 400),
+                                                random.randint(400, 400)),
+                           Vector2(random.random(), random.random()),
+                           [255, 0, 0], 50)
         object_list.append(rect)
 
     # TODO: Create other ball types for testing
