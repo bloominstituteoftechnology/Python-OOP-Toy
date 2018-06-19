@@ -54,11 +54,11 @@ class BouncingRainbow(RainbowBall, BouncingBall):
         super().update()
 
 
-class KineticBall(???):
-    """
-    A ball that collides with other collidable balls using simple elastic circle collision
-    """
-    # TODO:
+# class KineticBall(Ball):
+#     """
+#     A ball that collides with other collidable balls using simple elastic circle collision
+#     """
+#     # TODO:
 
 # class KineticBouncing(???):
 #     """
