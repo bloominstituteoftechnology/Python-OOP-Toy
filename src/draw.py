@@ -4,13 +4,17 @@ import random
 from pygame.math import Vector2
 
 from ball import *
+from rect import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    object_list.append(ball)
+    for i in range(5):
+        # ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+        rectangle = Rect(SCREEN_SIZE, [255, 0, 0], (100, 400, 10, 10))
+        # object_list.append(ball)
+        object_list.append(rectangle)
 
     # TODO: Create other ball types for testing
   
@@ -36,13 +40,18 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
+        # for ball in object_list:
+        #     ball.update()
+        for rectangle in object_list:
+            rectangle.update()
  
         # Draw Loop
+        # screen.fill(BACKGROUND_COLOR)
+        # for ball in object_list:
+        #     ball.draw(screen, pygame)
         screen.fill(BACKGROUND_COLOR)
-        for ball in object_list:
-            ball.draw(screen, pygame)
+        for rectangle in object_list:
+            rectangle.draw(screen, pygame)
  
         clock.tick(60)
         pygame.display.flip()
