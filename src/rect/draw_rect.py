@@ -3,7 +3,7 @@ import random
 
 from pygame.math import Vector2
 
-from ball import *
+from rect import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [0, 0, 0]
@@ -11,15 +11,15 @@ BACKGROUND_COLOR = [0, 0, 0]
 def debug_create_objects(object_list):
     # QUESTION: Looking at the class `Ball` parameters, I see 6, but only see 5 values passed here?
     # # Where/What is "self"???
-    for i in range(10):
-        ball = BouncingBall(SCREEN_SIZE, Vector2(random.randint(100,400),
+    for i in range(5):
+        rect = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100,400),
                                                  random.randint(100,400)), 
                                                  Vector2((2 + random.random())%3, 
                                                          (2 + random.random())%3),
-                                                         [255, 0, 0], 10) # This is the constructor!
-        object_list.append(ball)
+                                                         [255, 165, 0], 50, 80) # This is the constructor!
+        object_list.append(rect)
 
-    # TODO: Create other ball types for testing
+    # TODO: Create other rect types for testing
   
 def main():
     pygame.init()
@@ -43,13 +43,13 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
+        for rect in object_list:
+            rect.update()
  
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
-        for ball in object_list:
-            ball.draw(screen, pygame)
+        for rect in object_list:
+            rect.draw(screen, pygame)
  
         clock.tick(60)
         pygame.display.flip()
