@@ -4,16 +4,18 @@ import random
 from pygame.math import Vector2
 
 from ball import *
-from rectangle import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 
 def debug_create_objects(object_list):
-    # ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-
-        object_list.append(ball)
+    ball = Ball(SCREEN_SIZE, Vector2(10, 50), Vector2(3, 3), [255, 0, 0], 10)
+    ball1 = Ball(SCREEN_SIZE, Vector2(20, 50), Vector2(3, 3), [255, 0, 0], 10)
+    ball2 = Ball(SCREEN_SIZE, Vector2(30, 50), Vector2(3, 3), [255, 0, 0], 10)
+    object_list.append(ball)
+    object_list.append(ball1)
+    object_list.append(ball2)
 
     # TODO: Create other ball types for testing
 
