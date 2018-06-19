@@ -11,8 +11,8 @@ randX1 = random.randint(1,639)
 randY1 = random.randint(1,479)
 
 def debug_create_objects(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(25,50), Vector2(3, 3), [255, 0, 0], 10)
-    ball1= Ball(SCREEN_SIZE, Vector2(randX1,randY1), Vector2(3, 3), [0, 255, 0], 10)
+    ball = BouncingRainbow(SCREEN_SIZE, Vector2(25,50), Vector2(3, 3), [255, 0, 0], 10)
+    ball1= BouncingRainbow(SCREEN_SIZE, Vector2(randX1,randY1), Vector2(3, 3), [0, 255, 0], 10)
     object_list.append(ball)
     object_list.append(ball1)
 
