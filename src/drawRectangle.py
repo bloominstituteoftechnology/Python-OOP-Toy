@@ -3,21 +3,19 @@ import random
 
 from pygame.math import Vector2
 
-from ball import *
+from rectangle import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
-def debug_create_objects(object_list):
-    for i in range(5):
-        ball = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100, 400), 
-                                                    random.randint(100, 400)), 
-                                                    Vector2(random.random(), random.random()), 
-                                                    [255, 0, 0], 10)
-        object_list.append(ball)
 
-    # TODO: Create other ball types for testing
-  
+
+def debug_create_objects(object_list):
+    rectangle = Rectangle(SCREEN_SIZE,  [255, 0, 0], (3, 3), 100, 50)
+    object_list.append(rectangle)
+
+
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -39,14 +37,11 @@ def main():
                 if event.key == pygame.K_SPACE:
                     # TODO: Add behavior when button pressed
                     pass
-
-        for ball in object_list:
-            ball.update()
  
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
-        for ball in object_list:
-            ball.draw(screen, pygame)
+        for rectangle in object_list:
+            rectangle.draw(screen, pygame)
  
         clock.tick(60)
         pygame.display.flip()
