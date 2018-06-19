@@ -39,9 +39,17 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
- 
+        #monitor collisions and update
+        for ball1 in object_list:
+            for ball2 in object_list:
+                dist = math.sqrt((ball1.position[0] - ball2.position[0])**2 + (ball1.position[1] - ball2.position[1])**2)
+                if dist <= ball1.radius + ball2.radius:
+                    ball1.velocity.x *= -1
+                    ball1.velocity.y *= -1
+                    ball2.velocity.x *= -1
+                    ball2.velocity.y *= -1
+            ball1.update()
+
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
