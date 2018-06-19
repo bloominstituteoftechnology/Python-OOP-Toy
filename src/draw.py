@@ -9,8 +9,11 @@ SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    object_list.append(ball)
+    for i in range(5):
+        ball = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100,400),
+                                                    random.randint(100, 400)),
+                                                    Vector2(3, 0), [0, 0, 0], 10)
+        object_list.append(ball)
 
     # TODO: Create other ball types for testing
   
@@ -36,9 +39,17 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
- 
+        #monitor collisions and update
+        for ball1 in object_list:
+            for ball2 in object_list:
+                dist = math.sqrt((ball1.position[0] - ball2.position[0])**2 + (ball1.position[1] - ball2.position[1])**2)
+                if dist <= ball1.radius + ball2.radius:
+                    ball1.velocity.x *= -1
+                    ball1.velocity.y *= -1
+                    ball2.velocity.x *= -1
+                    ball2.velocity.y *= -1
+            ball1.update()
+
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
