@@ -11,17 +11,31 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_objects(object_list):
     # ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    for i in range(5):
-        ball = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100, 400), random.randint(100, 400)),
-                                         Vector2(random.randint(0, 5), random.randint(0, 5)), [255, 0, 0], 10)
-        object_list.append(ball)
-    rect1 = Rectangle(SCREEN_SIZE, [255, 0, 0], [175, 10, 150, 100], 2)
-    rect2 = Rectangle(SCREEN_SIZE, [0, 0, 255], [300, 200, 75, 125], 2)
-    object_list.append(rect1)
-    object_list.append(rect2)
+    ball_count = 5
+    # for i in range(ball_count):
+    #     ball = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100, 400), random.randint(100, 400)),
+    #                                      Vector2(random.randint(0, 5), random.randint(0, 5)), [255, 0, 0], 10)
+    #     object_list.append(ball)
+    # rect1 = Rectangle(SCREEN_SIZE, [255, 0, 0], [175, 10, 150, 100], 2)
+    # rect2 = Rectangle(SCREEN_SIZE, [0, 0, 255], [300, 200, 75, 125], 2)
+    # object_list.append(rect1)
+    # object_list.append(rect2)
     
 
     # TODO: Create other ball types for testing
+    for i in range(ball_count):
+        pos = Vector2(random.randint(100, 400), random.randint(100, 400))
+        vel = Vector2(random.randint(0, 5), random.randint(0, 5))
+        color = [255, 0, 0]
+        #radius = 10
+        radius = random.randint(10, 40)
+        #mass = 1
+        mass = random.randint(1, 5)
+        # ball = BouncingRainbow(SCREEN_SIZE, pos, vel, color, radius)
+        ball = AllTheThings(SCREEN_SIZE, pos, vel, color, radius, mass, object_list)
+
+        object_list.append(ball)
+       
   
 def main():
     pygame.init()
@@ -47,7 +61,7 @@ def main():
 
         for ball in object_list:
             ball.update()
- 
+       
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
