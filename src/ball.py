@@ -1,5 +1,4 @@
 import math
-
 from pygame.math import Vector2
 
 
@@ -16,7 +15,7 @@ class Ball:
         self.radius = radius
 
     def update(self):
-        # bounce at edges.  TODO: Fix sticky edges
+        # bounce at edges.  TODO: Fix sticky edges, when reversing y/x, make border before edge, when collide make position 1px away from edge movement,
         # screen width
         if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius:
             self.velocity.x *= -1
@@ -31,13 +30,15 @@ class Ball:
             self.position.x), int(self.position.y)], self.radius)
 
 
-class BouncingBall(???):
+class BouncingBall(Ball):
     #     """
     #     ball effected by gravity
     #     """
-    self
-    self.velocity.y += self.VELOCITY
-#     # TODO:
+    GRAVITY = .1
+
+    def update(self):  # fix rounding error that makes bounce higher
+        self.velocity.y += self.GRAVITY
+        super().update()
 
 
 class RainbowBall(Ball):
@@ -45,33 +46,82 @@ class RainbowBall(Ball):
     #     Ball that changes colors
     #     """
     def update(self):
-        r = (self.color[0] + 10) % 256
-        g = (self.color[0] - 5) % 256
-        b = (self.color[0] + 5) % 256
+        r = (self.color[0] + 1) % 256
+        g = (self.color[0] - 1) % 256
+        b = (self.color[0] + 2) % 256
         self.color = [r, g, b]
-        super().update
+        super().update()
 
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
-
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
-
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    pass
 
 
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+
+    def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        self.mass = mass
+        super().__init__(bounds, position, velocity, color, radius)
+
+    def collide(self, object, relative_vector):
+        # print('bang!')
+
+        # We can imagine the point of reflection as a wall tangent to the collision
+        tangent = math.atan2(relative_vector.y, relative_vector.x)
+        # Get the angle of travel for both
+        angle1 = 0.5 * math.pi - math.atan2(self.velocity.y, self.velocity.x)
+        angle2 = 0.5 * math.pi - \
+            math.atan2(object.velocity.y, object.velocity.x)
+        # The angles of travel are updated to be two times the tangent minus the current angle
+        angle1 = 2 * tangent - angle1
+        angle2 = 2 * tangent - angle2
+
+        # Exchange speed
+        # Get velocity of other particle
+        object_speed = object.velocity.length()
+        self_speed = self.velocity.length()
+
+        # Update with new angle and opposing particle's speed
+        self.velocity = Vector2(
+            math.sin(angle1), math.cos(angle1)) * object_speed
+        object.velocity = Vector2(
+            math.sin(angle2), math.cos(angle2)) * self_speed
+
+        # Help sticky problem
+        # TODO:  This is not efficient or accurate, we should calculate the correct distance and move there exactly
+        angle = 0.5 * math.pi + tangent
+        while relative_vector.length() <= self.radius + object.radius:
+            self.position.x += math.sin(angle)
+            self.position.y -= math.cos(angle)
+            object.position.x -= math.sin(angle)
+            object.position.y += math.cos(angle)
+            relative_vector = self.position - object.position
+
+    def update(self):
+        # Warning!:  This is a primitive method of collision detection
+        # Consider time complexity when adding more of this type
+        index = self.object_list.index(self)
+        for object in self.object_list[index+1:]:  # TODO: Check effeciency
+            # Don't collide with non kinetic (a class is also a subclass of itself)
+            if issubclass(type(object), KineticBall) and object != self:
+                relative_vector = self.position - object.position
+                if relative_vector.length() <= self.radius + object.radius:
+                    # Objects are in collision range, so collide
+                    self.collide(object, relative_vector)
+
+        super().update()
+
+
+class KineticBouncing(BouncingBall, KineticBall):
+    pass
+
+
+class AllTheThings(BouncingBall, KineticBall, RainbowBall):
+    pass

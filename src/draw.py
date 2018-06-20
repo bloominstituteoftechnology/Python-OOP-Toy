@@ -10,11 +10,14 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 
 def debug_create_objects(object_list):
-    ball = RainbowBall(SCREEN_SIZE, Vector2(50, 50),
-                       Vector2(3, 3), [255, 0, 0], 10)
-    object_list.append(ball)
+    for i in range(5):
+        ball = AllTheThings(SCREEN_SIZE, Vector2(random.randint(100, 400),
+                                                 random.randint(100, 400)),
+                            Vector2(random.random(), random.random()),
+                            [255, 0, 0], 10)
+        object_list.append(ball)
 
-    # TODO: Create other ball types for testing
+# TODO: Create other ball types for testing
 
 
 def main():
@@ -47,7 +50,7 @@ def main():
         for ball in object_list:
             ball.draw(screen, pygame)
 
-        clock.tick(60)
+        clock.tick(60)  # frames per second
         pygame.display.flip()
 
     # Close everything down
