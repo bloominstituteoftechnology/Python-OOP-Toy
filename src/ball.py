@@ -23,7 +23,6 @@ class Ball:
                                         self.radius*2, self.radius*2)
 
     def update(self):
-        # bounce at edges.  TODO: Fix sticky edges
         if self.position.x <= 0 + self.radius: # screen width
             self.position.x = self.radius + 1
             self.velocity.x *= -1
@@ -84,58 +83,23 @@ class KineticBall(Ball):
     def collide_with_ball(self, object, relative_vector):
         print('bang!')
 
+        #TODO:  Calculate the correct position and move there directly
         while relative_vector.length() <= self.radius + object.radius:
             self.position += relative_vector.normalize()
             object.position -= relative_vector.normalize()
             relative_vector = self.position - object.position
 
-        # Help sticky problem
-        # TODO:  This is not efficient or accurate, we should calculate the correct distance and move there exactly
-        # angle = 0.5 * math.pi + tangent
-        # test = Vector2(math.cos(angle), math.sin(angle))
-        # print(test)
-        # while relative_vector.length() <= self.radius + object.radius:
-        #     object.position -= relative_vector.normalize()
-        #     self.position += relative_vector.normalize()
-        # #     self.position.x += math.sin(angle)
-        # #     self.position.y -= math.cos(angle)
-        # #     object.position.x -= math.sin(angle)
-        # #     object.position.y += math.cos(angle)
-        #     relative_vector = self.position - object.position
-        
-        # We can imagine the point of reflection as a wall tangent to the collision 
-        tangent = math.atan2(relative_vector.y, relative_vector.x)
-
-        plane = relative_vector
         self_speed = self.velocity.length()
         object_speed = object.velocity.length()
-        self.velocity = self.velocity.reflect(plane).normalize()
+
+        self.velocity = self.velocity.reflect(relative_vector).normalize()
         self.velocity *= object_speed
-        object.velocity = object.velocity.reflect(plane).normalize()
+
+        object.velocity = object.velocity.reflect(relative_vector).normalize()
         object.velocity *= self_speed
 
-        
-        # # Get the angle of travel for both
-        # angle1 = 0.5 * math.pi - math.atan2(self.velocity.y, self.velocity.x)
-        # angle2 = 0.5 * math.pi - math.atan2(object.velocity.y, object.velocity.x)
-        # # The angles of travel are updated to be two times the tangent minus the current angle
-        # angle1 = 2 * tangent - angle1
-        # angle2 = 2 * tangent - angle2
-
-        # # Exchange speed
-        # # Get velocity of other particle
-        # object_speed = object.velocity.length()
-        # self_speed = self.velocity.length()
-
-        # print('before', self.velocity.length())
-        # # Update with new angle and opposing particle's speed
-        # # self.velocity = Vector2(math.cos(angle2), math.sin(angle2)).normalize() * object_speed
-        # # object.velocity = Vector2(math.cos(angle1), math.sin(angle1)).normalize() * self_speed
-
-        # # original
-        # self.velocity = Vector2(math.cos(angle1), math.sin(angle1)) * object_speed
-        # object.velocity = Vector2(math.cos(angle2), math.sin(angle2)) * self_speed
-        # print('after', self.velocity.length())
+        self.position += self.velocity
+        object.position += object.velocity
 
     def collide_with_rectangle(self, object):
         # This function is called after a first-pass test, that is the collision
@@ -219,7 +183,7 @@ class KineticBall(Ball):
 
 
 
-    def update(self):
+    def check_collision(self):
         # Warning!:  This is a primitive method of collision detection
         # Consider time complexity when adding more of this type
         index = self.object_list.index(self)
@@ -236,8 +200,6 @@ class KineticBall(Ball):
                 # Do a first round pass for collision (we know object is a KineticBlock)
                 if self.collision_rectangle.colliderect(object.rectangle):
                     self.collide_with_rectangle(object)
-
-        super().update()
 
 class KineticBouncing(BouncingBall, KineticBall):
     pass

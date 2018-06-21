@@ -93,8 +93,9 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
+        for object in object_list:
+            object.update()
+            object.check_collision()
  
         # Draw Updates
         screen.fill(BACKGROUND_COLOR)
