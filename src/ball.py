@@ -65,11 +65,12 @@ class BouncingRainbow(BouncingBall, RainbowBall):
     """
     pass
 
-# class KineticBall(???):
+
+# class KineticBall(Ball):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """
-#     # TODO:
+
 
 # class KineticBouncing(???):
 #     """
