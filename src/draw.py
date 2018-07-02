@@ -4,11 +4,12 @@ import random
 from pygame.math import Vector2
 
 from ball import *
+from block import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
-def debug_create_objects(object_list):
+def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
@@ -27,7 +28,8 @@ def main():
  
     object_list = [] # list of objects of all types in the toy
 
-    debug_create_objects(object_list)
+    debug_create_balls(object_list)
+    debug_create_blocks(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
