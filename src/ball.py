@@ -4,7 +4,7 @@ from pygame.math import Vector2
 
 class Ball:
     """
-    base class for bouncing objects
+    base class for bouncing objects # base class: class that other classes inherit from
     """
     def __init__(self, bounds, position, velocity, color, radius):
         self.position = position
@@ -42,6 +42,8 @@ class Ball:
 #     Ball that changes color and is affected by gravity
 #     """
 #     # TODO:
+
+# STRETCH GOALS:
 
 # class KineticBall(???):
 #     """
