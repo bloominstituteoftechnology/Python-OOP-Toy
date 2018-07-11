@@ -13,10 +13,12 @@ def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 100), Vector2(3, 3), [255, 0, 0], 10)
     bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 255], 10, -1)
     rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(50, 150), Vector2(3, 3), [255, 255, 0], 10)
+    bouncing_rainbow = BouncingRainbow(SCREEN_SIZE, Vector2(50, 200), Vector2(3, 3), [255, 0, 255], 10, -1)
 
     object_list.append(ball)
     object_list.append(bouncing_ball)
     object_list.append(rainbow_ball)
+    object_list.append(bouncing_rainbow)
 
     # TODO: Create other ball types for testing
     
@@ -47,6 +49,7 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
+        # loop through all the `ball` objects in `object_list`
         for ball in object_list:
             change_colors = getattr(ball, 'change_colors', None)
             

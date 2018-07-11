@@ -59,9 +59,11 @@ class RainbowBall(Ball):
         super().__init__(bounds, position, velocity, color, radius)
 
     def change_colors(self):
-        self.color[0] += 10
-        self.color[1] += 10
-        self.color[2] += 10
+        self.color[0] += 1
+        self.color[1] += 5
+        self.color[2] += 20
+
+        print(self.color[0])
 
         if self.color[0] >= 255:
             self.color[0] = 0
@@ -73,11 +75,14 @@ class RainbowBall(Ball):
             self.color[2] = 0
 
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    # TODO:
+    def __init__(self, bounds, position, velocity, color, radius, weight):
+        super().__init__(bounds, position, velocity, color, radius, weight)
+
 
 # class KineticBall(???):
 #     """
