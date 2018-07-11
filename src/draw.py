@@ -14,6 +14,14 @@ def debug_create_balls(object_list):
     object_list.append(ball)
 
     # TODO: Create other ball types for testing
+    rainbowBall = RainbowBall(SCREEN_SIZE, Vector2(50, 25), Vector2(3, 3), [255, 0, 0], 10)
+    object_list.append(rainbowBall)
+
+    bouncing = BouncingBall(SCREEN_SIZE, Vector2(50, 35), Vector2(1, 1), [255, 0, 0], 10)
+    object_list.append(bouncing)
+
+    bouncingBow = BouncingRainbow(SCREEN_SIZE, Vector2(35, 35), Vector2(1, 0), [255, 125, 0], 10)
+    object_list.append(bouncingBow)
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
@@ -27,6 +35,7 @@ def main():
     clock = pygame.time.Clock()
  
     object_list = [] # list of objects of all types in the toy
+    
 
     debug_create_balls(object_list)
     debug_create_blocks(object_list)
