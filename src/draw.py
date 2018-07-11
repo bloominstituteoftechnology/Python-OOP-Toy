@@ -12,11 +12,11 @@ BACKGROUND_COLOR = [255, 255, 255]
 def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 100), Vector2(3, 3), [255, 0, 0], 10)
     bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 255], 10, -1)
+    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(50, 150), Vector2(3, 3), [255, 255, 0], 10)
 
     object_list.append(ball)
     object_list.append(bouncing_ball)
-
-    print(object_list)
+    object_list.append(rainbow_ball)
 
     # TODO: Create other ball types for testing
     
@@ -48,11 +48,12 @@ def main():
                     pass
 
         for ball in object_list:
-            if type(ball) == 'BouncingBall':
-                ball.gravity_effect()
-
-            ball.update()
+            change_colors = getattr(ball, 'change_colors', None)
             
+            ball.update()
+
+            if callable(change_colors):
+                ball.change_colors()
 
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
