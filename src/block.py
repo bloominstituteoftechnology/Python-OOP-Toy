@@ -29,3 +29,16 @@ class Block:
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
+
+#code along during the lecture
+class RainbowBlock(Block):
+
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
+
+        self.color = [r, g, b]
+
+        #call the superclass (Block) update()
+        super().update()

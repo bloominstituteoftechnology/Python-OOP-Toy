@@ -14,9 +14,15 @@ def debug_create_balls(object_list):
     object_list.append(ball)
 
     # TODO: Create other ball types for testing
+    ball = RainbowBall(SCREEN_SIZE, Vector2(50, 80), Vector2(10, 5), [0, 0, 255], 10)
+    object_list.append(ball)
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
+    object_list.extend((block, ))
+
+    #code along with the lecture
+    block = RainbowBlock(SCREEN_SIZE, Vector2(200,100), 60, 30, [255,255,0])
     object_list.extend((block, ))
   
 def main():
@@ -42,8 +48,8 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
+        for obj in object_list:
+            obj.update()
  
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
