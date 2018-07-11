@@ -2,6 +2,7 @@ import math
 
 from pygame.math import Vector2
 from decimal import *
+from random import *
 
 class Ball:
     """
@@ -51,8 +52,6 @@ class BouncingBall(Ball):
                 self.friction += 0.1
             else:
                 self.friction = 0
-
-            print(self.velocity.x)
             self.velocity.x *= self.friction
 
         # reduces y direction velocity with
@@ -76,10 +75,23 @@ class BouncingBall(Ball):
 
     # TODO: 
 
-class RainbowBall(???):
+class RainbowBall(Ball):
     """
     Ball that changes colors
     """
+
+    def __init__(self, bounds, position, velocity, color, radius):
+        super().__init__(bounds, position, velocity, color, radius)
+
+    def update(self):
+        self.color = [int(random() * 255), int(random() * 255), int(random() * 255)]
+        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
+            self.velocity.x *= -1
+        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
+            self.velocity.y *= -1
+        self.position += self.velocity
+
+
     # TODO:
 
 # class BouncingRainbow(???):
