@@ -20,7 +20,14 @@ Self: In Python, a class refers to class-level variables and methods with the ke
 # Python OOP Toy
 This project will demonstrate the core concepts of OOP by using a library called pygame to create a toy similar to early screensavers.  
 
-To run, use: `python src/draw.py`
+For initial setup, run:
+
+```
+pipenv install
+pipenv shell
+```
+
+Then to run, use: `python src/draw.py`
 
 ## In-class Demo
 Your instructor will demonstrate the above concepts by extending the `Block` class
@@ -30,3 +37,23 @@ Fill out the stubs in `ball.py` to extend the functionality of the `ball` class.
 
 ## Stretch Goals
 Implement simple physics to enable balls to bounce off of one another, or off of blocks.  This will be HARD.  If you get it ‘sort of working’ in any form, consider yourself to have accomplished an impressive feat!
+
+## Troubleshooting
+
+### Windows
+* If `pipenv install` is taking forever or erroring with TIMEOUT messages, disable your antivirus software.
+* If `pipenv install` is puking on installing pygame:
+  * Don't use `pipenv` for this project. No `install`, no `shell`.
+  * Download the appropriate `.whl` file from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame).
+    * Python 3.6 use the `cp36` version. Python 3.7 use `cp37`, etc. Use `python --version` to check your version.
+    * Try the `win32` version first. If that doesn't work, the AMD version.
+    * E.g. `pygame‑1.9.3‑cp36‑cp36m‑win32.whl`
+  * Install it with
+    ```
+    pip install pygame-[whatever].whl
+    ```
+    You'll need to specify the full path, likely.
+  * Once it's installed, run the game with
+    ```
+    python draw.py
+    ```
