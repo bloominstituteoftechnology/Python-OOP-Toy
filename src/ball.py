@@ -43,7 +43,7 @@ class RainbowBall(Ball):
     """
     # TODO:
 
-    GRAVITY = .1
+    GRAVITY = .2
     
     def update(self):
         r = (self.color[0] + 2) % 256
