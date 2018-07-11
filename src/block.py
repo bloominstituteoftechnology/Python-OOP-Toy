@@ -8,7 +8,7 @@ class Block:
     """
     Base class for square or rectangular object
     """
-
+    
     def __init__(self, bounds, position, width, height, color):
         # Create a rectangle centered around the x and y
         self.bounds = bounds
@@ -17,7 +17,7 @@ class Block:
         self.color = color
 
     def update(self):
-        # TODO:  Add base functionality
+        # TODO:  Add base functionality #this doesn't do anything
         pass
 
     def set_rectangle(self, position, width, height):
@@ -29,3 +29,14 @@ class Block:
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
+
+class RainbowBlock(Block):
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
+
+        self.color = [r, g, b]
+
+        super().update()
+

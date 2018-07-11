@@ -4,7 +4,7 @@ from pygame.math import Vector2
 
 class Ball:
     """
-    base class for bouncing objects
+    base class for bouncing objects - base class is the root class that other classes inherit from
     """
     def __init__(self, bounds, position, velocity, color, radius):
         self.position = position
@@ -13,7 +13,7 @@ class Ball:
         self.color = color
         self.radius = radius
 
-    def update(self):
+    def update(self): #this is a method
         # bounce at edges.  TODO: Fix sticky edges
         if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
             self.velocity.x *= -1
@@ -25,19 +25,30 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
+#class BouncingBall(Ball):
 #     """
-#     ball effected by gravity
+#     ball affected by gravity
 #     """
-#     # TODO: 
+#     # TODO: update
 
-# class RainbowBall(???):
+
+class RainbowBall(Ball):
 #     """
 #     Ball that changes colors
 #     """
-#     # TODO:
+#     # TODO: update
 
-# class BouncingRainbow(???):
+    def update(self):
+        r = (self.color[0]+ 5) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
+
+        self.color = [r, g, b]
+
+        super().update()
+
+
+# class BouncingRainbow():
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
