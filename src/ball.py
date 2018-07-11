@@ -20,7 +20,7 @@ class Ball:
         if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
             self.velocity.y *= -1
         self.position += self.velocity
-
+        
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
@@ -31,6 +31,20 @@ class BouncingBall(Ball):
     """
     def __init__(self, bounds, position, velocity, color, radius):
       super().__init__(bounds, position, velocity, color, radius)
+
+    def update(self):
+      # if  and :
+      if self.velocity.y > 0:
+        if self.velocity.y < 40:
+          self.velocity.y += (0.07 * self.velocity.y)
+        else:
+          self.velocity.y = 40
+      elif self.velocity.y < -1:
+        self.velocity.y -= (0.07 * self.velocity.y)
+      else: 
+        self.velocity.y = 1
+      print(f'velocity: {self.velocity.x}, {self.velocity.y}')
+      super().update()
 
 class RainbowBall(Ball):
     """
