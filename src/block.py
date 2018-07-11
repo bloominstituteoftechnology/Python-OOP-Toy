@@ -24,8 +24,8 @@ class Block:
         # Creates a rectangle of the given width and height centered at the x/y coordinates
         return pygame.Rect(position.x - (width/2),
                            position.y - (height/2),
-                                    width,
-                                    height)
+                           width,
+                           height)
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
