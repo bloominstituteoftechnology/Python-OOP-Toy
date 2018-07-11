@@ -1,9 +1,9 @@
 import math
-import pygame
-from pygame.locals import
+#import pygame
+#from pygame.locals import *
 from pygame.math import Vector2
 
-pygame.init() 
+#pygame.init() 
 
 # I got this from the pygame docs - https://www.pygame.org/docs/tut/ImportInit.html
 
@@ -30,11 +30,16 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
+class BouncingBall(Ball):
 #     """
 #     ball effected by gravity
 #     """
 #     # TODO: 
+	GRAVITY = .1
+	def update(self):
+		self.velocity.y += self.GRAVITY
+		super().update()
+
 
 class RainbowBall(Ball):
 #     """
