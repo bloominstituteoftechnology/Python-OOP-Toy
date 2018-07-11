@@ -31,11 +31,15 @@ class Ball:
 #     """
 #     # TODO: 
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+class BouncingBall(Ball):
+    
+    GRAVITY = .1
+
+    def update(self):
+        
+        self.velocity.y += self.GRAVITY
+        super().update()
+
 class RainbowBall(Ball):
 
     def update(self):
