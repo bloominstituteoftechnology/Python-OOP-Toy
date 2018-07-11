@@ -1,4 +1,4 @@
-import pygame #TODO:  Fix intellisense
+import pygame #TODO:
 import random
 
 from pygame.math import Vector2

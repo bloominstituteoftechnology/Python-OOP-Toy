@@ -23,9 +23,22 @@ class Block:
     def set_rectangle(self, position, width, height):
         # Creates a rectangle of the given width and height centered at the x/y coordinates
         return pygame.Rect(position.x - (width/2),
-                           position.y - (height/2),
+                            position.y - (height/2),
                                     width,
                                     height)
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
+
+class RainbowBlock(Block):
+
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] + 1) % 256
+
+        self.color = [r, g, b]
+
+        # Call the superclass (Block) update()
+
+        super().update()
