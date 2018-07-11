@@ -1,4 +1,4 @@
-import pygame #TODO:  Fix intellisense
+import pygame
 import random
 
 from pygame.math import Vector2
@@ -13,12 +13,24 @@ def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
+    bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(100, 100), Vector2(3, 0), [0, 0, 255], 8)
+    object_list.append(bouncing_ball)
+
+    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(400, 300), Vector2(3, -2), [0, 255, 0], 8)
+    object_list.append(rainbow_ball)
+
+    bouncing_rainbow_ball = BouncingRainbow(SCREEN_SIZE, Vector2(300, 150), Vector2(-4, 0), [0, 255, 0], 8)
+    object_list.append(bouncing_rainbow_ball)
+
     # TODO: Create other ball types for testing
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
     object_list.extend((block, ))
-  
+
+    block = RainbowBlock(SCREEN_SIZE, Vector2(150,100), 60, 30, [255,255,0])
+    object_list.extend((block, ))
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
