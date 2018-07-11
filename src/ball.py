@@ -1,4 +1,6 @@
 import math
+import time
+
 
 from pygame.math import Vector2
 
@@ -19,23 +21,39 @@ class Ball:
             self.velocity.x *= -1
         if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
             self.velocity.y *= -1
+            print(time.time(), time.clock())
         self.position += self.velocity
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
-#     """
-#     ball effected by gravity
-#     """
-#     # TODO: 
+class BouncingBall(Ball):
+    """
+    ball effected by gravity
+    """
+    # def update(self):
+    #     if self.velocity.x < self.gravity.x
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+    # # TODO: 
+    def update(self):
+        super().update()
+        pass
+      
+
+
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
+    # TODO:
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
+
+        self.color = [r, g, b]
+        super().update()
 
 # class BouncingRainbow(???):
 #     """
