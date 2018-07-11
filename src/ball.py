@@ -31,7 +31,21 @@ class Ball:
 #     """
 #     # TODO: 
 
+class BouncingBall(Ball):
 
+    def update(self):
+
+        if self.velocity.y < -0.5:
+            self.velocity.y -= (0.098 * self.velocity.y)
+        elif self.velocity.y > 0:
+            if self.velocity.y < 30:
+                self.velocity.y += (0.098 * self.velocity.y)
+            else:
+                self.velocity.y = 30
+        else:
+            self.velocity.y = 1
+
+        super().update()
 
 # class RainbowBall(???):
 #     """
