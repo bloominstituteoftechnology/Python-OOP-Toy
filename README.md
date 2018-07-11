@@ -30,3 +30,5 @@ Fill out the stubs in `ball.py` to extend the functionality of the `ball` class.
 
 ## Stretch Goals
 Implement simple physics to enable balls to bounce off of one another, or off of blocks.  This will be HARD.  If you get it ‘sort of working’ in any form, consider yourself to have accomplished an impressive feat!
+
+# Initail commit
