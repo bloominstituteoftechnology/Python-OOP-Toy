@@ -3,9 +3,6 @@ import math
 from pygame.math import Vector2
 
 class Ball:
-    """
-    base class for bouncing objects
-    """
     def __init__(self, bounds, position, velocity, color, radius):
         self.position = position
         self.velocity = velocity
@@ -25,11 +22,17 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
-#     """
-#     ball effected by gravity
-#     """
-#     # TODO: 
+class BouncingBall(Ball):
+    """
+    ball effected by gravity
+    """
+    Gravity = 0.25
+
+    def update(self):
+        self.velocity.y = self.velocity.y + self.Gravity
+        super().update()
+
+    # TODO: 
 
 # class RainbowBall(???):
 #     """
