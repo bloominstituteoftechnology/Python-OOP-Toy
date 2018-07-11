@@ -25,24 +25,26 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
+    class BouncingBall(Ball):
 #     """
 #     ball effected by gravity
 #     """
 #     # TODO: 
+    def __init__(self)
 
-# class RainbowBall(???):
+# class RainbowBall(Ball,BouncingBall):
 #     """
 #     Ball that changes colors
 #     """
 #     # TODO:
 
-# class BouncingRainbow(???):
+# class BouncingRainbow(Ball,BouncingBall,Rainbow):
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
 #     # TODO:
 
+# Stretch for today 
 # class KineticBall(???):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
