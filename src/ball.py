@@ -71,7 +71,27 @@ class RainbowBall(Ball):
 #     """
 #     # TODO:
 
+class BouncingRainbow(Ball):
 
+    def update(self):
+        if self.velocity.y < -0.5:
+            self.velocity.y -= (0.098 * self.velocity.y)
+        elif self.velocity.y > 0:
+            if self.velocity.y < 30:
+                self.velocity.y += (0.098 * self.velocity.y)
+            else:
+                self.velocity.y = 30
+        else:
+            self.velocity.y = 1
+
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
+
+        self.color = [r, g, b]
+
+        # call the superclass {Block} update()
+        super().update()
 
 # STRETCH GOALS:
 
