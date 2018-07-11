@@ -18,6 +18,11 @@ def debug_create_balls(object_list):
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
     object_list.extend((block, ))
+
+    block = RainbowBlock(SCREEN_SIZE, Vector2(200,100), 100, 20, [0,255,0])
+    object_list.extend((block, ))
+
+
   
 def main():
     pygame.init()
