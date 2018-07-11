@@ -26,7 +26,7 @@ class Ball:
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
 class BouncingBall(Ball):
-    gravity = 5
+    gravity = 3
 
     def update(self):
         self.velocity.y += self.gravity
@@ -43,7 +43,7 @@ class RainbowBall(Ball):
         super().update()
 
 class BouncingRainbow(Ball):
-    gravity = 5
+    gravity = 2
 
     def update(self):
         r = (self.color[0] + 30) % 256 
