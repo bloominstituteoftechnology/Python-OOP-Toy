@@ -25,25 +25,73 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
+
 class BouncingBall(Ball):
     """
     ball effected by gravity
     """
-    # TODO:
+    def __init__(self, bounds, position, velocity, color, radius):
+      super().__init__(bounds, position, velocity, color, radius)
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+    def update(self):
+      if self.velocity.y > 0:
+        if self.velocity.y < 40:
+          self.velocity.y += (0.07 * self.velocity.y)
+        else:
+          self.velocity.y = 40
+      elif self.velocity.y < -1:
+        self.velocity.y -= (0.07 * self.velocity.y)
+      else:
+        self.velocity.y = 1
+      super().update()
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
 
-# class KineticBall(???):
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
+    def __init__(self, bounds, position, velocity, color, radius):
+      super().__init__(bounds, position, velocity, color, radius)
+
+    def update(self):
+      r = (self.color[0] + 3) % 256
+      g = (self.color[1] + 1) % 256
+      b = (self.color[2] - 1) % 256
+      self.color = [r,g,b]
+      super().update()
+
+
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    def __init__(self, bounds, position, velocity, color, radius):
+      BouncingBall.__init__(self, bounds, position, velocity, color, radius)
+      RainbowBall.__init__(self, bounds, position, velocity, color, radius)
+
+    def update(self):
+      BouncingBall.update(self)
+      RainbowBall.update(self)
+
+class KineticBall(Ball):
+    def __init__(self,screen_length,screen_width):
+        self.balls = {}
+        self.ball_index = 0
+        self.screen_length = screen_length
+        self.screen_width = screen_width
+
+        def set_ball_list(self,n):
+       ball_count = n
+       balls = []
+       for i in range(ball_count):
+           radius = randint(15,30)
+           x_pos = randint(0+radius,self.screen_width-radius)
+           y_pos = randint(0+radius,self.screen_length-radius)
+           x_vel = 0
+           y_vel = 0
+           self.things[self.thing_index] = Ball(Vector2(x_pos,y_pos),Vector2(x_vel,y_vel),radius,(randint(0,255),randint(0,255),randint(0,255)))
+           self.thing_index += 1
+
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """
@@ -54,7 +102,7 @@ class BouncingBall(Ball):
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     And is affected by gravity
 #     """
-    
+
 
 # class AllTheThings(???):
 #     """
