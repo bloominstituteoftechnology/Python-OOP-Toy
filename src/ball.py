@@ -13,6 +13,7 @@ class Ball:
         self.color = color
         self.radius = radius
 
+
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
         if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
@@ -25,23 +26,40 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
-#     """
-#     ball effected by gravity
-#     """
-#     # TODO: 
+class BouncingBall(Ball):
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+     """
+     ball effected by gravity
+     """
+     # TODO:
+     Gravity = .1
+
+     def update(self):
+         self.velocity.y  += self.Gravity
+         super().update()
+
+     """
+     Ball that changes colors
+     """
+class RainbowBall(Ball):
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
+
+        self.color = [r, g, b]
+        super().update()
+     # TODO:
+
+class BouncingRainbow(BouncingBall, RainbowBall):
+     pass
+  
+  #  """
+   #Ball that changes color and is affected by gravity
+   # """
+
+#     # TODO: pass first two balls already made
 
 # class KineticBall(???):
 #     """
@@ -56,7 +74,8 @@ class Ball:
 #     """
     
 
-# class AllTheThings(???):
+class AllTheThings(BouncingBall, RainbowBall):
+    pass
 #     """
 #     A ball that does everything!
 #     """
