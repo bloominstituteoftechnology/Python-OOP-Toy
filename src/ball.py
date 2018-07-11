@@ -30,7 +30,7 @@ class BouncingBall(Ball):
     ball effected by gravity
     """
     def update(self):
-        self.velocity.y += 0.1 % 480
+        self.velocity.y += 0.1
         super().update()
 
 class RainbowBall(Ball):
