@@ -11,7 +11,9 @@ BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+    bouncingball = BouncingBall(SCREEN_SIZE, Vector2(100, 100), Vector2(3, 3), [255, 0, 255], 10, -1)
     object_list.append(ball)
+    object_list.append(bouncingball)
 
     # TODO: Create other ball types for testing
     
