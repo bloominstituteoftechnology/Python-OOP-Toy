@@ -15,9 +15,10 @@ class Ball:
         self.radius = radius
 
     def update(self):
-        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius:  # screen width
+        next_position = self.position + self.velocity
+        if next_position.x < 0 + self.radius or next_position.x > self.bounds[0] - self.radius:  # screen width
             self.velocity.x *= -1
-        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius:  # screen height
+        if next_position.y < 0 + self.radius or next_position.y > self.bounds[1] - self.radius:  # screen height
                 self.velocity.y *= -1
         self.position += self.velocity
 
