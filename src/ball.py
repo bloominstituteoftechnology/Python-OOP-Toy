@@ -47,19 +47,20 @@ class RainbowBall(Ball):
     
     def update(self):
         r = (self.color[0] + 2) % 256
-        g = (self.color[1] + 9) % 256
-        b = (self.color[2] + 5) % 256
+        g = (self.color[1] + 10) % 256
+        b = (self.color[2] + 4) % 256
         self.color = [r, g, b]
 
         # Call the superclass (Block) update()
 
         super().update()
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    # TODO:
+    pass
 
 # class KineticBall(???):
 #     """
