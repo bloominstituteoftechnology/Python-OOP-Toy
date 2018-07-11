@@ -24,7 +24,7 @@ class Ball:
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
-
+#initial
 # class BouncingBall(???):
 #     """
 #     ball effected by gravity
