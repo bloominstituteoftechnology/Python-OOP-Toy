@@ -13,7 +13,7 @@ def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
-    ball = RainbowBall(SCREEN_SIZE, Vector2(50, 50), Vector2(4, 3), [255, 255, 255], 20)
+    ball = RainbowBall(SCREEN_SIZE, Vector2(50, 50), Vector2(4, 3), [255, 255, 0], 20)
     object_list.append(ball)
 
     ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(5, 3), [255, 0, 0], 5)

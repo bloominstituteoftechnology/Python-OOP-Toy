@@ -36,7 +36,7 @@ class RainbowBall(Ball):
     def update(self):
         r = (self.color[0] + 30) % 256 
         g = (self.color[1] + 30) % 256
-        b = (self.color[2] + 30) % 256
+        b = (self.color[2] - 30) % 256
 
         self.color = [r, g, b]
 
