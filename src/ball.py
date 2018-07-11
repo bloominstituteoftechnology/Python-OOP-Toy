@@ -31,11 +31,18 @@ class Ball:
 #     """
 #     # TODO: 
 
-# class RainbowBall(???):
+class RainbowBall(Ball):
 #     """
 #     Ball that changes colors
 #     """
 #     # TODO:
+
+	def update(self):
+		r = (self.color[0] + 10) % 256
+		g = (self.color[1] - 5) % 256
+		b = (self.color[2] + 2) % 256
+		self.color = [r, g, b]
+		super().update()
 
 # class BouncingRainbow(???):
 #     """
