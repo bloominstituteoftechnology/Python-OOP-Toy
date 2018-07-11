@@ -16,14 +16,21 @@ def debug_create_balls(object_list):
 
     # TODO: Create other ball types for testing
 
+    ball = BouncingBall(SCREEN_SIZE, Vector2(100, 100), Vector2(4, 4), [0, 0, 0], 10)
+    object_list.append(ball)
+
+    ball = RainbowBall(SCREEN_SIZE, Vector2(10, 10), Vector2(3, 3), [0, 0, 255], 10)
+    object_list.append(ball)
+
+    ball = BouncingRainbow(SCREEN_SIZE, Vector2(25, 25), Vector2(5, 5), [0, 255, 0], 10)
+    object_list.append(ball)
 
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100, 100), 20, 20, [0, 255, 0])
     object_list.extend((block, ))
 
-    block = Block(SCREEN_SIZE, Vector2(150, 100), 60, 30, [255, 255, 0])
+    block = RainbowBlock(SCREEN_SIZE, Vector2(150, 100), 60, 30, [255, 255, 0])
     object_list.extend((block, ))
-
 
 def main():
     pygame.init()
@@ -48,13 +55,13 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
+        for obj in object_list:
+            obj.update()
 
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
-        for ball in object_list:
-            ball.draw(screen, pygame)
+        for obj in object_list:
+            obj.draw(screen, pygame)
 
         clock.tick(60)
         pygame.display.flip()
