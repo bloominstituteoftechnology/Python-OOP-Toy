@@ -29,18 +29,21 @@ class BouncingBall(Ball):
     """
     ball effected by gravity
     """
-    # TODO: add Higgs bosson in the universe
-
     def update(self):
-        self.velocity.y += -0.1 % 480
+        self.velocity.y += 0.1 % 480
         super().update()
 
-# class RainbowBall(Ball):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
 
+        self.color = [r, g, b]
+        super().update()
 
 
 # class BouncingRainbow(???):
