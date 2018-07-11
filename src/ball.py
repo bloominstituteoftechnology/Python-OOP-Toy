@@ -1,6 +1,11 @@
 import math
-
+import pygame
+from pygame.locals import
 from pygame.math import Vector2
+
+pygame.init() 
+
+# I got this from the pygame docs - https://www.pygame.org/docs/tut/ImportInit.html
 
 class Ball:
     """
