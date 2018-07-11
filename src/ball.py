@@ -49,13 +49,27 @@ class RainbowBall(Ball):
 #     """
 #     Ball that changes colors
 #     """
-#     # TODO:
+    def __init__(self, bounds, position, velocity, color, radius):
+      super().__init__(bounds, position, velocity, color, radius)
 
-# class BouncingRainbow(BouncingBall,RainbowBall):
+    def update(self):
+      r = (self.color[0] + 3) % 256
+      g = (self.color[1] + 1) % 256
+      b = (self.color[2] - 1) % 256
+      self.color = [r, g, b]
+      super().update()
+
+class BouncingRainbow(BouncingBall,RainbowBall):
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
-#     # TODO:
+    def __init__(self, bounds, position, velocity, color, radius):
+      BouncingBall.__init__(self, bounds, position, velocity, color, radius)
+      RainbowBall.__init__(self, bounds, position, velocity, color, radius)
+
+    def update(self):
+      BouncingBall.update(self)
+      RainbowBall.update(self)
 
 # Stretch for today 
 # class KineticBall(???):
