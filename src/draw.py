@@ -10,10 +10,15 @@ SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    object_list.append(ball)
+# ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+# object_list.append(ball)
 
-    # TODO: Create other ball types for testing
+	for i in range(5):
+		ball = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100,400), random.randint(100,400)), Vector2(3,0), [0,0,0], 10)
+	object_list.append(ball)
+
+# resources: https://stackoverflow.com/questions/34865409/python-and-random-randint, http://www.pythonforbeginners.com/random/how-to-use-the-random-module-in-python    
+# TODO: Create other ball types for testing
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
