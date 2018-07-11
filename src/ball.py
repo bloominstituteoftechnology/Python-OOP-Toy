@@ -26,11 +26,28 @@ class Ball:
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
 class BouncingBall(Ball):
-    gravity = .2
+    
+     def update(self):
+            # bounce at edges.  TODO: Fix sticky edges
+        self.velocity.y += 0.1
+        
+        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
+            self.velocity.x *= -1
 
-    def update(self):
-        self.velocity.y += self.gravity
-        super().update()
+        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
+            self.velocity.y *= self.weight
+
+            if self.weight < -1.3877787807814457e-16:
+                print(self.weight)
+                self.weight += 0.1
+            
+        self.position += self.velocity
+        
+    # gravity = .2
+
+    # def update(self):
+    #     self.velocity.y += self.gravity
+    #     super().update()
     
 #     """
 #     ball effected by gravity
@@ -39,9 +56,9 @@ class BouncingBall(Ball):
 
 class RainbowBall(Ball):
     def update(self):
-        r = (self.color[0]+1) % 256
-        g = (self.color[1]-10) % 256
-        b = (self.color[2]+1) % 256
+        r = (self.color[0] + 1) % 256
+        g = (self.color[1] + 10) % 256
+        b = (self.color[2] - 4) % 256
         self.color = [r, g, b]
         super().update()
 
