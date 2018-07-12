@@ -30,11 +30,8 @@ class Block:
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
 
-
-class SecondBlock(Block):
-    
+class SecondBlock(Block): 
     pass
-
 
 class RainbowBlock(SecondBlock):
     
