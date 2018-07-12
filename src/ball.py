@@ -75,12 +75,30 @@ class BouncingRainbow(RainbowBall, BouncingBall):
 #     """
 #     # TODO:
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    def __init__(self, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        super().__init__(bounds, position, velocity, color, radius)
 
+    def update(self):
+        for obj in self.object_list:
+
+            if not issubclass(type(obj), KineticBall):
+                continue
+
+            if obj == self:
+                continue
+
+            distance = obj.position.distance_to(self.position)
+
+            sumr = self.radius + obj.radius
+
+            if distance < sumr:
+                print("Collision!")
+                
 # class KineticBouncing(???):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
