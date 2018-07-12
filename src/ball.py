@@ -13,7 +13,7 @@ class Ball:
         self.color = color
         self.radius = radius
         self.maxHeight = self.radius + 2
-        self.reduce = self.bounds[1]/2
+        self.reduce = self.bounds[1]/3
 
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
