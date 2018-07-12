@@ -56,11 +56,13 @@ class RainbowBall(Ball):
         self.color = [r, g, b]
         super().update()
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    # TODO:
+    def __init__(self, bounds, position, velocity, color, radius, acceleration):
+        super().__init__(bounds, position, velocity, color, radius, acceleration)
 
 # class KineticBall(???):
 #     """
