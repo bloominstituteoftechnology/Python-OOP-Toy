@@ -59,8 +59,12 @@ class BouncingBall(Ball):
 
     def update(self):
         next_pos = self.position + self.velocity
-        if not (next_pos.y >= self.bounds[1] - self.radius and
-                self.velocity.y < self.radius):
+        if (self.position.y > self.bounds[1] - self.radius * 1.01 and
+                abs(self.velocity.y) < self.radius / 32):
+            self.position.y = self.bounds[1] - self.radius
+            self.velocity.y = 0
+        elif not (next_pos.y >= self.bounds[1] - self.radius and
+                  self.velocity.y < self.radius):
             self.velocity.y += .98
         super().update()
 
@@ -101,7 +105,6 @@ class KineticBall(Ball):
         super().__init__(bounds, position, velocity, color, radius)
 
     def update(self):
-        print(self.other_shapes)
         for shape in self.other_shapes:
             if shape == self:
                 continue
@@ -116,13 +119,29 @@ class KineticBall(Ball):
             radii = self.radius + shape.radius
             t = (product * -1 - (product**2 - (s_diff) *
                                  (s_dist - radii**2))**.5)/(s_diff)
-            if not isinstance(t, complex) and (t >= 0 or t < 1):
-                print("collision!")
+            if not isinstance(t, complex) and (t >= 0 and t < 1):
+                self.position = self.position + self.velocity * t
+                shape.position = shape.position + shape.velocity * t
+                self_vec = Vector2(self.velocity.x, self.velocity.y)
+                shape_vec = Vector2(shape.velocity.x, shape.velocity.y)
+
+                self.velocity -= (2 * self.radius / (radii)) * (
+                    (self_vec - shape_vec).dot(self.position - shape.position)
+                    / (self.position - shape.position).length_squared()) * \
+                    (self.position - shape.position)
+
+                shape.velocity -= (2 * shape.radius / (radii)) * (
+                    (shape_vec - self_vec).dot(shape.position - self.position)
+                    / (shape.position - self.position).length_squared()) * \
+                    (shape.position - self.position)
+
+                self.position = self.position + self.velocity * (1 - t)
+                shape.position = shape.position + shape.velocity * (1 - t)
 
         super().update()
 
 
-class KineticBouncing(KineticBall, BouncingBall):
+class KineticBouncing(BouncingBall, KineticBall):
     """
     A ball that collides with other collidable balls using simple elastic
     circle collision
@@ -130,8 +149,15 @@ class KineticBouncing(KineticBall, BouncingBall):
     """
 
     def update(self):
-        KineticBall.update(self)
         BouncingBall.update(self)
+        KineticBall.update(self)
+
+
+class GravityBall(KineticBall):
+    def update(self):
+        for shape in self.other_shapes:
+            distance = self.position.distance_to(shape.position)
+            power = (self.radius * shape.radius) / distance ** 2
 
 
 # class AllTheThings(???):
