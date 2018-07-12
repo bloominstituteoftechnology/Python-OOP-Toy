@@ -90,7 +90,7 @@ class KineticBall(Ball):
           return False
 
 
-# class KineticBouncing(???):
+# class KineticBouncing(BouncingBall, KineticBall):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     And is affected by gravity
