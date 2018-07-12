@@ -1,4 +1,4 @@
-import math
+# import math
 
 from pygame.math import Vector2
 
@@ -18,42 +18,38 @@ class Ball:
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
         # screen width
-        x_edge_exact = self.position.x == self.radius or \
-            self.position.x == self.bounds[0] - self.radius
-        y_edge_exact = self.position.y == self.radius or \
-            self.position.y == self.bounds[1] - self.radius
-        print(x_edge_exact)
-        if x_edge_exact:
-            print("HEEEEEEEEEEEEEEEEY!!!!!!!!!!!!")
+        next_pos = self.position + self.velocity
+        x_left_edge_next = next_pos.x < 0 + self.radius
+        x_right_edge_next = next_pos.x > self.bounds[0] - self.radius
+        y_top_edge_next = next_pos.y < 0 + self.radius
+        y_bottom_edge_next = next_pos.y > self.bounds[1] - self.radius
+        if x_left_edge_next:
+            self.position.x = self.radius * 2 - next_pos.x
             self.velocity.x *= -1
-        if y_edge_exact:
-            self.velocity.y *= -1
-        if not (x_edge_exact or y_edge_exact):
-            next_pos = self.position + self.velocity
-            x_left_edge_next = next_pos.x < 0 + self.radius
-            x_right_edge_next = next_pos.x > self.bounds[0] - self.radius
-            y_top_edge_next = next_pos.y < 0 + self.radius
-            y_bottom_edge_next = next_pos.y > self.bounds[1] - self.radius
-            if x_left_edge_next:
-                print("YOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!")
-                self.position.x = self.radius
-            elif x_right_edge_next:
-                self.position.x = self.bounds[0] - self.radius
-            else:
-                self.position.x += self.velocity.x
-            if y_top_edge_next:
-                self.position.y = self.radius
-            elif y_bottom_edge_next:
-                self.position.y = self.bounds[1] - self.radius
-            else:
-                self.position.y += self.velocity.y
+        elif x_right_edge_next:
+            self.position.x = (self.bounds[0] - self.radius) * 2 - next_pos.x
+            self.velocity.x *= -1
         else:
-            self.position += self.velocity
+            self.position.x += self.velocity.x
+        if y_top_edge_next:
+            self.position.y = self.radius * 2 - next_pos.y
+            self.velocity.y *= -1
+        elif y_bottom_edge_next:
+            self.position.y = (self.bounds[1] - self.radius) * 2 - next_pos.y
+            self.velocity.y *= -1
+        else:
+            self.position.y += self.velocity.y
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(
             self.position.x), int(self.position.y)], self.radius)
+
+
+class FrictionBall(Ball):
+    def update(self):
+        self.velocity *= .99
+        super().update()
 
 
 class BouncingBall(Ball):
@@ -63,9 +59,9 @@ class BouncingBall(Ball):
 
     def update(self):
         next_pos = self.position + self.velocity
-        if not next_pos.y >= self.bounds[1] - self.radius - 1:
-            self.velocity[1] += .98
-        self.velocity *= .99
+        if not (next_pos.y >= self.bounds[1] - self.radius and
+                self.velocity.y < self.radius):
+            self.velocity.y += .98
         super().update()
 
 
@@ -81,14 +77,15 @@ class RainbowBall(Ball):
         super().update()
 
 
-class BouncingRainbow(BouncingBall, RainbowBall):
+class BouncingRainbow(FrictionBall, BouncingBall, RainbowBall):
     """
     Ball that changes color and is affected by gravity
     """
 
     def update(self):
-        RainbowBall.update(self)
+        FrictionBall.update(self)
         BouncingBall.update(self)
+        RainbowBall.update(self)
 
 
 class KineticBall(Ball):
@@ -109,7 +106,8 @@ class KineticBall(Ball):
             next_pos_self = self.position + self.velocity
             next_pos_shape = shape.position + shape.velocity
             distance = (next_pos_shape - next_pos_self).length()
-            if (not shape == self) and (distance <= self.radius + shape.radius):
+            if (not shape == self) and (distance <= self.radius +
+                                        shape.radius):
                 self_vec = Vector2(self.velocity.x, self.velocity.y)
                 shape_vec = Vector2(shape.velocity.x, shape.velocity.y)
                 self.velocity -= (

@@ -1,8 +1,8 @@
 import pygame
-import random
-
-from pygame.math import Vector2
-from pygame import Rect
+# import random
+#
+# from pygame.math import Vector2
+# from pygame import Rect
 
 
 class Block:
