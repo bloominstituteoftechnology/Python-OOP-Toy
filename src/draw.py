@@ -19,7 +19,10 @@ def debug_create_balls(object_list):
     ball = BouncingRainbow(SCREEN_SIZE, Vector2(300, 150), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
-    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(100, 200), Vector2(3, 3), [0, 50, 255], 10)
+    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(100, 200), Vector2(1, 1), [0, 50, 255], 20)
+    object_list.append(ball)
+
+    ball = Ball(SCREEN_SIZE, Vector2(250, 250), Vector2(0, 0), [0, 255, 0], 10)
     object_list.append(ball)
 
     # TODO: Create other ball types for testing
@@ -43,17 +46,18 @@ def main():
 
     debug_create_balls(object_list)
     debug_create_blocks(object_list)
+
+    run_me = True
  
-    while True: # TODO:  Create more elegant condition for loop
+    while run_me == True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                run_me = False
         # Logic Loop
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  #TODO:  Get working
-                if event.key == pygame.K_SPACE:
-                    # TODO: Add behavior when button pressed
-                    pass
+                if event.key == pygame.K_LEFT:
+                    print("Pressed left")
 
         for obj in object_list:
             obj.update()
@@ -65,9 +69,7 @@ def main():
  
         clock.tick(60)
         pygame.display.flip()
- 
-    # Close everything down
-    pygame.quit()
+    
  
 if __name__ == "__main__":
     main()

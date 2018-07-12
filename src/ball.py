@@ -67,9 +67,10 @@ class KineticBall(Ball):
         super().__init__(bounds, position, velocity, color, radius)
 
     def update(self):
+        super().update()
         for obj in self.objects:
 
-            if not issubclass(type(obj), KineticBall):
+            if issubclass(type(obj), KineticBall):
                 continue
 
             if obj == self:
