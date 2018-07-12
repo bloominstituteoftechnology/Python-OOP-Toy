@@ -6,6 +6,7 @@ class Ball:
     """
     base class for bouncing objects
     """
+    vel = 
     def __init__(self, bounds, position, velocity, color, radius):
         self.position = position
         self.velocity = velocity
@@ -25,19 +26,36 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
+class BouncingBall(Ball):
 #     """
 #     ball effected by gravity
 #     """
+    def update(self):
+        if self.position.x > 0 + self.radius or self.position.x > self.bounds[0] - self.radius:
+            self.velocity.y -= 0.3
+    
+        super().update()
 #     # TODO: 
 
-# class RainbowBall(???):
+class RainbowBall(Ball):
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
+
+        self.color = [r, g, b]
+        super().update()
 #     """
 #     Ball that changes colors
 #     """
 #     # TODO:
 
-# class BouncingRainbow(???):
+class BouncingRainbow(RainbowBall):
+    def update(self):
+        if self.position.x > 0 + self.radius or self.position.x > self.bounds[0] - self.radius:
+            self.velocity.x -= 0.2
+    
+        super().update()
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
