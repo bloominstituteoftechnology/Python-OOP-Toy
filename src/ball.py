@@ -25,36 +25,79 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
+class BouncingBall(Ball):
 #     """
 #     ball effected by gravity
 #     """
-#     # TODO: 
+    def __init__(self, bounds, position, velocity, color, radius):
+      super().__init__(bounds, position, velocity, color, radius)
 
-# class RainbowBall(???):
+    def update(self):
+      if self.velocity.y > 0:
+        if self.velocity.y < 40:
+          self.velocity.y += (0.07 * self.velocity.y)
+        else:
+          self.velocity.y = 40
+      elif self.velocity.y < -1:
+        self.velocity.y -= (0.07 * self.velocity.y)
+      else:
+        self.velocity.y = 1
+      super().update()
+        
+
+class RainbowBall(Ball):
 #     """
 #     Ball that changes colors
 #     """
-#     # TODO:
+    def __init__(self, bounds, position, velocity, color, radius):
+      super().__init__(bounds, position, velocity, color, radius)
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+    def update(self):
+      r = (self.color[0] + 3) % 256
+      g = (self.color[1] + 1) % 256
+      b = (self.color[2] - 1) % 256
+      self.color = [r, g, b]
+      super().update()
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall,RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    def __init__(self, bounds, position, velocity, color, radius):
+      BouncingBall.__init__(self, bounds, position, velocity, color, radius)
+      RainbowBall.__init__(self, bounds, position, velocity, color, radius)
 
-# class KineticBouncing(???):
+    def update(self):
+      BouncingBall.update(self)
+      RainbowBall.update(self)
+
+# Stretch for today 
+class KineticBall(Ball):
+    """
+     A ball that collides with other collidable balls using simple elastic circle collision
+    """
+
+    def __init__(self, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        super().__init__(bounds, position, velocity, color, radius)
+
+    def ball_contact(self,obj1, obj2):
+        distance = ((obj1.position.x - obj2.position.x)**2 +
+                (obj1.position.y - obj2.position.y)**2)**(1/2)
+        if distance < obj1.radius + obj2.radius:
+          return True
+        else:
+          return False
+
+        super().update()
+
+
+# class KineticBouncing(BouncingBall, KineticBall):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     And is affected by gravity
 #     """
-    
+   
 
 # class AllTheThings(???):
 #     """

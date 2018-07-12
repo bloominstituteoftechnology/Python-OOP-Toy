@@ -13,11 +13,23 @@ def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
+    ball = RainbowBall(SCREEN_SIZE, Vector2(20, 250), Vector2(1, 4), [255, 0, 0], 10)
+    object_list.append(ball)
+
+    ball = BouncingBall(SCREEN_SIZE, Vector2(250, 150), Vector2(2, 0), [255, 255, 0], 10)
+    object_list.append(ball)
+
+    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(200, 100), Vector2(1, 5), [0, 255, 255], 50)
+    object_list.append(ball)
+
+
     # TODO: Create other ball types for testing
     
 def debug_create_blocks(object_list):
-    block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
-    object_list.extend((block, ))
+   # block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
+   # object_list.extend((block, ))
+   # commented out as dont have code to collide with blocks at the moment
+   pass
   
 def main():
     pygame.init()
