@@ -16,10 +16,10 @@ def debug_create_balls(object_list):
 # resources: https://stackoverflow.com/questions/34865409/python-and-random-randint, http://www.pythonforbeginners.com/random/how-to-use-the-random-module-in-python    
 # TODO: Create other ball types for testing
 
-	ball2 = Ball(SCREEN_SIZE, Vector2(75, 75), Vector2(3, 0), [0, 0, 255], 10)
+	ball2 = BouncingBall(SCREEN_SIZE, Vector2(75, 75), Vector2(3, 0), [0, 0, 255], 10)
 	object_list.append(ball2)
 
-	ball3 = Ball(SCREEN_SIZE, Vector2(25, 25), Vector2(1, 2), [0, 255, 0], 10)
+	ball3 = RainbowBall(SCREEN_SIZE, Vector2(25, 25), Vector2(1, 2), [0, 255, 0], 10)
 	object_list.append(ball3)
 
 
