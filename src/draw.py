@@ -18,6 +18,9 @@ def debug_create_balls(object_list):
 
     rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(400, 300), Vector2(2, -1), [0, 255, 0], 8)
     object_list.append(rainbow_ball)
+
+    bouncing_rainbow = BouncingRainbow(SCREEN_SIZE, Vector2(100, 300), Vector2(3, -1), [46, 255, 0], 8)
+    object_list.append(bouncing_rainbow)
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
