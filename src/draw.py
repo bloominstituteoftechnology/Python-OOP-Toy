@@ -40,19 +40,31 @@ def debug_create_balls(object_list):
     # kinetic_ball2 = KineticBall(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 0], 10, object_list)
     # object_list.append(kinetic_ball2)
 
-    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    # ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    # object_list.append(ball)
+
+    # ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    # object_list.append(ball)
+
+    # ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    # object_list.append(ball)
+
+    # ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    # object_list.append(ball)
+
+    # ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    # object_list.append(ball)
+
+    ball = AllTheThings(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
     object_list.append(ball)
 
-    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    ball = AllTheThings(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
     object_list.append(ball)
 
-    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    ball = AllTheThings(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
     object_list.append(ball)
 
-    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
-    object_list.append(ball)
-
-    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    ball = AllTheThings(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
     object_list.append(ball)
 
     # TODO: Create other ball types for testing

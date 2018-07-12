@@ -129,7 +129,25 @@ class KineticBouncing(BouncingBall):
             if distance < sumr:
                 self.velocity.x *= -1; self.velocity.y *= -1
 
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+class AllTheThings(KineticBouncing):
+    """
+    A ball that does everything!
+    """
+    # def __init__(self, bounds, position, velocity, color, radius, weight, object_list):
+    #     super()__init__(bounds, position, velocity, color, radius, weight, object_list)
+
+    def update(self):
+        super().update()
+
+        self.color[0] += 1
+        self.color[1] += 5
+        self.color[2] += 20
+
+        if self.color[0] >= 255:
+            self.color[0] = 0
+
+        if self.color[1] >= 255:
+            self.color[1] = 0
+
+        if self.color[2] >= 255:
+            self.color[2] = 0
