@@ -55,7 +55,8 @@ class BouncingRainbow(BouncingBall, RainbowBall):
        RainbowBall.update(self)
 
        super().update()
-       
+# not sure why this ends up bouncing off the screen after a few minutes
+
 
 # class KineticBall(???):
 #     """
