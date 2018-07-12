@@ -25,11 +25,20 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
-#     """
-#     ball effected by gravity
-#     """
-#     # TODO: 
+class BouncingBall(Ball):
+    """
+    ball effected by gravity
+    """
+    # TODO: 
+    def __init__(self, bounds, position, velocity, color, radius, acceleration):
+        super().__init__(bounds, position, velocity, color, radius)
+        self.acceleration = acceleration
+    
+    def update(self):
+        self.velocity.y += self.acceleration
+        super().update()
+        
+    
 
 # class RainbowBall(???):
 #     """
