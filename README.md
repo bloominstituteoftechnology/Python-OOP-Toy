@@ -53,7 +53,15 @@ Implement simple physics to enable balls to bounce off of one another, or off of
     pip install pygame-[whatever].whl
     ```
     You'll need to specify the full path, likely.
-  * Once it's installed, run the game with
+  * Once it's installed, run the game from the `src/` directory with
     ```
     python draw.py
+    ```
+### Mac
+* If you're getting errors about `InvalidMarker`:
+  * Don't use `pipenv` for this project. No `install`, no `shell`.
+  * Run `pip3 install pygame`
+  * Once it's installed, run the game from the `src/` directory with
+    ```
+    python3 draw.py
     ```
