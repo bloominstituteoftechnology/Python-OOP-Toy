@@ -89,6 +89,8 @@ class KineticBall(Ball):
         else:
           return False
 
+        super().update()
+
 
 # class KineticBouncing(BouncingBall, KineticBall):
 #     """
