@@ -1,6 +1,11 @@
 import math
 
 from pygame.math import Vector2
+import random
+
+SCREEN_WIDTH = 700
+SCREEN_HEIGHT = 500
+BALL_SIZE = 25
 
 class Ball:
     """
@@ -25,25 +30,40 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
-#     """
-#     ball effected by gravity
-#     """
+class RandomBall(Ball): ## trying to get a ball when spacebar is pressed down
+    pass
+        
+
+class BouncingBall(Ball): 
+
+    gravity = -1
+
+    def update(self):
+      #  self.velocity.y += self.velocity.xy
+        self.velocity.y += self.gravity
+        super().update()
 #     # TODO: 
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
+class RainbowBall(Ball):
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
+
+        self.color = [r, g, b] 
+        super().update()
 #     """
 #     # TODO:
 
-# class BouncingRainbow(???):
+class BouncingRainbow(BouncingBall, RainbowBall):
+
+     pass
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
 #     # TODO:
 
-# class KineticBall(???):
+#class KineticBall(???):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """

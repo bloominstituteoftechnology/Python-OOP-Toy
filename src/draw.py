@@ -1,4 +1,5 @@
-import pygame #TODO:  Fix intellisense
+import pygame 
+# TODO:  Fix intellisense
 import random
 
 from pygame.math import Vector2
@@ -7,16 +8,36 @@ from ball import *
 from block import *
 
 SCREEN_SIZE = [640, 480]
-BACKGROUND_COLOR = [255, 255, 255]
+BACKGROUND_COLOR = [0, 0, 0]
 
 def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
+    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(400, 300), Vector2(3, -2),
+                                    [0, 255, 0], 8)
+    object_list.append(rainbow_ball)
+
+    bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(200, 100), Vector2(2, 0),
+                                    [0, 255, 0], 8)
+    object_list.append(bouncing_ball)
+
+    bouncingrainbow_ball = BouncingRainbow(SCREEN_SIZE, Vector2(200, 100), Vector2(2, 0),
+                                    [0, 255, 0], 8)
+    object_list.append(bouncingrainbow_ball)
+
+    random_ball = RandomBall(SCREEN_SIZE, Vector2(200, 100), Vector2(2, 0),
+                                    [0, 255, 0], 8)
+
+    object_list.append(random_ball)
+
     # TODO: Create other ball types for testing
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
+    object_list.extend((block, ))
+  
+    block = RainbowBlock(SCREEN_SIZE, Vector2(150,100), 60, 30, [255,255,0])
     object_list.extend((block, ))
   
 def main():
@@ -42,8 +63,8 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
+        for obj in object_list:
+            obj.update()
  
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
