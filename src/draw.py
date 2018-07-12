@@ -8,7 +8,7 @@ from ball import *
 from block import *
 
 SCREEN_SIZE = [640, 480]
-BACKGROUND_COLOR = [255, 255, 255]
+BACKGROUND_COLOR = [0, 0, 0]
 
 def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
@@ -25,6 +25,11 @@ def debug_create_balls(object_list):
     bouncingrainbow_ball = BouncingRainbow(SCREEN_SIZE, Vector2(200, 100), Vector2(2, 0),
                                     [0, 255, 0], 8)
     object_list.append(bouncingrainbow_ball)
+
+    random_ball = RandomBall(SCREEN_SIZE, Vector2(200, 100), Vector2(2, 0),
+                                    [0, 255, 0], 8)
+
+    object_list.append(random_ball)
 
     # TODO: Create other ball types for testing
     
