@@ -7,20 +7,19 @@ from ball import *
 from block import *
 
 SCREEN_SIZE = [640, 480]
-BACKGROUND_COLOR = [255, 255, 255]
+BACKGROUND_COLOR = [0, 0, 0 ]
 
 def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+    b_ball = RainbowBall(SCREEN_SIZE, Vector2(10, 50), Vector2(30, 30), [0, 255, 0], 10)
     object_list.append(ball)
+    object_list.append(b_ball)
 
     # TODO: Create other ball types for testing
     
 def debug_create_blocks(object_list):
-    block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [255,255,0])
+    block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
     object_list.extend((block, ))
-
-    '''block = RainbowBlock(SCREEN_SIZE, Vector2(150,100), 60, 30, [255,255,0])
-    object_list.extend((block, ))'''
 
 def main():
     pygame.init()
