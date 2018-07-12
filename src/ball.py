@@ -39,6 +39,7 @@ class BouncingBall(Ball):
 
     def update(self):
         super().update()
+        print("y", self.position.y)
         self.velocity.y += self.gravity
         self.position.y += self.velocity.y
         if self.position.y + self.radius >= self.bounds[1]:
