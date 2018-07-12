@@ -27,13 +27,13 @@ class Ball:
 
 class BouncingBall(Ball): 
 
-    gravity = 0
+    gravity = -1
 
     def update(self):
-        self.velocity.y += self.velocity.xy
-        self.velocity.xy += gravity
+      #  self.velocity.y += self.velocity.xy
+        self.velocity.y += self.gravity
         super().update()
-#     # TODO: code above doesn't work
+#     # TODO: 
 
 class RainbowBall(Ball):
     def update(self):
