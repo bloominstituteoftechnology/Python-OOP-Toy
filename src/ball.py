@@ -125,7 +125,7 @@ class KineticBouncing(Ball):
     And is affected by gravity
     """
 
-    
+
 class AllTheThings(???):
     """
     A ball that does everything!
