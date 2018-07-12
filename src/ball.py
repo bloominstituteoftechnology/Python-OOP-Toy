@@ -64,18 +64,21 @@ class BouncingBall(Ball):
         nextY = self.position.y + self.velocity.y
 
         if self.position.y == self.bounds[1] - self.radius: # if ball at bottom
-            if self.velocity.y > -1 and self.velocity.y < 10: # if ball velocity is near cero.
-                if self.velocity.x > -0.1 and self.velocity.x < 0.1:
+            if self.velocity.y > -1 and self.velocity.y < 10: # if ball's velocity.y is near cero.
+                if self.velocity.x > -0.1 and self.velocity.x < 0.1: # if ball's velocity.x is near cero.
+                    # STOP movement on X axis.
                     self.velocity.x = 0
                     self.frictionX = 0
                 else:
+                    # STOP movement on Y axis.
                     self.acceleration = 0
                     self.velocity.y = 0
+                    # APLY Friction on X axis.
                     if self.velocity.x > 0:
                         self.velocity.x -= self.frictionX
                     if self.velocity.x < 0:
                         self.velocity.x += self.frictionX
-        elif nextX < 0 + self.radius or nextX > self.bounds[0] - self.radius or nextY < 0 + self.radius or nextY > self.bounds[1] - self.radius:
+        elif  nextY < 0 + self.radius or nextY > self.bounds[1] - self.radius: # If ball hit Y bounds
             self.acceleration += self.acceleration * 0.6
             if self.velocity.x > 0:
                 self.velocity.x -= self.frictionX

@@ -8,17 +8,18 @@ from block import *
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
+gravityAcceleration = 0.15
 
 def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
     # TODO: Create other ball types for testing
-    bouncingBall = BouncingBall(SCREEN_SIZE, Vector2(50, 40), Vector2(3, 0), [0, 250, 0], 10, 0.15)
+    bouncingBall = BouncingBall(SCREEN_SIZE, Vector2(50, 40), Vector2(3, 0), [0, 250, 0], 10, gravityAcceleration)
     object_list.append(bouncingBall)
     rainbowBall = RainbowBall(SCREEN_SIZE, Vector2(50, 70), Vector2(3, 1), [0, 0, 250], 10)
     object_list.append(rainbowBall)
-    bouncingRainbow = BouncingRainbow(SCREEN_SIZE, Vector2(50, 70), Vector2(3, -4), [0, 250, 0], 20, 0.15)
+    bouncingRainbow = BouncingRainbow(SCREEN_SIZE, Vector2(50, 70), Vector2(3, -4), [0, 250, 0], 20, gravityAcceleration)
     object_list.append(bouncingRainbow)
     
 def debug_create_blocks(object_list):
