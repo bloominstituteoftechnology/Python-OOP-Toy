@@ -1,4 +1,4 @@
-import math
+import math #imported via python shell
 
 from pygame.math import Vector2
 
