@@ -21,11 +21,12 @@ def debug_create_balls(object_list):
     ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [0, 0, 0], 10)
     object_list.append(ball)
 
-    """
+    
     #BouncingRainbow
     ball = BouncingRainbow(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [0, 0, 0], 10)
     object_list.append(ball)
-    """
+    
+    
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
