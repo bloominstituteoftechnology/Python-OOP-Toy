@@ -37,17 +37,18 @@ class BouncingBall(Ball):
     
     def update(self):
         self.velocity.y += self.acceleration
+        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
+            self.acceleration += self.acceleration * 0.8
         super().update()
         
     
-
 class RainbowBall(Ball):
     """
     Ball that changes colors
     """
     # TODO:
-    def __init__(self, bounds, position, velocity, color, radius):
-        super().__init__(bounds, position, velocity, color, radius)
+    # def __init__(self, bounds, position, velocity, color, radius):
+    #     super().__init__(bounds, position, velocity, color, radius)
 
     def update(self):
         r = (self.color[0] + random.randrange(0,5)) % 256
@@ -61,8 +62,9 @@ class BouncingRainbow(BouncingBall, RainbowBall):
     Ball that changes color and is affected by gravity
     """
     # TODO:
-    def __init__(self, bounds, position, velocity, color, radius, acceleration):
-        super().__init__(bounds, position, velocity, color, radius, acceleration)
+    # def __init__(self, bounds, position, velocity, color, radius, acceleration):
+    #     super().__init__(bounds, position, velocity, color, radius, acceleration)
+    pass
 
 # class KineticBall(???):
 #     """
