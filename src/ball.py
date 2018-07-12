@@ -46,13 +46,15 @@ class RainbowBall(Ball):
 #     """
 #     # TODO:
 
-# class BouncingRainbow(???):
+class BouncingRainbow(BouncingBall, RainbowBall):
+
+     pass
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
 #     # TODO:
 
-# class KineticBall(???):
+class KineticBall(???):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """
