@@ -44,7 +44,7 @@ class RainbowBall(Ball):
         self.color = [r, g, b] 
         super().update()
 #     """
-#     # TODO:doesn't work either
+#     # TODO:
 
 # class BouncingRainbow(???):
 #     """

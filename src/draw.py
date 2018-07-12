@@ -1,4 +1,5 @@
-import pygame #TODO:  Fix intellisense
+import pygame 
+# TODO:  Fix intellisense
 import random
 
 from pygame.math import Vector2
@@ -12,6 +13,10 @@ BACKGROUND_COLOR = [255, 255, 255]
 def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
+
+    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(400, 300), Vector2(3, -2),
+                                    [0, 255, 0], 8)
+    object_list.append(rainbow_ball)
 
     # TODO: Create other ball types for testing
     
