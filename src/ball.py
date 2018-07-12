@@ -1,4 +1,5 @@
 import math
+import random
 
 from pygame.math import Vector2
 
@@ -16,10 +17,10 @@ class Ball:
 
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
-        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
-            self.velocity.x *= -1
-        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
-            self.velocity.y *= -1
+        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: 
+            self.velocity.x *= -1  # screen width
+        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius:
+            self.velocity.y *= -1  # screen height
         self.position += self.velocity
 
     def draw(self, screen, pygame):
@@ -34,13 +35,19 @@ class Ball:
 #     # TODO: 
 
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
 
+    def update(self):
+        r = (self.color[0] + 1) % 255
+        g = (self.color[1] + 5) % 255
+        b = (self.color[2] + 10) % 255
+        self.color = [r, g, b]
 
+        super().update()
+    
 # class BouncingRainbow(???):
 #     """
 #     Ball that changes color and is affected by gravity

@@ -9,7 +9,7 @@ SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+    ball = RainbowBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
     
 def debug_create_blocks(object_list):
@@ -20,8 +20,8 @@ def main():
     pygame.init()
 
     screen = pygame.display.set_mode(SCREEN_SIZE)
-    clock = pygame.time.Clock() # Used to manage how fast the screen updates
-    object_list = [] # list of objects of all types in the toy
+    clock = pygame.time.Clock()
+    object_list = []
 
     debug_create_balls(object_list)
     debug_create_blocks(object_list)
@@ -38,14 +38,16 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
+        # Update items
+        for obj in object_list:
+            obj.update()
  
-        # Draw Loop
+        # Draw items to buffer
         screen.fill(BACKGROUND_COLOR)
-        for ball in object_list:
-            ball.draw(screen, pygame)
- 
+        for obj in object_list:
+            obj.draw(screen, pygame)
+
+        # Show buffer at x fps
         clock.tick(60)
         pygame.display.flip()
  
