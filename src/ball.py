@@ -6,6 +6,7 @@ class Ball:
     """
     base class for bouncing objects
     """
+
     def __init__(self, bounds, position, velocity, color, radius):
         self.position = position
         self.velocity = velocity
@@ -29,52 +30,97 @@ class BouncingBall(Ball):
     """
     ball affected by gravity
     """
-    # TODO: 
     
-    GRAVITY = .1
+    GRAVITY = 0.3
     
     def update(self):
         # Add gravity then call normal updates
         self.velocity.y += self.GRAVITY
-        super().update()
+        super().update()        
 
 class RainbowBall(Ball):
     """
     Ball that changes colors
     """
-    # TODO:
-    
+
     def update(self):
-        r = (self.color[0] + 1) % 256
-        g = (self.color[1] + 10) % 256
-        b = (self.color[2] - 4) % 256
+        r = (self.color[0] + 6) % 256
+        g = (self.color[1] + 4) % 256
+        b = (self.color[2] - 2) % 256
         self.color = [r, g, b]
 
         # Call the superclass (Block) update()
-
         super().update()
 
 class BouncingRainbow(BouncingBall, RainbowBall):
     """
     Ball that changes color and is affected by gravity
     """
-    # TODO:
+    
     pass
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
+# Stretch Goals:
 
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
     
+    def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        super().__init__(bounds, position, velocity, color, radius)
+        self.mass = mass
 
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+    def collide(self, object, relative_vector):
+
+        tangent = math.atan2(relative_vector.y, relative_vector.x)
+
+        angle1 = 0.5 * math.pi - math.atan2(self.velocity.y, self.velocity.x)
+        angle2 = 0.5 * math.pi - math.atan2(object.velocity.y, object.velocity.x)
+
+        angle1 = 2 * tangent - angle1
+        angle2 = 2 * tangent - angle2
+
+        object_speed = object.velocity.length()
+        self_speed = self.velocity.length()
+
+        self.velocity = Vector2(math.sin(angle1), math.cos(angle1)) * object_speed
+        object.velocity = Vector2(math.sin(angle2), math.cos(angle2)) * self_speed
+
+        angle = 0.5 * math.pi + tangent
+
+        while relative_vector.length() <= self.radius + object.radius:
+            self.position.x += math.sin(angle)
+            self.position.y -= math.cos(angle)
+            object.position.x -= math.sin(angle)
+            object.position.y += math.cos(angle)
+            relative_vector = self.position - object.position
+
+    def update(self):
+
+        index = self.object_list.index(self)
+
+        for object in self.object_list[index+1:]:
+
+            if issubclass(type(object), KineticBall) and object != self:
+                relative_vector = self.position - object.position
+                if relative_vector.length() <= self.radius + object.radius:
+                    self.collide(object, relative_vector)
+
+        super().update()
+
+
+class KineticBouncing(BouncingBall, KineticBall):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    And is affected by gravity
+    """
+
+    pass
+    
+class AllTheThings(BouncingBall, KineticBall, RainbowBall):
+    """
+    A ball that does everything!
+    """
+
+    pass

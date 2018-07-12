@@ -9,20 +9,43 @@ from block import *
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
-def debug_create_balls(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(9, 9), [255, 0, 0], 15) # Red
+def debug_create_objects(object_list):
+    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 15) # Red
     object_list.append(ball)
 
     bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(9, 9), [0, 255, 0], 15) # Green
-    object_list.append(bouncing_ball)
+    object_list.append(ball)
 
-    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(400, 300), Vector2(3, -2), [255, 0, 0], 15) # Various
+    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(400, 300), Vector2(1, 5), [255, 0, 0], 15) # Various
     object_list.append(rainbow_ball)
 
     bouncing_rainbow_ball = BouncingRainbow(SCREEN_SIZE, Vector2(300, 150), Vector2(-4, 0), [0, 255, 0], 8)
     object_list.append(bouncing_rainbow_ball)
 
     # TODO: Create other ball types for testing
+
+    for i in range(0, 2):
+        kinetic = KineticBall(1, object_list, SCREEN_SIZE,
+                                        Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                        Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                        [255, 10, 0], 20)
+        object_list.append(kinetic)
+
+    for i in range(0, 10):
+        kinetic = KineticBouncing(1, object_list, SCREEN_SIZE,
+                                        Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                        Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                        [10, 255, 0], 20)
+        object_list.append(kinetic)
+
+    for i in range(0, 10):
+        kinetic = AllTheThings(1, object_list, SCREEN_SIZE,
+                                        Vector2(random.randint(20, SCREEN_SIZE[0] - 20), random.randint(20, SCREEN_SIZE[1] - 20)),
+                                        Vector2(4*random.random() - 2, 4*random.random() - 2),
+                                        [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
+                                        random.randint(3, 20))
+        object_list.append(kinetic)    
+
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100, 100), 20, 20, [0, 255, 0])
@@ -40,7 +63,7 @@ def main():
  
     object_list = [] # list of objects of all types in the toy
 
-    debug_create_balls(object_list)
+    debug_create_objects(object_list)
     debug_create_blocks(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
