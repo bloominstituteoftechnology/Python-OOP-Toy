@@ -1,10 +1,18 @@
 import pygame
+
 # TODO:  Fix intellisense
 # import random
 
 from pygame.math import Vector2
 
-from ball import Ball, RainbowBall, BouncingBall, BouncingRainbow, KineticBall
+from ball import (
+    Ball,
+    RainbowBall,
+    BouncingBall,
+    BouncingRainbow,
+    OrbitalBall,
+    KineticBall,
+)
 from block import Block
 
 SCREEN_SIZE = [640, 480]
@@ -15,26 +23,41 @@ def create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
-    ball = RainbowBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 6), [255, 255, 0], 20)
-    object_list.extend((ball, ))
+    ball = RainbowBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 6), [255, 255, 0], 40)
+    object_list.extend((ball,))
 
     ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 6), [255, 255, 0], 20)
-    object_list.extend((ball, ))
+    object_list.extend((ball,))
 
-    ball = BouncingRainbow(SCREEN_SIZE, Vector2(30, 60), Vector2(2, 12), [255, 255, 0], 20)
-    object_list.extend((ball, ))
+    ball = BouncingRainbow(
+        SCREEN_SIZE, Vector2(30, 60), Vector2(2, 12), [255, 255, 0], 30
+    )
+    object_list.extend((ball,))
 
-    ball = KineticBall(SCREEN_SIZE, Vector2(30, 60), Vector2(2, 12), [122, 122, 122], 20, object_list)
-    object_list.extend((ball, ))
+    ball = OrbitalBall(
+        object_list, SCREEN_SIZE, Vector2(30, 60), Vector2(2, 12), [255, 0, 0], 60
+    )
+    object_list.extend((ball,))
+
+    ball = KineticBall(
+        object_list, SCREEN_SIZE, Vector2(30, 60), Vector2(2, 12), [255, 0, 200], 20
+    )
+    object_list.extend((ball,))
+
+    ball = KineticBall(
+        object_list, SCREEN_SIZE, Vector2(30, 60), Vector2(5, 10), [255, 0, 200], 20
+    )
+    object_list.extend((ball,))
     # TODO: Create other ball types for testing
 
 
 def create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100, 100), 20, 20, [0, 255, 0])
-    object_list.extend((block, ))
+    object_list.extend((block,))
 
 
 def main():
+    done = False
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
 
@@ -46,10 +69,10 @@ def main():
     create_balls(object_list)
     create_blocks(object_list)
 
-    while True:  # TODO:  Create more elegant condition for loop
+    while not done:  # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                done = True
         # Logic Loop
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  # TODO:  Get working
