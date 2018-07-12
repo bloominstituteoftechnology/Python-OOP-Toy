@@ -32,18 +32,36 @@ class BouncingBall(Ball):
     ball effected by gravity
     """
     def update(self):
+        # super().update()
+        print(self.velocity.y, self.position.y, self.bounds[1] - self.radius)
         self.velocity.x = 0
-        if self.maxHeight >= (self.bounds[1] - 0.001):
+
+        if (self.velocity.y > 0-self.radius/2 and self.velocity.y < self.radius/2 and self.position.y >= self.bounds[1] - self.radius):
             self.velocity.y = 0
         else:
-            if (self.velocity.y < 0 and self.position.y < self.maxHeight) or self.position.y >= self.bounds[1] - self.radius:                
-                self.velocity.y *= -0.7
-                self.reduce = self.maxHeight
-                self.maxHeight += (self.bounds[1] - self.reduce)/3
-            if self.velocity.y > 0:
-                self.velocity.y += 0.01
+            self.velocity.y += 0.2      
+            
+        if self.position.y > self.bounds[1]: # screen height
+            self.velocity.y -= 0.8
+            self.velocity.y *= -1
+            
+        
+        # if self.velocity.y < 0:
+            
 
         self.position += self.velocity
+        # if self.maxHeight >= (self.bounds[1] - 0.001):
+        #     self.velocity.y = 0
+        # else:
+        #     if (self.velocity.y < 0 and self.position.y < self.maxHeight) or self.position.y >= self.bounds[1] - self.radius:                
+        #         self.velocity.y *= -0.7
+        #         self.reduce = self.maxHeight
+        #         self.maxHeight += (self.bounds[1] - self.reduce)/3
+        #     if self.velocity.y > 0:
+        #         self.velocity.y += 0.01
+
+        # self.position += self.velocity
+
 
 class RainbowBall(Ball):
     """
