@@ -12,6 +12,8 @@ class Ball:
         self.bounds = bounds
         self.color = color
         self.radius = radius
+        self.maxHeight = self.radius + 2
+        self.reduce = self.bounds[1]/2
 
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
@@ -31,7 +33,17 @@ class BouncingBall(Ball):
     """
     def update(self):
         self.velocity.x = 0
-        super().update()
+        if self.maxHeight >= (self.bounds[1] - 0.001):
+            self.velocity.y = 0
+        else:
+            if (self.velocity.y < 0 and self.position.y < self.maxHeight) or self.position.y >= self.bounds[1] - self.radius:                
+                self.velocity.y *= -0.7
+                self.reduce = self.maxHeight
+                self.maxHeight += (self.bounds[1] - self.reduce)/3
+            if self.velocity.y > 0:
+                self.velocity.y += 0.01
+
+        self.position += self.velocity
 
 class RainbowBall(Ball):
     """
