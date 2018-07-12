@@ -25,12 +25,13 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(Ball):
-#     """
-#     ball effected by gravity
-#     """
-#     def update(self):
-#         super().update()
+class BouncingBall(Ball):
+    """
+    ball effected by gravity
+    """
+    def update(self):
+        self.velocity.y = .1
+        super().update()
 
 class RainbowBall(Ball):
     """
@@ -43,26 +44,44 @@ class RainbowBall(Ball):
         self.color = [r,g,b]
         super().update()
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    pass
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    def __init__(self, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        super().__init__(bounds, position, velocity, color, radius)
+    
+    def update(self):
+        for obj in self.object_list:
 
-# class KineticBouncing(???):
+            if obj == self:
+                continue
+
+            distance = obj.position.distance_to(self.position)
+
+            sumr = self.radius + obj.radius
+
+            if distance < sumr:
+                print("Collision!")
+            
+
+# class KineticBouncing(KineticBall, BouncingBall):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     And is affected by gravity
 #     """
+#     pass
     
 
-# class AllTheThings(???):
+# class AllTheThings(BouncingRainbow, KineticBall):
 #     """
 #     A ball that does everything!
 #     """
+#     pass
