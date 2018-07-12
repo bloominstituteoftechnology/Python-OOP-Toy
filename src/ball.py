@@ -29,20 +29,22 @@ class Ball:
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
 class BouncingBall(Ball):
+    def __init__(self,bounds, position, velocity, color, radius):
+        super().__init__(bounds, position, velocity, color, radius)
     """
     ball effected by gravity
     """
-    # def update(self):
-    #     if self.velocity.x < self.gravity.x
 
     # # TODO: 
     def update(self):
+        self.velocity.y += 0.07
         super().update()
-        pass
       
 
 
 class RainbowBall(Ball):
+    def __init__(self,bounds, position, velocity, color, radius):
+        super().__init__(bounds, position, velocity, color, radius)
     """
     Ball that changes colors
     """
@@ -55,17 +57,33 @@ class RainbowBall(Ball):
         self.color = [r, g, b]
         super().update()
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(RainbowBall, BouncingBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    pass
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
+
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    # TODO:
+    def __init__(self,object_list,bounds,position,velocity,color,radius) #overrides constructor with a new one
+        self.object_list = object_list #pass object list into classes properties
+        super().__init__(bounds,position,velocity,color,radius) # inherit from previous classes
+    def update(self):
+        for obj in object_list:
+            x0 = self.position.x #represents where ball is on x axis
+            y0 = self.position.y #represents where ball is on y axis
+
+            for obj in self.object_list:
+                distance = obj.position.distance_to(self_position)
+
+                sumr = self.radius + obj.radius
+
+                if distance < sumr:
+                    print("Collision detected")
 
 # class KineticBouncing(???):
 #     """
