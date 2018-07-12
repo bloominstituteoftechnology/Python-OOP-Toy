@@ -13,8 +13,22 @@ def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     # I created this yellow ball
     yellow_ball = Ball(SCREEN_SIZE, Vector2(80, 50), Vector2(10,1), [255,255,0], 30)
+    
     object_list.append(ball)
     object_list.append(yellow_ball)
+
+    ball = RainbowBall(SCREEN_SIZE, Vector2(20, 350), Vector2(1, 5), [255, 0, 0], 10)
+    object_list.append(ball)
+
+    ball = BouncingBall(SCREEN_SIZE, Vector2(200, 100), Vector2(2, 0), [255, 255, 0], 10)
+    object_list.append(ball)
+
+    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(200, 100), Vector2(2, 0), [0, 255, 255], 30)
+    object_list.append(ball)
+
+
+    # ball1 = KineticBouncing(object_list, SCREEN_SIZE, Vector2(100, 200), Vector2(3,1), [105,105,105], 50)
+    # object_list.append(ball1)
 
     # TODO: Create other ball types for testing
     
