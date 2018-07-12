@@ -81,28 +81,13 @@ class KineticBall(Ball):
         self.object_list = object_list
         super().__init__(bounds, position, velocity, color, radius)
 
-    def update(self):
-      x0 = self.position.x
-      y0 = self.position.y
-
-      for obj in self.object_list:
-        x1 = obj.position.x
-        y1 = obj.position.y
-
-        diffx = x1 - x0
-        diffy = y1 - y0
-
-        distance = math.sqrt(diffx ** 2 + diffy ** 2)
-        
-        sumr = self.radius + obj.radius
-
-        if distance < sumr:
-          print("Collided")
-
-    
-
-
-
+    def ball_contact(self,obj1, obj2):
+        distance = ((obj1.position.x - obj2.position.x)**2 +
+                (obj1.position.y - obj2.position.y)**2)**(1/2)
+        if distance < obj1.radius + obj2.radius:
+          return True
+        else:
+          return False
 
 
 # class KineticBouncing(???):
