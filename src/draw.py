@@ -10,16 +10,12 @@ SCREEN_SIZE = [1024, 768]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(object_list):
-    a_ball = KineticBouncing(SCREEN_SIZE, Vector2(10, 10), Vector2(1, 1), [255, 0, 0], 10)
-    b_ball = KineticBall(SCREEN_SIZE, Vector2(50, 10), Vector2(1, 1), [0, 255, 0], 25)
-    c_ball = KineticBouncing(SCREEN_SIZE, Vector2(100, 10), Vector2(1, 1), [255, 0, 0], 25)
-    d_ball = KineticBall(SCREEN_SIZE, Vector2(150, 10), Vector2(1, 1), [0, 255, 0], 10)
-    e_ball = AllTheThings(SCREEN_SIZE, Vector2(200, 10), Vector2(1, 1), [255, 0, 0], 50)
-    object_list.append(a_ball)
-    object_list.append(b_ball)
-    object_list.append(c_ball)
-    object_list.append(d_ball)
-    object_list.append(e_ball)
+    a_ball = KineticBouncing(SCREEN_SIZE, Vector2(10, 10), Vector2(3, 3), [255, 0, 0], 10)
+    b_ball = KineticBall(SCREEN_SIZE, Vector2(10, 10), Vector2(3, 3), [0, 255, 0], 10)
+    c_ball = KineticBouncing(SCREEN_SIZE, Vector2(100, 10), Vector2(3, 3), [255, 0, 0], 25)
+    d_ball = KineticBall(SCREEN_SIZE, Vector2(150, 10), Vector2(3, 3), [0, 255, 0], 10)
+    e_ball = AllTheThings(SCREEN_SIZE, Vector2(200, 10), Vector2(3, 3), [255, 0, 0], 50)
+    object_list.extend((a_ball, b_ball, c_ball, d_ball, e_ball, ))
     # TODO: Create other ball types for testing
 
 def set_collidables(object_list):

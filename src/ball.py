@@ -35,7 +35,7 @@ class Ball:
             self.velocity.y *= -1
         elif self.position.y > self.bounds[1] - self.radius:
             self.position.y = self.bounds[1] - self.radius
-            self.velocity.y *= -0.8
+            self.velocity.y *= -1
         self.position += self.velocity
 
     def draw(self, screen, pygame):
@@ -85,6 +85,7 @@ class RainbowBall(Ball):
             if b < 0: b = 0
         self.color = [r, g, b]
         super().update()
+    
 
 class BouncingRainbow(BouncingBall, RainbowBall):
     """
@@ -109,22 +110,22 @@ class KineticBall(Ball):
         # credit:
         # https://www.youtube.com/watch?v=0OiQk2CiBAY
         for a in self.entities:
-            for a2 in self.entities:
-                if a == a2: continue
-                
-                d = a.position.distance_to(a2.position)
 
-                if d < (a.radius + a2.radius):
-                    overlap = a.radius + a2.radius - d
-                
-                    dir = a2.position - a.position
-                    dir.scale_to_length(overlap / 2)
+            if a == self: continue
+            
+            d = a.position.distance_to(self.position)
 
-                    a.position -= dir
-                    a2.position += dir
-                
-                    a.velocity.reflect_ip(a.velocity)
-                    a2.velocity.reflect_ip(a.velocity)
+            if d < (a.radius + self.radius):
+                overlap = a.radius + self.radius - d
+            
+                dir = self.position - a.position
+                dir.scale_to_length(overlap / 2)
+
+                a.position -= dir
+                self.position += dir
+            
+                a.velocity.reflect_ip(a.velocity)
+                self.velocity.reflect_ip(self.velocity)
 
 
 class KineticBouncing(BouncingBall, KineticBall):
