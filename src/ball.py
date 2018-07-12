@@ -81,11 +81,13 @@ class KineticBall(Ball):
     """
     def __init__(self, object_list, bounds, position, velocity, color, radius):
         self.object_list = object_list
-        super().__init__(bounds, position, velocity, color, radius)
+        super().__init__(bounds, position, velocity, color, radius)   
 
-    
     def update(self):
         for obj in self.object_list:
+
+            self.velocity.x *= +1
+            self.velocity.y *= +1
 
             if not issubclass(type(obj), KineticBall):
                 continue
@@ -100,6 +102,8 @@ class KineticBall(Ball):
             if distance < sumr: 
                 print("Collision!")
 
+            super().update()
+            
 
     # def update(self):
     #     x0 = self.position.x
@@ -120,14 +124,16 @@ class KineticBall(Ball):
     #             print("Collision!")
             
 
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
-    
+class KineticBouncing(BouncingBall, KineticBall):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    And is affected by gravity
+    """
+    pass 
 
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+
+class AllTheThings(BouncingRainbow, KineticBouncing):
+    """
+    A ball that does everything!
+    """
+    pass 
