@@ -1,4 +1,4 @@
-# import math
+import math
 
 from pygame.math import Vector2
 
@@ -14,6 +14,7 @@ class Ball:
         self.bounds = bounds
         self.color = color
         self.radius = radius
+        self.mass = (4/3) * math.pi * radius**3
 
     def update(self):
         # bounce at edges.
@@ -23,11 +24,13 @@ class Ball:
         x_right_edge_next = next_pos.x > self.bounds[0] - self.radius
         y_top_edge_next = next_pos.y < 0 + self.radius
         y_bottom_edge_next = next_pos.y > self.bounds[1] - self.radius
+
         if x_left_edge_next:
             self.position.x = self.radius * 2 - next_pos.x
             self.velocity.x *= -1
         elif x_right_edge_next:
-            self.position.x = (self.bounds[0] - self.radius) * 2 - next_pos.x
+            self.position.x = (self.bounds[0] -
+                               self.radius) * 2 - next_pos.x
             self.velocity.x *= -1
         else:
             self.position.x += self.velocity.x
@@ -35,10 +38,14 @@ class Ball:
             self.position.y = self.radius * 2 - next_pos.y
             self.velocity.y *= -1
         elif y_bottom_edge_next:
-            self.position.y = (self.bounds[1] - self.radius) * 2 - next_pos.y
+            self.position.y = (self.bounds[1] -
+                               self.radius) * 2 - next_pos.y
             self.velocity.y *= -1
         else:
             self.position.y += self.velocity.y
+
+        if self.velocity.length() > 20:
+            self.velocity = self.velocity.normalize() * 20
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
@@ -124,13 +131,14 @@ class KineticBall(Ball):
                 shape.position = shape.position + shape.velocity * t
                 self_vec = Vector2(self.velocity.x, self.velocity.y)
                 shape_vec = Vector2(shape.velocity.x, shape.velocity.y)
+                masses = self.mass + shape.mass
 
-                self.velocity -= (2 * self.radius / (radii)) * (
+                self.velocity -= (2 * shape.mass / (masses)) * (
                     (self_vec - shape_vec).dot(self.position - shape.position)
                     / (self.position - shape.position).length_squared()) * \
                     (self.position - shape.position)
 
-                shape.velocity -= (2 * shape.radius / (radii)) * (
+                shape.velocity -= (2 * self.mass / (masses)) * (
                     (shape_vec - self_vec).dot(shape.position - self.position)
                     / (shape.position - self.position).length_squared()) * \
                     (shape.position - self.position)
@@ -153,11 +161,22 @@ class KineticBouncing(BouncingBall, KineticBall):
         KineticBall.update(self)
 
 
-class GravityBall(KineticBall):
+class Planet(KineticBall):
+    def __init__(self, bounds, position, velocity, color, radius,
+                 other_shapes):
+        super().__init__(bounds, position, velocity, color, radius,
+                         other_shapes)
+
     def update(self):
+
         for shape in self.other_shapes:
             distance = self.position.distance_to(shape.position)
-            power = (self.radius * shape.radius) / distance ** 2
+            grav_power = 5 * (self.mass * shape.mass) / distance ** 2
+
+            grav_direction = (self.position - shape.position).normalize()
+            shape.velocity += (grav_power * grav_direction) / self.mass
+            self.velocity = self.velocity * .9
+        super().update()
 
 
 # class AllTheThings(???):
