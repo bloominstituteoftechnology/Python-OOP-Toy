@@ -26,6 +26,7 @@ class Ball:
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
 
+
 class BouncingBall(Ball):
     """
     ball effected by gravity
@@ -74,23 +75,31 @@ class BouncingRainbow(BouncingBall, RainbowBall):
       RainbowBall.update(self)
 
 class KineticBall(Ball):
-    def __init__(self,screen_length,screen_width):
-        self.balls = {}
-        self.ball_index = 0
-        self.screen_length = screen_length
-        self.screen_width = screen_width
+   """
+   A ball that collides with other collidable balls using simple elastic circle collision
+   """
+   def __init__(self, object_list, bounds, position, velocity, color, radius):
+       self.object_list = object_list
+       super().__init__(bounds, position, velocity, color, radius)
 
-        def set_ball_list(self,n):
-       ball_count = n
-       balls = []
-       for i in range(ball_count):
-           radius = randint(15,30)
-           x_pos = randint(0+radius,self.screen_width-radius)
-           y_pos = randint(0+radius,self.screen_length-radius)
-           x_vel = 0
-           y_vel = 0
-           self.things[self.thing_index] = Ball(Vector2(x_pos,y_pos),Vector2(x_vel,y_vel),radius,(randint(0,255),randint(0,255),randint(0,255)))
-           self.thing_index += 1
+   def update(self):
+       for obj in self.object_list:
+
+           if not issubclass(type(obj), KineticBall):
+               continue
+
+           if obj == self:
+               continue
+
+           distance = obj.position.distance_to(self.position)
+
+           sumr = self.radius + obj.radius
+
+           if distance < sumr:
+
+               print("Collision")
+       super().update()
+
 
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision

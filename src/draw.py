@@ -14,11 +14,20 @@ def debug_create_balls(object_list):
     object_list.append(ball)
 
     # TODO: Create other ball types for testing
-    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(40, 20), Vector2(4, 5), [255, 45, 100], 10)
+    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(40, 20), Vector2(4, 5), [255, 45, 100], 15)
     object_list.append(rainbow_ball)
 
-    rainbow_ball2 = RainbowBall(SCREEN_SIZE, Vector2(70, 80), Vector2(30, 5), [255, 0, 0], 10)
+    rainbow_ball2 = RainbowBall(SCREEN_SIZE, Vector2(70, 80), Vector2(2, 2), [255, 0, 0], 10)
     object_list.append(rainbow_ball2)
+
+    rainbow_ball3 = RainbowBall(SCREEN_SIZE, Vector2(70, 50), Vector2(40, 5), [255, 0, 0], 10)
+    object_list.append(rainbow_ball3)
+
+    rainbow_ball4 = RainbowBall(SCREEN_SIZE, Vector2(30, 40), Vector2(8, 9), [255, 0, 0], 12)
+    object_list.append(rainbow_ball4)
+
+    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(200, 100), Vector2(5, 5), [56, 55, 255], 30)
+    object_list.append(ball)
 
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
