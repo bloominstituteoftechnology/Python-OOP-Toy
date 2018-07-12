@@ -10,14 +10,30 @@ SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+    ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+    object_list.append(ball)
+
+    ball = RainbowBall(SCREEN_SIZE, Vector2(200, 300), Vector2(3, 3), [0, 0, 0], 10)
+    object_list.append(ball)
+
+    ball = BouncingRainbow(SCREEN_SIZE, Vector2(300, 150), Vector2(3, 3), [255, 0, 0], 10)
+    object_list.append(ball)
+
+    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(100, 200), Vector2(1, 1), [0, 50, 255], 20)
+    object_list.append(ball)
+
+    ball = Ball(SCREEN_SIZE, Vector2(250, 250), Vector2(0, 0), [0, 255, 0], 10)
     object_list.append(ball)
 
     # TODO: Create other ball types for testing
     
 def debug_create_blocks(object_list):
-    block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
-    object_list.extend((block, ))
+    pass
+    # block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
+    # object_list.extend((block, ))
+
+    # block = RainbowBlock(SCREEN_SIZE, Vector2(200,100), 60, 30, [255,255,0])
+    # object_list.extend((block, ))
   
 def main():
     pygame.init()
@@ -30,20 +46,21 @@ def main():
 
     debug_create_balls(object_list)
     debug_create_blocks(object_list)
+
+    run_me = True
  
-    while True: # TODO:  Create more elegant condition for loop
+    while run_me == True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                run_me = False
         # Logic Loop
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  #TODO:  Get working
-                if event.key == pygame.K_SPACE:
-                    # TODO: Add behavior when button pressed
-                    pass
+                if event.key == pygame.K_LEFT:
+                    print("Pressed left")
 
-        for ball in object_list:
-            ball.update()
+        for obj in object_list:
+            obj.update()
  
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
@@ -52,9 +69,7 @@ def main():
  
         clock.tick(60)
         pygame.display.flip()
- 
-    # Close everything down
-    pygame.quit()
+    
  
 if __name__ == "__main__":
     main()
