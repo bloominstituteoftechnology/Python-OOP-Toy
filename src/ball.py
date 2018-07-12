@@ -31,17 +31,28 @@ class Ball:
 #     """
 #     # TODO: 
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+class BouncingBall(Ball):
+    
+    GRAVITY = .1
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+    def update(self):
+        
+        self.velocity.y += self.GRAVITY
+        super().update()
+
+class RainbowBall(Ball):
+
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] - 1) % 256
+
+        self.color = [r, g, b]
+
+        super().update()
+
+class BouncingRainbow(BouncingBall, RainbowBall):
+    pass
 
 # class KineticBall(???):
 #     """
