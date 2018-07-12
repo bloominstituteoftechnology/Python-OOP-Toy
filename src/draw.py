@@ -13,11 +13,21 @@ def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
-    # TODO: Create other ball types for testing
+    bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(125, 75), Vector2(1, 0), [0, 40, 255], 8)
+    object_list.append(bouncing_ball)
+
+    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(400, 300), Vector2(2, -1), [0, 255, 0], 8)
+    object_list.append(rainbow_ball)
+
+    bouncing_rainbow = BouncingRainbow(SCREEN_SIZE, Vector2(100, 300), Vector2(3, -1), [46, 255, 0], 8)
+    object_list.append(bouncing_rainbow)
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
-    object_list.extend((block, ))
+    object_list.append(block)
+    
+    rainbow_block = RainbowBlock(SCREEN_SIZE, Vector2(75, 75), 10, 10, [0, 255, 0])
+    object_list.append(rainbow_block)
   
 def main():
     pygame.init()
