@@ -13,7 +13,15 @@ def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
-    # TODO: Create other ball types for testing
+    ball2 = RainbowBall(SCREEN_SIZE, Vector2(100, 100), Vector2(4, 4), [0, 200, 200], 10)
+    object_list.append(ball2)
+
+    ball3 = BouncingBall(SCREEN_SIZE, Vector2(100, 100), Vector2(5, 5), [255, 182, 193], 10)
+    object_list.append(ball3)
+
+    ball4 = BouncingRainbow(SCREEN_SIZE, Vector2(100, 100), Vector2(5, 5), [255, 182, 193], 10)
+    object_list.append(ball4)
+    # TODO: Create other ball types for testing - DONE***
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
@@ -33,8 +41,7 @@ def main():
  
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
+            if event.type == pygame.QUIT: sys.exit()
         # Logic Loop
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  #TODO:  Get working
