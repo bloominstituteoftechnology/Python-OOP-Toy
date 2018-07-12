@@ -13,13 +13,30 @@ class Ball:
         self.color = color
         self.radius = radius
 
-    def update(self):
+
+    """ def update(self):
         # bounce at edges.  TODO: Fix sticky edges
         if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
             self.velocity.x *= -1
         if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
             self.velocity.y *= -1
-        self.position += self.velocity
+        self.position += self.velocity"""
+
+    def update(self):
+        # bounce at edges.  TODO: Fix sticky edges
+            if self.position.x < 0 + self.radius:
+                self.position.x = 0 + self.radius
+                self.velocity.x *= -1
+            elif self.position.x > self.bounds[0] - self.radius:
+                self.position.x = self.bounds[0] - self.radius
+                self.velocity.x *= -1
+            if self.position.y < 0 + self.radius:
+                self.position.y = 0 + self.radius
+                self.velocity.y *= -1
+            elif self.position.y > self.bounds[1] - self.radius:
+                self.position.y = self.bounds[1] - self.radius
+                self.velocity.y *= -1
+            self.position += self.velocity
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
@@ -63,15 +80,40 @@ class BouncingRainbow(BouncingBall, RainbowBall):
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """
 #     # TODO:
+class KineticBall(Ball):
+    def __init__(self, bounds, position, velocity, color, radius):
+        self.object_list = []
+        super().__init__(bounds, position, velocity, color, radius)
 
-# class KineticBouncing(???):
+
+    def update(self):
+        super().update()
+        for obj in self.object_list:
+
+            if not issubclass(type(obj), KineticBall):
+                continue
+
+            if obj == self:
+                continue
+
+            distance = obj.position.distance_to(self.position)
+
+            sumr = self.radius + obj.radius
+
+            if distance < sumr:
+                obj.velocity.reflect_ip(obj.velocity)
+                self.velocity.reflect_ip(self.velocity)
+
+class KineticBouncing(KineticBall, BouncingBall):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     And is affected by gravity
 #     """
+    pass
     
 
-# class AllTheThings(???):
+class AllTheThings(BouncingRainbow, KineticBall):
 #     """
 #     A ball that does everything!
 #     """
+    pass
