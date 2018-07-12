@@ -6,19 +6,18 @@ class Ball:
     """
     base class for bouncing objects
     """
-    vel = 
     def __init__(self, bounds, position, velocity, color, radius):
         self.position = position
         self.velocity = velocity
         self.bounds = bounds
         self.color = color
-        self.radius = radius
+        self.radius = radius 
 
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
-        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
+        if self.position.x < 5 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
             self.velocity.x *= -1
-        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
+        if self.position.y < 5 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
             self.velocity.y *= -1
         self.position += self.velocity
 
@@ -28,13 +27,13 @@ class Ball:
 
 class BouncingBall(Ball):
 #     """
-#     ball effected by gravity
+#     ball effected by gravityadsfasdf
 #     """
+    
     def update(self):
         if self.position.x > 0 + self.radius or self.position.x > self.bounds[0] - self.radius:
-            self.velocity.y -= 0.3
-    
-        super().update()
+            self.velocity.y += 0.1
+            super().update()
 #     # TODO: 
 
 class RainbowBall(Ball):
@@ -42,7 +41,7 @@ class RainbowBall(Ball):
         r = (self.color[0] + 3) % 256
         g = (self.color[1] + 2) % 256
         b = (self.color[2] - 1) % 256
-
+#
         self.color = [r, g, b]
         super().update()
 #     """
@@ -50,12 +49,10 @@ class RainbowBall(Ball):
 #     """
 #     # TODO:
 
-class BouncingRainbow(RainbowBall):
-    def update(self):
-        if self.position.x > 0 + self.radius or self.position.x > self.bounds[0] - self.radius:
-            self.velocity.x -= 0.2
+class BouncingRainbow(RainbowBall, BouncingBall):
     
-        super().update()
+    pass
+    
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
