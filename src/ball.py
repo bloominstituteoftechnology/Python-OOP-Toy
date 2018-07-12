@@ -1,4 +1,5 @@
 import math
+import random
 
 from pygame.math import Vector2
 
@@ -40,11 +41,20 @@ class BouncingBall(Ball):
         
     
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
+    # TODO:
+    def __init__(self, bounds, position, velocity, color, radius):
+        super().__init__(bounds, position, velocity, color, radius)
+
+    def update(self):
+        r = (self.color[0] + random.randrange(0,5)) % 256
+        g = (self.color[1] + random.randrange(0,5)) % 256
+        b = (self.color[2] + random.randrange(0,5)) % 256
+        self.color = [r, g, b]
+        super().update()
 
 # class BouncingRainbow(???):
 #     """
