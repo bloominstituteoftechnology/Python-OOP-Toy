@@ -29,6 +29,9 @@ def debug_create_balls(object_list):
     kball3 = KineticBall(object_list, SCREEN_SIZE, Vector2(400, 120), Vector2(3, 1), [90, 100, 250], 30)
     object_list.append(kball3)
     
+    kball4 = KineticBouncing(object_list, SCREEN_SIZE, Vector2(500, 120), Vector2(3, 1), [90, 100, 250], 30)
+    object_list.append(kball4)
+    
 
     # TODO: Create other ball types for testing
     

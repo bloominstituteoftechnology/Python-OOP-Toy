@@ -105,12 +105,15 @@ class KineticBall(Ball):
                 self.velocity.x *= -1
                 self.velocity.y *= -1
                 print("Collision!")
-        Ball.update(self)      
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
+        Ball.update(self)  
+        
+class KineticBouncing(KineticBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    def update(self):
+        self.velocity.y += 0.3
+        KineticBall.update(self)
     
 
 # class AllTheThings(???):
