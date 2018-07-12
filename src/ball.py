@@ -63,8 +63,6 @@ class RainbowBall(Ball):
         self.color[1] += 5
         self.color[2] += 20
 
-        print(self.color[0])
-
         if self.color[0] >= 255:
             self.color[0] = 0
 
@@ -74,7 +72,6 @@ class RainbowBall(Ball):
         if self.color[2] >= 255:
             self.color[2] = 0
 
-
 class BouncingRainbow(BouncingBall, RainbowBall):
     """
     Ball that changes color and is affected by gravity
@@ -83,19 +80,54 @@ class BouncingRainbow(BouncingBall, RainbowBall):
     def __init__(self, bounds, position, velocity, color, radius, weight):
         super().__init__(bounds, position, velocity, color, radius, weight)
 
-
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
-
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    def __init__(self, bounds, position, velocity, color, radius, object_list):
+        super().__init__(bounds, position, velocity, color, radius)
+        self.object_list = object_list
     
+    def update(self):
+        super().update()
+
+        for obj in self.object_list:
+            if not issubclass(type(obj), KineticBall):
+                continue
+
+            if obj == self:
+                continue
+
+            distance = obj.position.distance_to(self.position)
+            sumr = self.radius + obj.radius
+
+            if distance < sumr:
+                self.velocity.x *= -1; self.velocity.y *= -1
+
+class KineticBouncing(BouncingBall):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    And is affected by gravity
+    """
+    def __init__(self, bounds, position, velocity, color, radius, weight, object_list):
+        super().__init__(bounds, position, velocity, color, radius, weight)
+        self.object_list = object_list
+
+    def update(self):
+        super().update()
+
+        for obj in self.object_list:
+            if not issubclass(type(obj), KineticBouncing):
+                continue
+
+            if obj == self:
+                continue
+
+            distance = obj.position.distance_to(self.position)
+            sumr = self.radius + obj.radius
+
+            if distance < sumr:
+                self.velocity.x *= -1; self.velocity.y *= -1
 
 # class AllTheThings(???):
 #     """

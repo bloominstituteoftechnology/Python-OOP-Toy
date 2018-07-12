@@ -1,5 +1,5 @@
 import pygame #TODO:  Fix intellisense
-import random
+from random import randint
 
 from pygame.math import Vector2
 
@@ -10,15 +10,50 @@ SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 100), Vector2(3, 3), [255, 0, 0], 10)
-    bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 255], 10, -1)
-    rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(50, 150), Vector2(3, 3), [255, 255, 0], 10)
-    bouncing_rainbow = BouncingRainbow(SCREEN_SIZE, Vector2(50, 200), Vector2(3, 3), [255, 0, 255], 10, -1)
+    # ball = Ball(SCREEN_SIZE, Vector2(50, 100), Vector2(3, 3), [255, 0, 0], 10)
+    # object_list.append(ball)
 
+    # bouncing_ball = BouncingBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 255], 10, -1)
+    # object_list.append(bouncing_ball)
+
+    # rainbow_ball = RainbowBall(SCREEN_SIZE, Vector2(50, 150), Vector2(3, 3), [255, 255, 0], 10)
+    # object_list.append(rainbow_ball)
+
+    # bouncing_rainbow = BouncingRainbow(SCREEN_SIZE, Vector2(50, 200), Vector2(3, 3), [255, 0, 255], 10, -1)
+    # object_list.append(bouncing_rainbow)
+
+    # kinetic_ball1 = KineticBall(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 10, 255], 10, object_list)
+    # object_list.append(kinetic_ball1)
+
+    # kinetic_ball2 = KineticBall(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 0], 10, object_list)
+    # object_list.append(kinetic_ball2)
+
+    # kinetic_ball2 = KineticBall(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 0], 10, object_list)
+    # object_list.append(kinetic_ball2)
+
+    # kinetic_ball2 = KineticBall(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 0], 10, object_list)
+    # object_list.append(kinetic_ball2)
+
+    # kinetic_ball2 = KineticBall(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 0], 10, object_list)
+    # object_list.append(kinetic_ball2)
+
+    # kinetic_ball2 = KineticBall(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 0], 10, object_list)
+    # object_list.append(kinetic_ball2)
+
+    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
     object_list.append(ball)
-    object_list.append(bouncing_ball)
-    object_list.append(rainbow_ball)
-    object_list.append(bouncing_rainbow)
+
+    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    object_list.append(ball)
+
+    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    object_list.append(ball)
+
+    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    object_list.append(ball)
+
+    ball = KineticBouncing(SCREEN_SIZE, Vector2(randint(10, 630), randint(10, 470)), Vector2(3, 3), [255, 0, 255], 10, -1, object_list)
+    object_list.append(ball)
 
     # TODO: Create other ball types for testing
     
@@ -38,6 +73,9 @@ def main():
     debug_create_balls(object_list)
     debug_create_blocks(object_list)
  
+    ##
+    ## crazy while loop with nested for loops
+    ##
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
