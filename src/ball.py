@@ -24,6 +24,10 @@ class Ball:
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
+    
+    def stop(self):
+        self.velocity.x = 0
+        self.velocity.y = 0
 
 class BouncingBall(Ball):
     """
@@ -31,7 +35,7 @@ class BouncingBall(Ball):
     """
 
     def update(self):
-        self.velocity.y -= 0.3
+        self.velocity.y += 0.2
         super().update()
 
 
@@ -42,8 +46,8 @@ class RainbowBall(Ball):
     def update(self):
         super().update()
 
-        r = (self.color[0] + 6) % 256
-        g = (self.color[1] + 4) % 256
+        r = (self.color[0] + 2) % 256
+        g = (self.color[1] + 2) % 256
         b = (self.color[2] - 2) % 256
 
         self.color = [r, g, b]
