@@ -18,17 +18,37 @@ class Ball:
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
         # screen width
-        new_pos = self.position + self.velocity
-        x_edge = new_pos.x < 0 + self.radius or new_pos.x > \
-            self.bounds[0] - self.radius
-        y_edge = new_pos.y < 0 + self.radius or new_pos.y > \
-            self.bounds[1] - self.radius
-        if x_edge:
+        x_edge_exact = self.position.x == self.radius or \
+            self.position.x == self.bounds[0] - self.radius
+        y_edge_exact = self.position.y == self.radius or \
+            self.position.y == self.bounds[1] - self.radius
+        print(x_edge_exact)
+        if x_edge_exact:
+            print("HEEEEEEEEEEEEEEEEY!!!!!!!!!!!!")
             self.velocity.x *= -1
-        # screen height
-        if y_edge:
+        if y_edge_exact:
             self.velocity.y *= -1
-        self.position += self.velocity
+        if not (x_edge_exact or y_edge_exact):
+            next_pos = self.position + self.velocity
+            x_left_edge_next = next_pos.x < 0 + self.radius
+            x_right_edge_next = next_pos.x > self.bounds[0] - self.radius
+            y_top_edge_next = next_pos.y < 0 + self.radius
+            y_bottom_edge_next = next_pos.y > self.bounds[1] - self.radius
+            if x_left_edge_next:
+                print("YOOOOOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!")
+                self.position.x = self.radius
+            elif x_right_edge_next:
+                self.position.x = self.bounds[0] - self.radius
+            else:
+                self.position.x += self.velocity.x
+            if y_top_edge_next:
+                self.position.y = self.radius
+            elif y_bottom_edge_next:
+                self.position.y = self.bounds[1] - self.radius
+            else:
+                self.position.y += self.velocity.y
+        else:
+            self.position += self.velocity
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
@@ -42,7 +62,8 @@ class BouncingBall(Ball):
     """
 
     def update(self):
-        if not self.position.y > self.bounds[1] - self.radius:
+        next_pos = self.position + self.velocity
+        if not next_pos.y >= self.bounds[1] - self.radius - 1:
             self.velocity[1] += .98
         self.velocity *= .99
         super().update()
@@ -85,27 +106,34 @@ class KineticBall(Ball):
     def update(self):
         print(self.other_shapes)
         for shape in self.other_shapes:
-            distance = (shape.position - self.position).length()
-            if not shape == self and (distance <= self.radius + shape.radius):
-                self_vec = self.velocity
-                shape_vec = shape.velocity
+            next_pos_self = self.position + self.velocity
+            next_pos_shape = shape.position + shape.velocity
+            distance = (next_pos_shape - next_pos_self).length()
+            if (not shape == self) and (distance <= self.radius + shape.radius):
+                self_vec = Vector2(self.velocity.x, self.velocity.y)
+                shape_vec = Vector2(shape.velocity.x, shape.velocity.y)
                 self.velocity -= (
-                    (self_vec - shape_vec).dot(self.position - shape.position)
-                    / (self.position - shape.position).length_squared()) * \
-                    (self.position - shape.position)
+                    (self_vec - shape_vec).dot(next_pos_self - next_pos_shape)
+                    / (next_pos_self - next_pos_shape).length_squared()) * \
+                    (next_pos_self - next_pos_shape)
                 shape.velocity -= (
-                    (shape_vec - self_vec).dot(shape.position - self.position)
-                    / (shape.position - self.position).length_squared()) * \
-                    (shape.position - self.position)
+                    (shape_vec - self_vec).dot(next_pos_shape - next_pos_self)
+                    / (next_pos_shape - next_pos_self).length_squared()) * \
+                    (next_pos_shape - next_pos_self)
 
         super().update()
 
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic
-#     circle collision
-#     And is affected by gravity
-#     """
+
+class KineticBouncing(KineticBall, BouncingBall):
+    """
+    A ball that collides with other collidable balls using simple elastic
+    circle collision
+    And is affected by gravity
+    """
+
+    def update(self):
+        KineticBall.update(self)
+        BouncingBall.update(self)
 
 
 # class AllTheThings(???):
