@@ -69,11 +69,11 @@ class RainbowBall(Ball):
 
         super().update()
     
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall,RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    pass
 
 
 # class KineticBall(???):
