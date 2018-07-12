@@ -12,6 +12,8 @@ from ball import (
     BouncingRainbow,
     OrbitalBall,
     KineticBall,
+    KineticBouncing,
+    AllTheThings,
 )
 from block import Block
 
@@ -35,7 +37,7 @@ def create_balls(object_list):
     object_list.extend((ball,))
 
     ball = OrbitalBall(
-        object_list, SCREEN_SIZE, Vector2(30, 60), Vector2(2, 12), [255, 0, 0], 60
+        object_list, SCREEN_SIZE, Vector2(30, 60), Vector2(2, 12), [255, 0, 0], 5
     )
     object_list.extend((ball,))
 
@@ -46,6 +48,16 @@ def create_balls(object_list):
 
     ball = KineticBall(
         object_list, SCREEN_SIZE, Vector2(30, 60), Vector2(5, 10), [255, 0, 200], 20
+    )
+    object_list.extend((ball,))
+
+    ball = KineticBouncing(
+        object_list, SCREEN_SIZE, Vector2(30, 60), Vector2(5, 10), [138, 0, 255], 20
+    )
+    object_list.extend((ball,))
+
+    ball = AllTheThings(
+        object_list, SCREEN_SIZE, Vector2(30, 60), Vector2(5, 10), [0, 255, 0], 20
     )
     object_list.extend((ball,))
     # TODO: Create other ball types for testing

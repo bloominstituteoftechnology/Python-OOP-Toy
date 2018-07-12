@@ -158,14 +158,10 @@ class KineticBall(Ball):
         super().update()
 
 
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
+class KineticBouncing(BouncingBall, KineticBall):
+    pass
 
 
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+class AllTheThings(KineticBouncing, RainbowBall):
+    pass
+
