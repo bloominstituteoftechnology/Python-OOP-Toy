@@ -14,17 +14,21 @@ def debug_create_balls(object_list):
     object_list.append(ball)
 
     # TODO: Create other ball types for testing
-    bouncingBall = BouncingBall(SCREEN_SIZE, Vector2(50, 400), Vector2(3, 0), [0, 250, 0], 10, 0.15)
+    bouncingBall = BouncingBall(SCREEN_SIZE, Vector2(50, 40), Vector2(3, 0), [0, 250, 0], 10, 0.15)
     object_list.append(bouncingBall)
     rainbowBall = RainbowBall(SCREEN_SIZE, Vector2(50, 70), Vector2(3, 1), [0, 0, 250], 10)
     object_list.append(rainbowBall)
-    # bouncingRainbow = BouncingRainbow(SCREEN_SIZE, Vector2(50, 70), Vector2(3, 0), [0, 250, 0], 10, 0.15)
-    # object_list.append(bouncingRainbow)
+    bouncingRainbow = BouncingRainbow(SCREEN_SIZE, Vector2(50, 70), Vector2(3, -4), [0, 250, 0], 20, 0.15)
+    object_list.append(bouncingRainbow)
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
     object_list.extend((block, ))
   
+def debug_start_game(object_list):
+   debug_create_balls(object_list)
+   debug_create_blocks(object_list)
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -34,19 +38,20 @@ def main():
  
     object_list = [] # list of objects of all types in the toy
 
-    debug_create_balls(object_list)
-    debug_create_blocks(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-        # Logic Loop
-        for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  #TODO:  Get working
                 if event.key == pygame.K_SPACE:
                     # TODO: Add behavior when button pressed
-                    pass
+                    print(event)
+                if event.key == pygame.K_s:
+                    debug_start_game(object_list)
+                if event.key == pygame.K_q:
+                    pygame.quit()
+                
 
         for ball in object_list:
             ball.update()

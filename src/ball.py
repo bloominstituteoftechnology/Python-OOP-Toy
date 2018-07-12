@@ -33,6 +33,7 @@ class Ball:
         if nextY > self.bounds[1] - self.radius:
             nextY = self.bounds[1] - self.radius
             self.velocity.y *= -1
+            
 
 
         # if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
@@ -62,28 +63,28 @@ class BouncingBall(Ball):
         nextX = self.position.x + self.velocity.x
         nextY = self.position.y + self.velocity.y
 
-        print(self.velocity.y > -1 and self.velocity.y < 2 and self.position.y == self.bounds[1] - self.radius)
         if self.position.y == self.bounds[1] - self.radius: # if ball at bottom
-            if self.velocity.y > -1 and self.velocity.y < 2: # if ball velocity is near cero.
-                self.acceleration = 0
-                self.velocity.y = 0
-                if self.velocity.x > 0:
-                    self.velocity.x -= self.frictionX
-                if self.velocity.x < 0:
-                    self.velocity.x += self.frictionX
+            if self.velocity.y > -1 and self.velocity.y < 10: # if ball velocity is near cero.
+                if self.velocity.x > -0.1 and self.velocity.x < 0.1:
+                    self.velocity.x = 0
+                    self.frictionX = 0
+                else:
+                    self.acceleration = 0
+                    self.velocity.y = 0
+                    if self.velocity.x > 0:
+                        self.velocity.x -= self.frictionX
+                    if self.velocity.x < 0:
+                        self.velocity.x += self.frictionX
         elif nextX < 0 + self.radius or nextX > self.bounds[0] - self.radius or nextY < 0 + self.radius or nextY > self.bounds[1] - self.radius:
             self.acceleration += self.acceleration * 0.6
+            if self.velocity.x > 0:
+                self.velocity.x -= self.frictionX
+            if self.velocity.x < 0:
+                self.velocity.x += self.frictionX
                         
-        print('position',self.position.y)
-        print('velocity',self.velocity.y)
+        print('position',self.position.x)
+        print('velocity',self.velocity.x)
 
-        # print('-',self.position.y == self.bounds[1] - self.radius )
-        # print('positionY',self.position.y == self.bounds[1] - self.radius)
-        # print('velocityY',self.velocity.y > -0.1, self.velocity.y)
-        # if self.position.y == self.bounds[1] - self.radius:
-        #     if self.velocity.y > -0.3 and self.velocity.y < 0:
-        #         self.velocity.x *= self.frictionX
-        #         print(self.velocity.x)
         super().update()
 
         
@@ -97,9 +98,9 @@ class RainbowBall(Ball):
     #     super().__init__(bounds, position, velocity, color, radius)
 
     def update(self):
-        r = (self.color[0] + random.randrange(0,5)) % 256
-        g = (self.color[1] + random.randrange(0,5)) % 256
-        b = (self.color[2] + random.randrange(0,5)) % 256
+        r = (self.color[0] + random.randrange(0,10)) % 256
+        g = (self.color[1] + random.randrange(0,10)) % 256
+        b = (self.color[2] + random.randrange(0,10)) % 256
         self.color = [r, g, b]
         super().update()
 
