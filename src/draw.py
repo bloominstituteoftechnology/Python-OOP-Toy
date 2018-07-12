@@ -25,6 +25,12 @@ def debug_create_balls(object_list):
     ball = BouncingRainbow(SCREEN_SIZE, Vector2(25, 25), Vector2(5, 5), [0, 255, 0], 10)
     object_list.append(ball)
 
+    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(33, 33), Vector2(3, 3), [122, 35, 45], 10)
+    object_list.append(ball)
+
+    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(55, 55), Vector2(5, 5), [255, 0, 255], 10)
+    object_list.append(ball)
+
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100, 100), 20, 20, [0, 255, 0])
     object_list.extend((block, ))
