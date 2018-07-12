@@ -16,11 +16,30 @@ class Ball:
 
     def update(self):
         # bounce at edges.  TODO: Fix sticky edges
-        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
+        nextX = self.position.x + self.velocity.x
+        nextY = self.position.y + self.velocity.y
+
+        if nextX < 0 + self.radius:
+            nextX = self.radius
             self.velocity.x *= -1
-        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
+        if nextX > self.bounds[0] - self.radius:
+            nextX = self.bounds[0] - self.radius
+            self.velocity.x *= -1
+
+        if nextY < 0 + self.radius:
+            nextY = self.radius
             self.velocity.y *= -1
-        self.position += self.velocity
+        if nextY > self.bounds[1] - self.radius:
+            nextY = self.bounds[1] - self.radius
+            self.velocity.y *= -1
+
+
+        # if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
+        # if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
+
+        
+        self.position.x = nextX
+        self.position.y = nextY
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
@@ -37,9 +56,16 @@ class BouncingBall(Ball):
     
     def update(self):
         self.velocity.y += self.acceleration
-        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
-            self.acceleration += self.acceleration * 0.8
+
+        nextX = self.position.x + self.velocity.x
+        nextY = self.position.y + self.velocity.y
+
+        if nextX < 0 + self.radius or nextX > self.bounds[0] - self.radius or nextY < 0 + self.radius or nextY > self.bounds[1] - self.radius:
+            self.acceleration += self.acceleration * 0.6
+            print(self.position.y)
+            
         super().update()
+
         
     
 class RainbowBall(Ball):
