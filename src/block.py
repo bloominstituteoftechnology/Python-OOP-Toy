@@ -29,3 +29,16 @@ class Block:
 
     def draw(self, screen, pygame):
         pygame.draw.rect(screen, self.color, self.rectangle)
+
+class RainbowBlock(Block): # RainbowBlock extends Block class
+
+    def update(self):
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 3) % 256
+        b = (self.color[2] + 3) % 256
+
+        self.color = [r, g, b]
+        # Up to this point, RainbowBlock.update completely overrides Block.update
+        # If you want to RainbowBlock.update to extend Block.update
+        # You should `call the superclass (Block) update()`
+        super().update()

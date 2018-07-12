@@ -6,19 +6,28 @@ from pygame.math import Vector2
 from ball import *
 from block import *
 
-SCREEN_SIZE = [640, 480]
+SCREEN_SIZE = [1024, 768]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    object_list.append(ball)
-
+    a_ball = KineticBouncing(SCREEN_SIZE, Vector2(10, 10), Vector2(3, 3), [255, 0, 0], 10)
+    b_ball = KineticBall(SCREEN_SIZE, Vector2(10, 10), Vector2(3, 3), [0, 255, 0], 10)
+    c_ball = KineticBouncing(SCREEN_SIZE, Vector2(100, 10), Vector2(3, 3), [255, 0, 0], 25)
+    d_ball = KineticBall(SCREEN_SIZE, Vector2(150, 10), Vector2(3, 3), [0, 255, 0], 10)
+    e_ball = AllTheThings(SCREEN_SIZE, Vector2(200, 10), Vector2(3, 3), [255, 0, 0], 50)
+    object_list.extend((a_ball, b_ball, c_ball, d_ball, e_ball, ))
     # TODO: Create other ball types for testing
-    
+
+def set_collidables(object_list):
+    for shape in object_list:
+        if hasattr(shape, 'collidable'):
+            shape.entities = object_list
+
 def debug_create_blocks(object_list):
-    block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
-    object_list.extend((block, ))
-  
+    # block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
+    # object_list.extend((block, ))
+    pass
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
@@ -30,6 +39,7 @@ def main():
 
     debug_create_balls(object_list)
     debug_create_blocks(object_list)
+    set_collidables(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
