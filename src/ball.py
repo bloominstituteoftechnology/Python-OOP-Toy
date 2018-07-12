@@ -52,26 +52,73 @@ class RainbowBall(Ball):
 
         super().update()
 
-class BouncingRainbow(Ball):
+class BouncingRainbow(BouncingBall, RainbowBall):
     """
     Ball that changes color and is affected by gravity
     """
-    # TODO: create a bouncing rainbow ball 
+    pass
+    
+# class BouncingRainbow(Ball):
+#     """
+#     Ball that changes color and is affected by gravity
+#     """
+#     # TODO: create a bouncing rainbow ball 
 
+#     def update(self):
+#         r = (self.color[0] + 3) % 256
+#         g = (self.color[1] + 2) % 256
+#         b = (self.color[2] + 1) % 256
+
+#         self.color = [r, g, b]        
+
+#         super().update()
+
+# Stretch Goals 
+
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    def __init__(self, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        super().__init__(bounds, position, velocity, color, radius)
+
+    
     def update(self):
-        r = (self.color[0] + 3) % 256
-        g = (self.color[1] + 2) % 256
-        b = (self.color[2] + 1) % 256
+        for obj in self.object_list:
 
-        self.color = [r, g, b]        
+            if not issubclass(type(obj), KineticBall):
+                continue
 
-        super().update()
+            if obj == self:
+                continue 
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
+            distance = obj.position.distance_to(self.position)
+
+            sumr = self.radius + obj.radius
+
+            if distance < sumr: 
+                print("Collision!")
+
+
+    # def update(self):
+    #     x0 = self.position.x
+    #     y0 = self.position.y
+
+    #     for obj in self.object_lists:
+    #         x1 = obj.position.x
+    #         y1 = obj.position.y 
+
+    #         diffx = x1 = x0 
+    #         diffy = y1 - y0 
+
+    #         distance = math.sqrt(diffx**2 + diffy**2)
+
+    #         sumr = self.radius + obj.radius
+
+    #         if distance < sumr:
+    #             print("Collision!")
+            
 
 # class KineticBouncing(???):
 #     """

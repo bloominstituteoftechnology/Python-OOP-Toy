@@ -24,6 +24,9 @@ def debug_create_balls(object_list):
     ball = BouncingRainbow(SCREEN_SIZE, Vector2(58, 58), Vector2(3.5, 3.5), [255, 0, 0], 15)
     object_list.append(ball)
 
+    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(200, 200), Vector2(2, 10), [0, 255, 255], 30)
+    object_list.append(ball)
+
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
     object_list.extend((block, ))
@@ -54,13 +57,14 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
+        for obj in object_list:
+            obj.update()
  
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
-        for ball in object_list:
-            ball.draw(screen, pygame)
+
+        for obj in object_list:
+            obj.draw(screen, pygame)
  
         clock.tick(60)
         pygame.display.flip()
