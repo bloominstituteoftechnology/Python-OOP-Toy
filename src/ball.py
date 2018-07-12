@@ -79,34 +79,43 @@ class KineticBall(Ball):
     """
     A ball that collides with other collidable balls using simple elastic circle collision
     """
-    def __init__(self, object_list, bounds, position, velocity, color, radius):
+    def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
         self.object_list = object_list
+        self.mass = mass
         super().__init__(bounds, position, velocity, color, radius)
 
+    def collide(self, object, relative_vector):
+        tangent = math.atan2(relative_vector.y, relative_vector.x)
+        # Get the angle of travel for both
+        angle1 = 0.5 * math.pi - math.atan2(self.velocity.y, self.velocity.x)
+        angle2 = 0.5 * math.pi - math.atan2(object.velocity.y, object.velocity.x)
+        angle1 = 2 * tangent - angle1
+        angle2 = 2 * tangent - angle2
+        object_speed = object.velocity.length()
+        self_speed = self.velocity.length()
+        self.velocity = Vector2(math.sin(angle1), math.cos(angle1)) * object_speed
+        object.velocity = Vector2(math.sin(angle2), math.cos(angle2)) * self_speed
+        angle = 0.5 * math.pi + tangent
+        while relative_vector.length() <= self.radius + object.radius:
+            self.position.x += math.sin(angle)
+            self.position.y -= math.cos(angle)
+            object.position.x -= math.sin(angle)
+            object.position.y += math.cos(angle)
+            relative_vector = self.position - object.position
+
     def update(self):
-        for obj in self.object_list:
+        index = self.object_list.index(self)
+        for object in self.object_list[index+1:]:  
+            if issubclass(type(object), KineticBall) and object != self:
+                relative_vector = self.position - object.position
+                if relative_vector.length() <= self.radius + object.radius:
+                    # Objects are in collision range, so collide
+                    self.collide(object, relative_vector)
 
-            if not issubclass(type(obj), KineticBall):
-                continue
+        super().update()
 
-            if obj == self:
-                continue
+class KineticBouncing(BouncingBall, KineticBall):
+    pass
 
-            distance = obj.position.distance_to(self.position)
-
-            sumr = self.radius + obj.radius
-
-            if distance < sumr:
-                print("Collision!")
-                
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
-    
-
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+class AllTheThings(BouncingBall, KineticBall, RainbowBall):
+    pass
