@@ -28,11 +28,32 @@ class Ball:
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
 
-# class BouncingBall(???):
-#     """
-#     ball effected by gravity
-#     """
-#     # TODO: 
+class BouncingBall(Ball):
+    """
+    ball effected by gravity
+    """
+
+    def __init__(self, bounds, position, velocity, color, radius):
+        super().__init__(bounds, position, velocity, color, radius)
+        self.max_velocity_y = math.fabs(velocity.y) + 10
+        self.friction = 1
+
+    def update(self):
+        # if falling increase v until it hits max else decrease v until it hits 0
+        if self.velocity.y >= 0:  # 
+            if self.velocity.y < self.max_velocity_y:
+                self.velocity.y += 0.25
+        else:
+            if self.velocity.y != 0:
+                self.velocity.y += 0.25
+                # self.velocity.y += (0.25 * self.friction)
+        
+        # if ball hits the ground increase friction
+        # TODO how to make it come to a complete stop?
+        # if self.position.y > self.bounds[1] - self.radius:
+        #     self.friction += 0.25
+
+        super().update()
 
 
 class RainbowBall(Ball):
