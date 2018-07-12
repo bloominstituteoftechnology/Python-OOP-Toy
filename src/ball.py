@@ -16,7 +16,7 @@ class Ball:
         self.radius = radius
 
     def update(self):
-        # bounce at edges.  TODO: Fix sticky edges
+        # bounce at edges.
         # screen width
         next_pos = self.position + self.velocity
         x_left_edge_next = next_pos.x < 0 + self.radius
@@ -71,15 +71,15 @@ class RainbowBall(Ball):
     """
 
     def update(self):
-        self.color[0] = (self.color[0] + 3) % 256
-        self.color[1] = (self.color[1] + 5) % 256
-        self.color[2] = (self.color[2] + 7) % 256
+        self.color[0] = (self.color[0] + 1) % 256
+        self.color[1] = (self.color[1] + 3) % 256
+        self.color[2] = (self.color[2] + 5) % 256
         super().update()
 
 
 class BouncingRainbow(FrictionBall, BouncingBall, RainbowBall):
     """
-    Ball that changes color and is affected by gravity
+    Ball that changes color and is affected by gravity and friction
     """
 
     def update(self):
@@ -103,21 +103,21 @@ class KineticBall(Ball):
     def update(self):
         print(self.other_shapes)
         for shape in self.other_shapes:
-            next_pos_self = self.position + self.velocity
-            next_pos_shape = shape.position + shape.velocity
-            distance = (next_pos_shape - next_pos_self).length()
-            if (not shape == self) and (distance <= self.radius +
-                                        shape.radius):
-                self_vec = Vector2(self.velocity.x, self.velocity.y)
-                shape_vec = Vector2(shape.velocity.x, shape.velocity.y)
-                self.velocity -= (
-                    (self_vec - shape_vec).dot(next_pos_self - next_pos_shape)
-                    / (next_pos_self - next_pos_shape).length_squared()) * \
-                    (next_pos_self - next_pos_shape)
-                shape.velocity -= (
-                    (shape_vec - self_vec).dot(next_pos_shape - next_pos_self)
-                    / (next_pos_shape - next_pos_self).length_squared()) * \
-                    (next_pos_shape - next_pos_self)
+            if shape == self:
+                continue
+            initial_dist = self.position - shape.position
+            v_diff = self.velocity - shape.velocity
+
+            product = initial_dist * v_diff
+            s_diff = v_diff*v_diff
+            if s_diff == 0:
+                continue
+            s_dist = initial_dist*initial_dist
+            radii = self.radius + shape.radius
+            t = (product * -1 - (product**2 - (s_diff) *
+                                 (s_dist - radii**2))**.5)/(s_diff)
+            if not isinstance(t, complex) and (t >= 0 or t < 1):
+                print("collision!")
 
         super().update()
 
