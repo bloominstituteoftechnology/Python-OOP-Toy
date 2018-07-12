@@ -25,23 +25,55 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
+class BouncingBall(Ball):
 #     """
-#     ball effected by gravity
+#     ball affected by gravity
 #     """
-#     # TODO: 
+    def __init__(self, bounds, position, velocity, color, radius):
+        super().__init__(bounds, position, velocity, color, radius)
 
-# class RainbowBall(???):
+    def update(self):
+        if self.velocity.y > 0:
+            if self.velocity.y < 40:
+                self.velocity.y += (0.07 * self.velocity.y)
+            else:
+                self.velocity.y = 40
+        elif self.velocity.y < -1:
+            self.velocity.y -= (0.07 * self.velocity.y)
+        else:
+            self.velocity.y = 1
+        super().update
+
+        super().update()
+
 #     """
 #     Ball that changes colors
 #     """
-#     # TODO:
+class RainbowBall(Ball):
 
-# class BouncingRainbow(???):
+    def __init__(self, bounds, position, velocity, color, radius):
+        super().__init__(bounds, position, velocity, color, radius)
+
+    def update(self):
+        r = (self.color[0] + 1) % 256
+        g = (self.color[0] - 1) % 256
+        b = (self.color[0] + 2) % 256
+        self.color = [r, g, b]
+        super().update()
+
+class BouncingRainbow(RainbowBall, BouncingBall):
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
-#     # TODO:
+    def update(self):
+        super().update()
+    # def __init__(self, bounds, position, velocity, color, radius):
+    #         BouncingBall.__init__(self, bounds, position, velocity, color, radius)
+    #         RainbowBall.__init__(self, bounds, position, velocity, color, radius)
+    
+    # def update(self):
+    #     BouncingBall.update(self)
+    #     RainbowBall.update(self)
 
 # class KineticBall(???):
 #     """
