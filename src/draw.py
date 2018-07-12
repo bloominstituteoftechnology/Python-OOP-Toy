@@ -10,13 +10,20 @@ SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(object_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    object_list.append(ball)
+    for i in range(5):
+        ball = BouncingRainbow(SCREEN_SIZE, Vector2(random.randint(100, 400),
+                                                 random.randint(100, 400)),
+                                                Vector2(random.random(), random.random()),
+                                                [255, 0, 0], 10)
+        object_list.append(ball)
 
     # TODO: Create other ball types for testing
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
+    object_list.extend((block, ))
+
+    block = RainbowBlock(SCREEN_SIZE, Vector2(150,100), 60, 30, [255,255,0])
     object_list.extend((block, ))
   
 def main():
@@ -42,8 +49,8 @@ def main():
                     # TODO: Add behavior when button pressed
                     pass
 
-        for ball in object_list:
-            ball.update()
+        for obj in object_list:
+            obj.update()
  
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
