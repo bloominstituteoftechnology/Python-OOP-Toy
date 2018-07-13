@@ -13,6 +13,18 @@ def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     object_list.append(ball)
 
+    ball2 = Ball(SCREEN_SIZE, Vector2(150, 150), Vector2(3, 3), [0, 255, 255], 10)
+    object_list.append(ball2)
+
+    bouncingBall = BouncingBall(SCREEN_SIZE, Vector2(150, 150), Vector2(3, 3), [25, 20, 60], 20, .1)
+    object_list.append(bouncingBall)
+    
+    rainbowBall = RainbowBall(SCREEN_SIZE, Vector2(250, 250), Vector2(1, 1), [5, 5, 5], 15)
+    object_list.append(rainbowBall)
+
+    bouncingRainbow = BouncingRainbow(SCREEN_SIZE, Vector2(100, 280), Vector2(4, 3), [255, 20, 60], 20, .1)
+    object_list.append(bouncingRainbow)
+
     # TODO: Create other ball types for testing
     
 def debug_create_blocks(object_list):
