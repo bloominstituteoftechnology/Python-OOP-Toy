@@ -14,23 +14,28 @@ def debug_create_balls(object_list):
 
     object_list.append(ball)
 
-    ball1 = RainbowBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [0, 255, 0], 10)
-    object_list.append(ball1)
+    ball = RainbowBall(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [0, 255, 0], 10)
+    object_list.append(ball)
     
-    ball2 = BouncingBall(SCREEN_SIZE, Vector2(350, 350), Vector2(2, 3), [0, 255, 0], 10)
-    object_list.append(ball2)
+    ball = BouncingBall(SCREEN_SIZE, Vector2(350, 350), Vector2(2, 3), [0, 255, 0], 10, 10)
+    object_list.append(ball)
 
-    ball3 = BouncingRainbow(SCREEN_SIZE, Vector2(30, 30), Vector2(3, 3), [0, 255, 0], 10)
-    object_list.append(ball3)
+    ball = BouncingRainbow(SCREEN_SIZE, Vector2(30, 30), Vector2(3, 3), [0, 255, 0], 10, 10)
+    object_list.append(ball)
 
+    #ball = KineticBall(object_list, SCREEN_SIZE, Vector2(30, 30), Vector2(5, 5), [0, 255, 0], 30)
+    #object_list.append(ball)
+    
+    ball = KineticBouncing(object_list, SCREEN_SIZE, Vector2(350, 350), Vector2(3, 2), [0, 255, 0], 20, 10)
+    object_list.append(ball)
     # TODO: Create other ball types for testing
     
-def debug_create_blocks(object_list):
-    block = Block(SCREEN_SIZE, Vector2(100, 100), 20, 20, [0, 255, 0])
-    object_list.extend((block, ))
+#def debug_create_blocks(object_list):
+    #block = Block(SCREEN_SIZE, Vector2(100, 100), 20, 20, [0, 255, 0])
+    #object_list.extend((block, ))
 
-    block = RainbowBlock(SCREEN_SIZE, Vector2(150,100), 60, 30, [255,255,0])
-    object_list.extend((block, ))
+    #block = RainbowBlock(SCREEN_SIZE, Vector2(150,100), 60, 30, [255,255,0])
+    #object_list.extend((block, ))
 
 def main():
     pygame.init()
@@ -42,7 +47,7 @@ def main():
     object_list = [] # list of objects of all types in the toy
 
     debug_create_balls(object_list)
-    debug_create_blocks(object_list)
+    #debug_create_blocks(object_list)
  
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
@@ -51,10 +56,10 @@ def main():
         # Logic Loop
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:  #TODO:  Get working
+                print("keydown fired")
                 if event.key == pygame.K_SPACE:
-                    Ball.velocity = [0, 0]
+                    pygame.quit()
                     # TODO: Add behavior when button pressed
-                    pass
 
         for obj in object_list:
             obj.update()

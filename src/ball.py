@@ -30,6 +30,10 @@ class BouncingBall(Ball):
 #     ball effected by gravityadsfasdf
 #     """
     
+    def __init__(self, weight, bounds, position, velocity, color, radius):
+        super().__init__(bounds, position, velocity, color, radius)
+        self.weight = weight
+    
     def update(self):
         if self.position.x > 0 + self.radius or self.position.x > self.bounds[0] - self.radius:
             self.velocity.y += 0.1
@@ -58,13 +62,35 @@ class BouncingRainbow(RainbowBall, BouncingBall):
 #     """
 #     # TODO:
 
-# class KineticBall(???):
+class KineticBall(Ball):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """
-#     # TODO:
+    # #     # TODO:
+    
+    def __init__(self, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        super().__init__(bounds, position, velocity, color, radius)
+    
+    def update(self):
+        for object in self.object_list:
+            if object == self:
+                continue
 
-# class KineticBouncing(???):
+            distance = object.position.distance_to(self.position)
+            sumr = self.radius + object.radius
+
+            if distance < sumr:
+                print('collision!')
+        super().update()
+
+class KineticBouncing(KineticBall, BouncingBall):
+    
+    def __init__(self, object_list, bounds, position, velocity, color, radius, weight):
+        super().__init__(object_list, bounds, position, velocity, color, radius, weight)
+        
+        BouncingBall.update(self)    
+        KineticBall.update(self)
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     And is affected by gravity
