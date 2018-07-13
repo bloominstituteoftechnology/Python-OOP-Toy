@@ -109,7 +109,6 @@ class KineticBall(Ball):
 
         super().update()
 
-
 class KineticBouncing(BouncingBall, KineticBall):
     """
     A ball that collides with other collidable balls using simple elastic circle collision
