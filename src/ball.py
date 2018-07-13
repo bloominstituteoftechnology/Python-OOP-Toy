@@ -142,7 +142,8 @@ class KineticBouncing(BouncingBall, KineticBall):
     pass
     
 
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+class AllTheThings(BouncingRainbow, KineticBall):
+    """
+    A ball that does everything!
+    """
+    pass
