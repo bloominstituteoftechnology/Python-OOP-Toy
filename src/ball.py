@@ -8,9 +8,9 @@ class Ball:
     """
 
     def __init__(self, bounds, position, velocity, color, radius):
+        self.bounds = bounds
         self.position = position
         self.velocity = velocity
-        self.bounds = bounds
         self.color = color
         self.radius = radius
 
@@ -44,9 +44,9 @@ class RainbowBall(Ball):
     """
 
     def update(self):
-        r = (self.color[0] + 6) % 256
-        g = (self.color[1] + 4) % 256
-        b = (self.color[2] - 2) % 256
+        r = (self.color[0] + 1) % 256
+        g = (self.color[1] + 1) % 256
+        b = (self.color[2] - 1) % 256
         self.color = [r, g, b]
 
         # Call the superclass (Block) update()
@@ -68,22 +68,25 @@ class KineticBall(Ball):
     
     def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
         self.object_list = object_list
-        super().__init__(bounds, position, velocity, color, radius)
         self.mass = mass
+        super().__init__(bounds, position, velocity, color, radius)
 
     def collide(self, object, relative_vector):
+        print("Worlds collide!")
 
         tangent = math.atan2(relative_vector.y, relative_vector.x)
 
+        # Angle of travel
         angle1 = 0.5 * math.pi - math.atan2(self.velocity.y, self.velocity.x)
         angle2 = 0.5 * math.pi - math.atan2(object.velocity.y, object.velocity.x)
-
+        
         angle1 = 2 * tangent - angle1
         angle2 = 2 * tangent - angle2
 
         object_speed = object.velocity.length()
         self_speed = self.velocity.length()
 
+        # Update with new angle...
         self.velocity = Vector2(math.sin(angle1), math.cos(angle1)) * object_speed
         object.velocity = Vector2(math.sin(angle2), math.cos(angle2)) * self_speed
 

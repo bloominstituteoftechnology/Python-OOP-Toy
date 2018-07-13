@@ -24,6 +24,7 @@ def debug_create_objects(object_list):
 
     # TODO: Create other ball types for testing
 
+    # Kinetic Balls
     # Red Balls
     for i in range(0, 2):
         kinetic = KineticBall(1, object_list, SCREEN_SIZE,
@@ -59,15 +60,15 @@ def debug_create_blocks(object_list):
 def main():
     pygame.init()
     screen = pygame.display.set_mode(SCREEN_SIZE)
- 
+
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
- 
+
     object_list = [] # list of objects of all types in the toy
 
     debug_create_objects(object_list)
     debug_create_blocks(object_list)
- 
+
     while True: # TODO:  Create more elegant condition for loop
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
@@ -81,17 +82,17 @@ def main():
 
         for ball in object_list:
             ball.update()
- 
+
         # Draw Loop
         screen.fill(BACKGROUND_COLOR)
         for ball in object_list:
             ball.draw(screen, pygame)
- 
+
         clock.tick(60)
         pygame.display.flip()
- 
+
     # Close everything down
     pygame.quit()
- 
+
 if __name__ == "__main__":
     main()
