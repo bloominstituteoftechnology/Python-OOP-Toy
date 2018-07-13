@@ -30,7 +30,7 @@ class BouncingBall(Ball):
     ball affected by gravity
     """
     # TODO:
-    GRAVITY = 2
+    GRAVITY = .03
 
     def update(self):
         self.velocity.y += self.GRAVITY
@@ -48,23 +48,44 @@ class RainbowBall(Ball):
         self.color = [r, g, b]
         super().update()
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    # TODO:
+    pass
+    
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    # TODO:
+    def __init__(self, bounds, position, velocity, color, radius):
+        self.object_list = []
+        super().__init__(bounds, position, velocity, color, radius)
+    
+    def update(self):
+        super().update()
+        for obj in self.object_list:
+            if not issubclass(type(obj), KineticBall):
+                continue
+            if obj == self:
+                continue
+            
+            distance = obj.position.distance_to(self.position)
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
+            sumr = self.radius + obj.radius
+            if distance < sumr:
+                obj.velocity.reflect_ip(obj.velocity)
+                self.velocity.reflect_ip(self.velocity)
+                print("There has been a collision!")
 
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
+class KineticBouncing(KineticBall, BouncingBall):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    And is affected by gravity
+    """
+    pass
     
 
 # class AllTheThings(???):
