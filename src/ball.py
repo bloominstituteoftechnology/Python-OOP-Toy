@@ -25,38 +25,65 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
-#     """
-#     ball effected by gravity
-#     """
-#     # TODO: 
+class BouncingBall(Ball):
+    """
+    ball effected by gravity
+    """
+    def update(self):
+        self.velocity.y = .1
+        super().update()
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
+    def update(self):
+        r = (self.color[0]+3) % 256
+        g = (self.color[1]+2) % 256
+        b = (self.color[2]+1) % 256
+        self.color = [r,g,b]
+        super().update()
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
-#     # TODO:
+class BouncingRainbow(BouncingBall, RainbowBall):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    pass
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
-
-# class KineticBouncing(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     And is affected by gravity
-#     """
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    def __init__(self, mass, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        self.mass = mass
+        super().__init__(bounds, position, velocity, color, radius)
     
+    def update(self):
+        for obj in self.object_list:
 
-# class AllTheThings(???):
-#     """
-#     A ball that does everything!
-#     """
+            # if not issubclass(type(obj), KineticBall):
+            #     continue
+
+            if obj == self:
+                continue
+
+            distance = obj.position.distance_to(self.position)
+
+            sumr = self.radius + obj.radius
+
+            if distance < sumr:
+                print("Collision!")
+            
+class KineticBouncing(KineticBall, BouncingBall):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    And is affected by gravity
+    """
+    pass
+    
+class AllTheThings(BouncingBall, KineticBall, RainbowBall):
+    """
+    A ball that does everything!
+    """
+    pass
