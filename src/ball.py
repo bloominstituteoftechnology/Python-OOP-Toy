@@ -85,8 +85,8 @@ class BouncingBall(Ball):
             if self.velocity.x < 0:
                 self.velocity.x += self.frictionX
                         
-        print('position',self.position.x)
-        print('velocity',self.velocity.x)
+        # print('position',self.position.x)
+        # print('velocity',self.velocity.x)
 
         super().update()
 
@@ -97,9 +97,6 @@ class RainbowBall(Ball):
     Ball that changes colors
     """
     # TODO:
-    # def __init__(self, bounds, position, velocity, color, radius):
-    #     super().__init__(bounds, position, velocity, color, radius)
-
     def update(self):
         r = (self.color[0] + random.randrange(0,10)) % 256
         g = (self.color[1] + random.randrange(0,10)) % 256
@@ -116,11 +113,18 @@ class BouncingRainbow(BouncingBall, RainbowBall):
     #     super().__init__(bounds, position, velocity, color, radius, acceleration)
     pass
 
-# class KineticBall(???):
-#     """
-#     A ball that collides with other collidable balls using simple elastic circle collision
-#     """
-#     # TODO:
+class KineticBall(Ball):
+    """
+    A ball that collides with other collidable balls using simple elastic circle collision
+    """
+    # TODO:
+    def collide(self, distanceToObject, sumOfRadius):
+        # self.velocity *= -1
+        print('Collision!')
+        
+        self.update()
+
+
 
 # class KineticBouncing(???):
 #     """
