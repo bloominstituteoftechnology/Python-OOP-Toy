@@ -10,22 +10,26 @@ SCREEN_SIZE = [1280, 960]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(ball_list):
-    ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
+    a = random.randint(0, 1280)
+    b = random.randint(0, 960)
+    c = random.randint(0, 1280)
+    d = random.randint(0, 960)
+    ball = Ball(SCREEN_SIZE, Vector2(a, b), Vector2(3, 3), [255, 0, 0], 10)
     ball_list.append(ball)
 
 # first Vector 2 specifies coordinates on page (I think). Second vector 2 specifies speed. 
 # [0,0,0] specifies RGB code and then the last entry is radius
 
-    ball = BouncingBall(SCREEN_SIZE, Vector2(10, 10), Vector2(10, 10), [0,255, 0], 10, .5)
+    ball = BouncingBall(SCREEN_SIZE, Vector2(c, d), Vector2(10, 10), [0,255, 0], 10, .5)
     ball_list.append(ball)
 
-    ball = RainbowBall(SCREEN_SIZE, Vector2(15, 20), Vector2(1, 1), [255, 0, 125], 15)
+    ball = RainbowBall(SCREEN_SIZE, Vector2(a, d), Vector2(1, 1), [255, 0, 125], 15)
     ball_list.append(ball)
 
-    ball = BouncingRainbow(SCREEN_SIZE, Vector2(25, 40), Vector2(3, 3), [255, 125, 125], 25, .1)
+    ball = BouncingRainbow(SCREEN_SIZE, Vector2(c, b), Vector2(3, 3), [255, 125, 125], 25, .1)
     ball_list.append(ball)
     
-    ball = KineticBall(ball_list, SCREEN_SIZE, Vector2(200, 200), Vector2(10, 10), [0, 125, 125], 50)
+    ball = KineticBall(ball_list, SCREEN_SIZE, Vector2(a, b), Vector2(10, 10), [0, 125, 125], 50)
     ball_list.append(ball)
 
     # ball = KineticBouncing(object_list, SCREEN_SIZE, Vector2(225, 225), Vector2(5, 3), [255, 0, 125], 50)
