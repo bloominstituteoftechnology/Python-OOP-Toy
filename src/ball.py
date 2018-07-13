@@ -60,8 +60,8 @@ class KineticBall(Ball):
     A ball that collides with other collidable balls using simple elastic circle collision
     """
     # TODO:
-    def __init__(self, bounds, position, velocity, color, radius):
-        self.object_list = []
+    def __init__(self, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
         super().__init__(bounds, position, velocity, color, radius)
     
     def update(self):
