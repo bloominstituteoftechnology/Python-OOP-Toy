@@ -9,19 +9,23 @@ class Block:
     Base class for square or rectangular object
     """
     
-    def __init__(self, bounds, position, width, height, color):
+    def __init__(self, bounds, position, velocity, width, height, color):
         # Create a rectangle centered around the x and y
         self.bounds = bounds
         self.position = position
-        self.rectangle = self.set_rectangle(position, width, height)
+        self.velocity = velocity
+        self.width = width
+        self.height = height
+        self.rectangle = self.set_rectangle(position, velocity, width, height)
         self.color = color
 
     def update(self):
-        # TODO:  Add base functionality #this doesn't do anything
-        pass
+        self.set_rectangle(self.position, self.velocity, self.width, self.height)
 
-    def set_rectangle(self, position, width, height):
+    def set_rectangle(self, position, velocity, width, height):
         # Creates a rectangle of the given width and height centered at the x/y coordinates
+        x = random.randint(10, 100)
+        y = random.randint(10, 100)
         return pygame.Rect(position.x - (width/2),
                            position.y - (height/2),
                                     width,
@@ -40,3 +44,20 @@ class RainbowBlock(Block):
 
         super().update()
 
+class KineticBlock(Block):
+    def __init__(self, block_list, bounds, position, velocity, width, height, color):
+        self.block_list = block_list
+        super().__init__(bounds, position, velocity, width, height, color)
+    
+    def update(self):
+        for block in self.block_list:
+            if block == self:
+                continue
+
+            else:
+                distance = block.position.distance_to(self.position)
+                sumwidth = self.width + block.width
+
+                if distance < sumwidth:
+                    print("Block collision!")
+        super().update()

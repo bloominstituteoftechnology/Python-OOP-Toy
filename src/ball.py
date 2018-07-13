@@ -89,21 +89,22 @@ class KineticBall(Ball):
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """
 #     # TODO: update
-    def __init__(self, object_list, bounds, position, velocity, color, radius):
-        self.object_list = object_list
+    def __init__(self, ball_list, bounds, position, velocity, color, radius):
+        self.ball_list = ball_list
         super().__init__(bounds, position, velocity, color, radius)
     
     def update(self):
-        for obj in self.object_list:
-            if obj == self:
+        for ball in self.ball_list:
+            if ball == self:
                 continue
 
             else:
-                distance = obj.position.distance_to(self.position)
-                sumradius = self.radius + obj.radius
+                distance = ball.position.distance_to(self.position)
+                sumradius = self.radius + ball.radius
 
                 if distance < sumradius:
                     print("Collision!")
+
         
         super().update()
 
