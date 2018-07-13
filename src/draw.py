@@ -9,9 +9,13 @@ SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 def debug_create_balls(object_list):
-    ball = BouncingRainbow(SCREEN_SIZE, Vector2(
+    ball_1 = KineticBall(SCREEN_SIZE, Vector2(
         50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    object_list.append(ball)
+    object_list.append(ball_1)
+
+    ball_2 = KineticBall(SCREEN_SIZE, Vector2(
+        100, 50), Vector2(-3, 3), [25, 50, 50], 30)
+    object_list.append(ball_2)
     
 def debug_create_blocks(object_list):
     block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
