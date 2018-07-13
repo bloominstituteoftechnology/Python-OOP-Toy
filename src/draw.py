@@ -14,16 +14,13 @@ from ball import (
     FrictionBall,
     Planet,
 )
-from block import Block
 
 SCREEN_SIZE = [640, 480]
 BACKGROUND_COLOR = [255, 255, 255]
 
 
 def debug_create_balls(object_list):
-    ball = Planet(
-        SCREEN_SIZE, Vector2(90, 100), Vector2(5, 0), [255, 0, 0], 10, object_list
-    )
+    ball = Ball(SCREEN_SIZE, Vector2(90, 100), Vector2(5, 0), [255, 0, 0], 10)
     object_list.append(ball)
     ball = RainbowBall(SCREEN_SIZE, Vector2(25, 25), Vector2(3, 2), [0, 255, 0], 10)
     object_list.append(ball)
