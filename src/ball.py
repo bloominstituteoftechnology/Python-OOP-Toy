@@ -2,8 +2,8 @@ import math
 from pygame.math import Vector2
 from threading import Timer
 
-
 class Ball:
+    
     """
     base class for bouncing objects
     """
@@ -34,6 +34,7 @@ class Ball:
 
 
 class BouncingBall(Ball):
+    
     """
      ball affected by gravity 
     """
@@ -44,6 +45,7 @@ class BouncingBall(Ball):
 
 
 class RainbowBall(Ball):
+    
     """
     Ball that changes colors
     """
@@ -64,8 +66,8 @@ class RainbowBall(Ball):
         else:
             self.position = Vector2(self.position.x, 470)
 
-
 class BouncingRainbow(Ball):
+    
     """
     Ball that changes color and is affected by gravity
     """
@@ -82,11 +84,10 @@ class BouncingRainbow(Ball):
 
         super().update()
 
-
 #STRETCH GOALS:
 
-
 class KineticBall(Ball):
+    
     """
     A ball that collides with other collidable balls using simple elastic circle collision
     """
@@ -104,7 +105,7 @@ class KineticBall(Ball):
             if obj == self:
                 continue
 
-            if not issubclass(type(obj), KineticBall):
+            if not issubclass(type(obj), KineticBall) or not issubclass(type(obj), KineticBall):
                 continue
 
             distance = obj.position.distance_to(self.position)
@@ -113,20 +114,40 @@ class KineticBall(Ball):
 
             if distance < sumr:
                 self.velocity.x *= -1
-                self.velocity.y *= -1 
+                self.velocity.y *= -1
                 self.position += self.velocity
 
             super().update()
 
-class KineticBouncing(Ball):
+
+class KineticBouncing(KineticBall):
 
     """
     A ball that collides with other collidable balls using simple elastic circle collision
     And is affected by gravity
     """
 
+    def __init__(self, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        super().__init__(object_list, bounds, position, velocity, color,
+                         radius)
 
-class AllTheThings(???):
+    def update(self):
+        super().update()
+
+
+class AllTheThings(KineticBall):
+    
     """
     A ball that does everything!
     """
+
+    def update(self):
+
+        r = (self.color[0] + 3) % 256
+        g = (self.color[1] + 2) % 256
+        b = (self.color[2] + 1) % 256
+
+        self.color = [r, g, b]
+        
+        KineticBall.update(self)

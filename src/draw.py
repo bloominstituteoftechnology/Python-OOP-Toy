@@ -28,7 +28,11 @@ def debug_create_balls(object_list):
     ball = KineticBall(object_list, SCREEN_SIZE, Vector2(33, 33), Vector2(3, 3), [122, 35, 45], 10)
     object_list.append(ball)
 
-    ball = KineticBall(object_list, SCREEN_SIZE, Vector2(55, 55), Vector2(5, 5), [255, 0, 255], 10)
+    ball = KineticBouncing(object_list, SCREEN_SIZE, Vector2(55, 55), Vector2(5, 5), [255, 0, 255], 10)
+    object_list.append(ball)
+
+    ball = AllTheThings(object_list, SCREEN_SIZE, Vector2(66, 66), Vector2(3, 3), [66, 66, 66], 10)
+    print(type(ball))
     object_list.append(ball)
 
 def debug_create_blocks(object_list):
@@ -74,7 +78,6 @@ def main():
 
     # Close everything down
     pygame.quit()
-
 
 if __name__ == "__main__":
     main()
