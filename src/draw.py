@@ -7,7 +7,7 @@ from ball import *
 from block import *
 
 SCREEN_SIZE = [640, 480]
-BACKGROUND_COLOR = [255, 255, 255]
+BACKGROUND_COLOR = [105, 105, 105]
 
 def debug_create_balls(object_list):
     ball = Ball(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
@@ -15,9 +15,9 @@ def debug_create_balls(object_list):
     ball3 = RainbowBall(SCREEN_SIZE, Vector2(30, 80), Vector2(4, 4), [255, 0, 0], 10)
     ball4 = BouncingRainbow(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
     ball5 = KineticBall(object_list, SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [0, 0, 128], 10)
-    # ball6 = KineticBouncing(SCREEN_SIZE, Vector2(20, 350), Vector2(1, 5), [105, 105, 105], 10)
-    # ball7 = AllTheThings(SCREEN_SIZE, Vector2(50, 50), Vector2(3, 3), [255, 0, 0], 10)
-    object_list.extend([ball, ball2, ball3, ball4, ball5])
+    ball6 = KineticBouncing(object_list, SCREEN_SIZE, Vector2(20, 350), Vector2(1, 5), [220, 220, 220], 10)
+    ball7 = AllTheThings(object_list, SCREEN_SIZE, Vector2(10, 150), Vector2(3, 1), [210, 105, 30], 15)
+    object_list.extend([ball, ball2, ball3, ball4, ball5, ball6, ball7])
     
 def debug_create_blocks(object_list):
     # block = Block(SCREEN_SIZE, Vector2(100,100), 20, 20, [0,255,0])
