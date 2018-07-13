@@ -14,7 +14,7 @@ class Ball:
         self.bounds = bounds
         self.color = color
         self.radius = radius
-        self.mass = (4/3) * math.pi * radius**3
+        self.mass = (4 / 3) * math.pi * radius ** 3
 
     def update(self):
         # bounce at edges.
@@ -29,8 +29,7 @@ class Ball:
             self.position.x = self.radius * 2 - next_pos.x
             self.velocity.x *= -1
         elif x_right_edge_next:
-            self.position.x = (self.bounds[0] -
-                               self.radius) * 2 - next_pos.x
+            self.position.x = (self.bounds[0] - self.radius) * 2 - next_pos.x
             self.velocity.x *= -1
         else:
             self.position.x += self.velocity.x
@@ -38,8 +37,7 @@ class Ball:
             self.position.y = self.radius * 2 - next_pos.y
             self.velocity.y *= -1
         elif y_bottom_edge_next:
-            self.position.y = (self.bounds[1] -
-                               self.radius) * 2 - next_pos.y
+            self.position.y = (self.bounds[1] - self.radius) * 2 - next_pos.y
             self.velocity.y *= -1
         else:
             self.position.y += self.velocity.y
@@ -49,8 +47,12 @@ class Ball:
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
-        pygame.draw.circle(screen, self.color, [int(
-            self.position.x), int(self.position.y)], self.radius)
+        pygame.draw.circle(
+            screen,
+            self.color,
+            [int(self.position.x), int(self.position.y)],
+            self.radius,
+        )
 
 
 class FrictionBall(Ball):
@@ -66,12 +68,15 @@ class BouncingBall(Ball):
 
     def update(self):
         next_pos = self.position + self.velocity
-        if (self.position.y > self.bounds[1] - self.radius * 1.01 and
-                abs(self.velocity.y) < self.radius / 32):
+        if (
+            self.position.y > self.bounds[1] - self.radius * 1.01
+            and abs(self.velocity.y) < self.radius / 32
+        ):
             self.position.y = self.bounds[1] - self.radius
             self.velocity.y = 0
-        elif not (next_pos.y >= self.bounds[1] - self.radius and
-                  self.velocity.y < self.radius):
+        elif not (
+            next_pos.y >= self.bounds[1] - self.radius and self.velocity.y < self.radius
+        ):
             self.velocity.y += .98
         super().update()
 
@@ -105,10 +110,10 @@ class KineticBall(Ball):
     circle collision
     """
 
-    def __init__(self, bounds, position, velocity, color, radius,
-                 other_shapes):
-        self.other_shapes = [shape for shape in other_shapes if
-                             hasattr(shape, "radius")]
+    def __init__(self, bounds, position, velocity, color, radius, other_shapes):
+        self.other_shapes = [
+            shape for shape in other_shapes if hasattr(shape, "radius")
+        ]
         super().__init__(bounds, position, velocity, color, radius)
 
     def update(self):
@@ -119,13 +124,14 @@ class KineticBall(Ball):
             v_diff = self.velocity - shape.velocity
 
             product = initial_dist * v_diff
-            s_diff = v_diff*v_diff
+            s_diff = v_diff * v_diff
             if s_diff == 0:
                 continue
-            s_dist = initial_dist*initial_dist
+            s_dist = initial_dist * initial_dist
             radii = self.radius + shape.radius
-            t = (product * -1 - (product**2 - (s_diff) *
-                                 (s_dist - radii**2))**.5)/(s_diff)
+            t = (
+                product * -1 - (product ** 2 - (s_diff) * (s_dist - radii ** 2)) ** .5
+            ) / (s_diff)
             if not isinstance(t, complex) and (t >= 0 and t < 1):
                 self.position = self.position + self.velocity * t
                 shape.position = shape.position + shape.velocity * t
@@ -133,15 +139,23 @@ class KineticBall(Ball):
                 shape_vec = Vector2(shape.velocity.x, shape.velocity.y)
                 masses = self.mass + shape.mass
 
-                self.velocity -= (2 * shape.mass / (masses)) * (
-                    (self_vec - shape_vec).dot(self.position - shape.position)
-                    / (self.position - shape.position).length_squared()) * \
-                    (self.position - shape.position)
+                self.velocity -= (
+                    (2 * shape.mass / (masses))
+                    * (
+                        (self_vec - shape_vec).dot(self.position - shape.position)
+                        / (self.position - shape.position).length_squared()
+                    )
+                    * (self.position - shape.position)
+                )
 
-                shape.velocity -= (2 * self.mass / (masses)) * (
-                    (shape_vec - self_vec).dot(shape.position - self.position)
-                    / (shape.position - self.position).length_squared()) * \
-                    (shape.position - self.position)
+                shape.velocity -= (
+                    (2 * self.mass / (masses))
+                    * (
+                        (shape_vec - self_vec).dot(shape.position - self.position)
+                        / (shape.position - self.position).length_squared()
+                    )
+                    * (shape.position - self.position)
+                )
 
                 self.position = self.position + self.velocity * (1 - t)
                 shape.position = shape.position + shape.velocity * (1 - t)
@@ -162,10 +176,8 @@ class KineticBouncing(BouncingBall, KineticBall):
 
 
 class Planet(KineticBall):
-    def __init__(self, bounds, position, velocity, color, radius,
-                 other_shapes):
-        super().__init__(bounds, position, velocity, color, radius,
-                         other_shapes)
+    def __init__(self, bounds, position, velocity, color, radius, other_shapes):
+        super().__init__(bounds, position, velocity, color, radius, other_shapes)
 
     def update(self):
 
