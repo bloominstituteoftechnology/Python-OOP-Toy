@@ -36,7 +36,6 @@ class BouncingBall(Ball):
     def __init__(self, bounds, position, velocity, color, radius):
         super().__init__(bounds, position, velocity, color, radius)
         self.max_velocity_y = math.fabs(velocity.y) + 10
-        self.friction = 1
 
     def update(self):
         # if falling increase v until it hits max else decrease v until it hits 0
@@ -46,13 +45,7 @@ class BouncingBall(Ball):
         else:
             if self.velocity.y != 0:
                 self.velocity.y += 0.25
-                # self.velocity.y += (0.25 * self.friction)
-        
-        # if ball hits the ground increase friction
-        # TODO how to make it come to a complete stop?
-        # if self.position.y > self.bounds[1] - self.radius:
-        #     self.friction += 0.25
-
+                
         super().update()
 
 
