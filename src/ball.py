@@ -1,6 +1,11 @@
 import math
-
+#import pygame
+#from pygame.locals import *
 from pygame.math import Vector2
+
+#pygame.init() 
+
+# I got this from the pygame docs - https://www.pygame.org/docs/tut/ImportInit.html
 
 class Ball:
     """
@@ -25,30 +30,62 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
+class BouncingBall(Ball):
 #     """
-#     ball effected by gravity
+#     ball affected by gravity
 #     """
 #     # TODO: 
+	GRAVITY = .1
+	def update(self):
+		self.velocity.y += self.GRAVITY
+		super().update()
 
-# class RainbowBall(???):
+
+class RainbowBall(Ball):
 #     """
 #     Ball that changes colors
 #     """
 #     # TODO:
 
-# class BouncingRainbow(???):
+	def update(self):
+		r = (self.color[0] + 10) % 256
+		g = (self.color[1] - 5) % 256
+		b = (self.color[2] + 2) % 256
+		self.color = [r, g, b]
+		super().update()
+
+class BouncingRainbow(RainbowBall, BouncingBall):
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
 #     # TODO:
 
-# class KineticBall(???):
+	def update(self):
+		super().update()
+
+#class KineticBall(Ball):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """
 #     # TODO:
+#	Model Solution
+#	def __init__(self, object_list, bounds, position, velocity, color, radius):
+#		self.object.list = object_list
+#		super().__init__(bounds, position, velocity, color, radius)
 
+#	def update(self):
+#		for obj in self.object_list:
+#			if not issubclass(type(obj), KineticBall):
+#				continue
+#			if obj == self:
+#				continue
+#			distance = obj.position.distance_to(self.position)
+
+#			sumr = self.radius + obj.radius
+
+#			if distance < sumr:
+#				print("Collision!")
+		
 # class KineticBouncing(???):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
