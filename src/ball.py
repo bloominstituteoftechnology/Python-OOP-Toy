@@ -7,7 +7,6 @@ class Ball:
     """
     base class for bouncing objects
     """
-
     def __init__(self, bounds, position, velocity, color, radius):
         self.position = position
         self.velocity = velocity
@@ -32,7 +31,6 @@ class BouncingBall(Ball):
     """
     ball effected by gravity
     """
-
     def __init__(self, bounds, position, velocity, color, radius):
         super().__init__(bounds, position, velocity, color, radius)
         self.max_velocity_y = math.fabs(velocity.y) + 10
@@ -53,7 +51,6 @@ class RainbowBall(Ball):
     """
     Ball that changes colors
     """
-
     def update(self):
         r = (self.color[0] + 1) % 255
         g = (self.color[1] + 5) % 255
