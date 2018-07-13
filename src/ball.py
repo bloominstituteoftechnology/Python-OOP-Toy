@@ -15,21 +15,46 @@ class Ball:
 
     def update(self): #this is a method
         # bounce at edges.  TODO: Fix sticky edges
-        if self.position.x < 0 + self.radius or self.position.x > self.bounds[0] - self.radius: # screen width
+        nxt = self.position + self.velocity
+        left_edge_nxt = nxt.x < 0 + self.radius
+        right_edge_nxt = nxt.x > self.bounds[0] - self.radius
+        top_edge_nxt = nxt.y < 0 + self.radius
+        bottom_edge_nxt = nxt.y > self.bounds[1] - self.radius
+        
+        if left_edge_nxt:
+            self.position.x = self.radius * 2 - nxt.x
             self.velocity.x *= -1
-        if self.position.y < 0 + self.radius or self.position.y > self.bounds[1] - self.radius: # screen height
+        elif right_edge_nxt:
+            self.position.x = (self.bounds[0] - self.radius) * 2 - nxt.x
+            self.velocity.x *= -1
+        else: 
+            self.position.x += self.velocity.x
+
+        if top_edge_nxt:
+            self.position.y = self.radius * 2 - nxt.y
             self.velocity.y *= -1
-        self.position += self.velocity
+        elif bottom_edge_nxt:
+            self.position.y = (self.bounds[1] - self.radius) * 2 - nxt.y
+            self.velocity.y *= -1
+        else:
+            self.position.y += self.velocity.y
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-#class BouncingBall(Ball):
+class BouncingBall(Ball):
+    def __init__(self, bounds, position, velocity, color, radius, gravity):
+        self.gravity = gravity
+        super().__init__(bounds, position, velocity, color, radius)
 #     """
 #     ball affected by gravity
 #     """
 #     # TODO: update
+
+    def update(self):
+        self.velocity.y += self.gravity
+        super().update()    
 
 
 class RainbowBall(Ball):
@@ -48,19 +73,41 @@ class RainbowBall(Ball):
         super().update()
 
 
-# class BouncingRainbow():
+class BouncingRainbow(BouncingBall, RainbowBall):
 #     """
 #     Ball that changes color and is affected by gravity
 #     """
 #     # TODO:
 
-# class KineticBall(???):
+    def update(self):
+        BouncingBall(self, self.position, self.velocity, self.color, self.radius, self.gravity)
+        RainbowBall(self, self.position, self.velocity, self.color, self.radius)
+        super().update()
+
+class KineticBall(Ball):
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     """
-#     # TODO:
+#     # TODO: update
+    def __init__(self, object_list, bounds, position, velocity, color, radius):
+        self.object_list = object_list
+        super().__init__(bounds, position, velocity, color, radius)
+    
+    def update(self):
+        for obj in self.object_list:
+            if obj == self:
+                continue
 
-# class KineticBouncing(???):
+            else:
+                distance = obj.position.distance_to(self.position)
+                sumradius = self.radius + obj.radius
+
+                if distance < sumradius:
+                    print("Collision!")
+        
+        super().update()
+
+# class KineticBouncing():
 #     """
 #     A ball that collides with other collidable balls using simple elastic circle collision
 #     And is affected by gravity
