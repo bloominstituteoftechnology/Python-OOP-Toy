@@ -43,14 +43,14 @@ def debug_create_balls(ball_list):
     # TODO: Create other ball types for testing
     
 def debug_create_blocks(block_list):
-    a = random.randint(0, 1000)
-    b = random.randint(100, 600)
-    c = random.randint(250, 1250)
-    d = random.randint(0, 500)
-    block = Block(SCREEN_SIZE, Vector2(a,b), Vector2(10, 10), random.randint(30, 50), random.randint(15, 60, [0,255,0])
-    block_list.extend((block, ))
+    a = random.randint(0, 1280)
+    b = random.randint(0, 960)
+    c = random.randint(0, 1280)
+    d = random.randint(0, 960)
+    block = Block(SCREEN_SIZE, Vector2(a,b), Vector2(10, 10), random.randint(30, 50), random.randint(15, 60), [0,255,0])
+    block_list.append(block)
     block = RainbowBlock(SCREEN_SIZE, Vector2(c,d), Vector2(3, 3), random.randint(70, 90), random.randint(15, 50), [0,0,255])
-    block_list.extend((block, ))
+    block_list.append(block)
 
 def main():
     pygame.init()
