@@ -25,6 +25,9 @@ class Ball:
         y_top_edge_next = next_pos.y < 0 + self.radius
         y_bottom_edge_next = next_pos.y > self.bounds[1] - self.radius
 
+        if self.velocity.length() > 20:
+            self.velocity = self.velocity.normalize() * 20
+
         if x_left_edge_next:
             self.position.x = self.radius * 2 - next_pos.x
             self.velocity.x *= -1
@@ -42,8 +45,8 @@ class Ball:
         else:
             self.position.y += self.velocity.y
 
-        if self.velocity.length() > 20:
-            self.velocity = self.velocity.normalize() * 20
+
+
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
