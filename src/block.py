@@ -1,8 +1,10 @@
-import pygame
 import random
 
-from pygame.math import Vector2
+import pygame
 from pygame import Rect
+from pygame.math import Vector2
+
+
 
 class Block:
     """
@@ -21,10 +23,9 @@ class Block:
         pass
 
     def set_rectangle(self, position, width, height):
-        # Creates a rectangle of the given width and height centered at the x/y coordinates
-        return pygame.Rect(position.x - (width/2),
-                           position.y - (height/2),
-                                    width,
+        return pygame.Rect(
+            position.x - (width / 2), position.y - (height / 2), width, height
+        )
                                     height)
 
     def draw(self, screen, pygame):
