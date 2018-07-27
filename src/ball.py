@@ -1,5 +1,4 @@
 import math
-
 from pygame.math import Vector2
 
 
@@ -21,7 +20,6 @@ class Ball:
         x_right_edge_next = next_pos.x > self.bounds[0] - self.radius
         y_top_edge_next = next_pos.y < 0 + self.radius
         y_bottom_edge_next = next_pos.y > self.bounds[1] - self.radius
-
         if x_left_edge_next:
             self.position.x = self.radius * 2 - next_pos.x
             self.velocity.x *= -1
@@ -38,6 +36,8 @@ class Ball:
             self.velocity.y *= -1
         else:
             self.position.y += self.velocity.y
+        if self.velocity.length() > 20:
+            self.velocity = self.velocity.normalize() * 20
 
     def draw(self, screen, pygame):
         # cast x and y to int for drawing
@@ -164,4 +164,3 @@ class KineticBouncing(BouncingBall, KineticBall):
 
 class AllTheThings(KineticBouncing, RainbowBall):
     pass
-
