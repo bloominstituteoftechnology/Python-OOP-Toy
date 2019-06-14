@@ -25,22 +25,56 @@ class Ball:
         # cast x and y to int for drawing
         pygame.draw.circle(screen, self.color, [int(self.position.x), int(self.position.y)], self.radius)
 
-# class BouncingBall(???):
-#     """
-#     ball effected by gravity
-#     """
-#     # TODO: 
+class BouncingBall(Ball):
+    """
+    ball effected by gravity
+    """
+    def update(self):
+        self.velocity.x = 0
+        if self.velocity.y > 0:
+            if self.velocity.y < 20:
+                self.velocity.y += (.09 / self.velocity.y)
+            else:
+                self.velocity.y = 1
+        elif self.velocity.y < -1:
+                self.velocity.y -= (.09 * self.velocity.y)
+        else:
+            self.velocity.y = 1
+        super().update()
 
-# class RainbowBall(???):
-#     """
-#     Ball that changes colors
-#     """
-#     # TODO:
+    # TODO: 
 
-# class BouncingRainbow(???):
-#     """
-#     Ball that changes color and is affected by gravity
-#     """
+class RainbowBall(Ball):
+    """
+    Ball that changes colors
+    """
+    def update(self):
+        r = (self.color[0] + 5) % 256
+        g = (self.color[1] + 1) % 256
+        b = (self.color[2] - 1) % 256
+        self.color = [r,g,b]
+        super().update()
+    # TODO:
+
+class BouncingRainbow(Ball):
+    """
+    Ball that changes color and is affected by gravity
+    """
+    def update(self):
+        if self.velocity.y > 0:
+            if self.velocity.y < 50:
+                self.velocity.y += (.09 / self.velocity.y)
+            else:
+                self.velocity.y = 1
+        elif self.velocity.y < -1:
+                self.velocity.y -= (.09 * self.velocity.y)
+        else:
+            self.velocity.y = 1
+        r = (self.color[0] + 5) % 256
+        g = (self.color[1] + 1) % 256
+        b = (self.color[2] - 1) % 256
+        self.color = [r,g,b]
+        super().update()
 #     # TODO:
 
 # class KineticBall(???):
